@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;-webkit-font-smoothing:antialiased}
+a{color:#1B4332}a:hover{color:#2D6A4F}
+@keyframes bk-shimmer{0%{background-position:-260px 0}100%{background-position:260px 0}}
+@keyframes bk-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.06);opacity:.82}}
+@keyframes bk-draw{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
+@keyframes bk-bounce{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.18);opacity:1}100%{transform:scale(1)}}
+@keyframes bk-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@keyframes bk-corners{0%,100%{opacity:.45}50%{opacity:1}}
+</style>
+</helmet>
+
+<div style="--accent:{{ accent }};--amount:{{ montantFamily }}">
+
+<header style="padding:56px 60px 40px;border-bottom:1px solid rgba(27,67,50,.12);display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap">
+  <div>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+      <div style="width:44px;height:44px;border-radius:13px;background:#1B4332;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:var(--accent,#F4A100)">B</div>
+      <span style="font-weight:700;font-size:15px;letter-spacing:.22em;text-transform:uppercase">Boutik</span>
+    </div>
+    <h1 style="margin:0;font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1">Système visuel</h1>
+    <p style="margin:14px 0 0;max-width:620px;font-size:16px;line-height:1.55;color:#6B6B6B;text-wrap:pretty">Palette, typographie, composants de base et grammaire d'animation. À valider avant de partir sur le Groupe&nbsp;4 (flux d'enregistrement d'un bon).</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px;color:#6B6B6B;line-height:1.6;text-align:right">
+    <span>Android · 5″ à 6.5″ · mode clair uniquement</span>
+    <span>Lisibilité plein soleil · contraste AA minimum</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em">MOODBOARD · V1 · 2026</span>
+  </div>
+</header>
+
+<section style="padding:52px 60px 8px">
+  <div style="font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1B4332;margin-bottom:26px">01 — Palette</div>
+  <div style="display:flex;flex-wrap:wrap;gap:16px">
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#1B4332"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Vert nuit</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#1B4332</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Primaire · boutons, headers, splash</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:var(--accent,#F4A100)"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Or Teranga</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#F4A100</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Accent · FAB client, badges, attente</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#FAFAF7;border-bottom:1px solid rgba(27,67,50,.10)"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Blanc cassé chaud</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#FAFAF7</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Fond d'écran par défaut</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#F2F2EF"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Gris doux</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#F2F2EF</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Surfaces, pistes de progression</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#1A1A1A"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Presque noir</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#1A1A1A</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Texte principal, montants</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#6B6B6B"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Gris moyen</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#6B6B6B</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Texte secondaire, libellés</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#2D6A4F"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Vert validation</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#2D6A4F</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Succès, scan réussi, bon accepté</div>
+      </div>
+    </div>
+
+    <div style="width:216px;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="height:132px;background:#C1121F"></div>
+      <div style="padding:14px 16px 16px">
+        <div style="font-size:14px;font-weight:700">Rouge doux</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B6B;margin-top:4px">#C1121F</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:8px;line-height:1.45">Danger · refus, PIN erroné, échu</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
+    <div style="padding:14px 18px;border-radius:12px;background:#fff;border:1px solid rgba(27,67,50,.12);font-size:12.5px;color:#6B6B6B;line-height:1.5;max-width:340px"><strong style="color:#1A1A1A">Règle de dosage.</strong> Vert nuit porte la structure, l'or ne sert qu'à une seule action par écran. Jamais de dégradés.</div>
+    <div style="padding:14px 18px;border-radius:12px;background:#fff;border:1px solid rgba(27,67,50,.12);font-size:12.5px;color:#6B6B6B;line-height:1.5;max-width:340px"><strong style="color:#1A1A1A">Teintes autorisées.</strong> Uniquement des versions à 8 % et 14 % d'opacité des couleurs ci-dessus pour les fonds de badges.</div>
+  </div>
+</section>
+
+<section style="padding:52px 60px 8px">
+  <div style="font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1B4332;margin-bottom:26px">02 — Typographie</div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:1 1 620px;min-width:520px;background:#fff;border-radius:16px;padding:34px 36px;box-shadow:0 1px 3px rgba(27,67,50,.10);display:flex;flex-direction:column;gap:26px">
+
+      <div style="display:flex;align-items:baseline;gap:24px">
+        <div style="width:120px;flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B6B;line-height:1.5">Display 800<br>64 / 60 / -3%</div>
+        <div style="font-size:64px;font-weight:800;letter-spacing:-.035em;line-height:.94;font-variant-numeric:tabular-nums;font-family:var(--amount,Inter)">12 500</div>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:24px">
+        <div style="width:120px;flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B6B;line-height:1.5">Titre 700<br>28 / 34 / -2%</div>
+        <div style="font-size:28px;font-weight:700;letter-spacing:-.02em">Prends une photo de tes produits</div>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:24px">
+        <div style="width:120px;flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B6B;line-height:1.5">Sous-titre 600<br>20 / 28</div>
+        <div style="font-size:20px;font-weight:600">Boutique Ndiaye — Sacré-Cœur 3</div>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:24px">
+        <div style="width:120px;flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B6B;line-height:1.5">Corps 400<br>16 / 25</div>
+        <div style="font-size:16px;line-height:1.55;color:#1A1A1A;max-width:420px">Ton bon est parti. Le boutiquier reçoit une notification et valide le montant depuis son cahier.</div>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:24px">
+        <div style="width:120px;flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B6B;line-height:1.5">Libellé 600<br>13 / 18 / +6%</div>
+        <div style="font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6B6B6B">Encours total</div>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:24px;padding-top:6px;border-top:1px solid rgba(27,67,50,.10)">
+        <div style="width:120px;flex:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B6B;line-height:1.5">Montants<br>tabulaire</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-variant-numeric:tabular-nums">
+          <div style="font-size:22px;font-weight:700;font-family:Inter">2 500 · 12 500 · 147 000 <span style="font-size:12px;font-weight:500;color:#6B6B6B;margin-left:6px">Inter tabulaire</span></div>
+          <div style="font-size:22px;font-weight:700;font-family:'JetBrains Mono',monospace">2 500 · 12 500 · 147 000 <span style="font-size:12px;font-weight:500;color:#6B6B6B;margin-left:6px;font-family:Inter">JetBrains Mono</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1 1 380px;min-width:340px;background:#1B4332;border-radius:16px;padding:34px 36px;color:#fff">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,#F4A100);margin-bottom:20px">Signature</div>
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <div style="font-size:76px;font-weight:800;letter-spacing:-.04em;line-height:.9;font-variant-numeric:tabular-nums;font-family:var(--amount,Inter)">5 000</div>
+        <div style="font-size:15px;font-weight:600;letter-spacing:.1em;padding-top:12px;color:rgba(255,255,255,.7)">FCFA</div>
+      </div>
+      <p style="margin:22px 0 0;font-size:14px;line-height:1.6;color:rgba(255,255,255,.78);text-wrap:pretty">Le montant domine chaque écran où il apparaît : 64px minimum, chiffres tabulaires, unité en petit à droite et alignée sur le haut du nombre. Aucun autre élément ne peut être plus grand.</p>
+      <div style="margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);display:flex;gap:28px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.55);margin-bottom:6px">Séparateur</div>
+          <div style="font-size:15px;font-weight:600">Espace fine, jamais de virgule</div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.55);margin-bottom:6px">Zéro état</div>
+          <div style="font-size:15px;font-weight:600">0 en gris moyen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:52px 60px 8px">
+  <div style="font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1B4332;margin-bottom:26px">03 — Composants de base</div>
+  <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+
+    <div style="width:300px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:20px">Boutons</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="height:56px;border-radius:12px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s" style-hover="box-shadow:0 6px 18px rgba(27,67,50,.22)" style-active="transform:scale(.97)">Envoyer</div>
+        <div style="height:56px;border-radius:12px;border:1.5px solid #1B4332;color:#1B4332;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;cursor:pointer;transition:background .18s" style-hover="background:rgba(27,67,50,.06)" style-active="transform:scale(.97)">Reprendre</div>
+        <div style="height:56px;border-radius:12px;background:var(--accent,#F4A100);color:#1A1A1A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;cursor:pointer" style-active="transform:scale(.97)">Faire un bon</div>
+        <div style="height:56px;border-radius:12px;background:#F2F2EF;color:#6B6B6B;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">Envoyer</div>
+        <div style="font-size:11.5px;color:#6B6B6B;line-height:1.5">Hauteur 56px (cible tactile ≥ 48px) · rayon 12px · compression 0.97 au tap, retour spring 180ms</div>
+      </div>
+    </div>
+
+    <div style="width:300px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:20px">Badges &amp; pills</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="padding:7px 14px;border-radius:100px;background:rgba(45,106,79,.12);color:#2D6A4F;font-size:13px;font-weight:600">Actif</span>
+        <span style="padding:7px 14px;border-radius:100px;background:rgba(244,161,0,.16);color:#8A5B00;font-size:13px;font-weight:600">En attente</span>
+        <span style="padding:7px 14px;border-radius:100px;background:rgba(193,18,31,.10);color:#C1121F;font-size:13px;font-weight:600">Verrouillé</span>
+        <span style="padding:7px 14px;border-radius:100px;background:#1B4332;color:#fff;font-size:13px;font-weight:600">Vérifiée ✓</span>
+        <span style="padding:7px 14px;border-radius:100px;border:1.5px solid rgba(27,67,50,.20);color:#6B6B6B;font-size:13px;font-weight:600">Non vérifiée</span>
+      </div>
+      <div style="margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:14px">Plafond</div>
+      <div style="font-size:13px;color:#6B6B6B;margin-bottom:8px;display:flex;justify-content:space-between"><span>12 500 FCFA</span><span>plafond 20 000</span></div>
+      <div style="height:10px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:62%;height:100%;border-radius:100px;background:#2D6A4F"></div></div>
+      <div style="margin-top:14px;font-size:13px;color:#6B6B6B;margin-bottom:8px;display:flex;justify-content:space-between"><span>19 200 FCFA</span><span>plafond 20 000</span></div>
+      <div style="height:10px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:96%;height:100%;border-radius:100px;background:#C1121F"></div></div>
+      <div style="margin-top:12px;font-size:11.5px;color:#6B6B6B;line-height:1.5">Piste gris doux · remplissage vert, or au-delà de 80 %, rouge au-delà de 95 %</div>
+    </div>
+
+    <div style="width:300px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:20px">Saisie</div>
+      <div style="display:flex;gap:10px;margin-bottom:16px">
+        <div style="height:60px;padding:0 14px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600">🇸🇳 +221</div>
+        <div style="flex:1;height:60px;border-radius:12px;border:1.5px solid #1B4332;display:flex;align-items:center;padding:0 14px;font-size:19px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums">77 123 45 67</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <div style="flex:1;aspect-ratio:1;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;animation:bk-bounce .3s cubic-bezier(.34,1.56,.64,1)">4</div>
+        <div style="flex:1;aspect-ratio:1;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700">2</div>
+        <div style="flex:1;aspect-ratio:1;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700">9</div>
+        <div style="flex:1;aspect-ratio:1;border-radius:12px;background:#fff;border:1.5px solid #1B4332"></div>
+        <div style="flex:1;aspect-ratio:1;border-radius:12px;background:#fff;border:1.5px solid rgba(27,67,50,.16)"></div>
+        <div style="flex:1;aspect-ratio:1;border-radius:12px;background:#fff;border:1.5px solid rgba(27,67,50,.16)"></div>
+      </div>
+      <div style="font-size:11.5px;color:#6B6B6B;line-height:1.5;margin-bottom:20px">OTP 6 cases · case active en bordure verte · micro-bounce 300ms au remplissage</div>
+      <div style="display:flex;gap:16px;align-items:center">
+        <div style="display:flex;gap:12px">
+          <div style="width:16px;height:16px;border-radius:50%;background:#1B4332"></div>
+          <div style="width:16px;height:16px;border-radius:50%;background:#1B4332"></div>
+          <div style="width:16px;height:16px;border-radius:50%;background:rgba(27,67,50,.18)"></div>
+          <div style="width:16px;height:16px;border-radius:50%;background:rgba(27,67,50,.18)"></div>
+        </div>
+        <div style="display:flex;gap:12px;animation:bk-shake .4s ease-in-out infinite">
+          <div style="width:16px;height:16px;border-radius:50%;background:#C1121F"></div>
+          <div style="width:16px;height:16px;border-radius:50%;background:#C1121F"></div>
+          <div style="width:16px;height:16px;border-radius:50%;background:#C1121F"></div>
+          <div style="width:16px;height:16px;border-radius:50%;background:#C1121F"></div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:11.5px;color:#6B6B6B;line-height:1.5">PIN 4 points · erreur : shake horizontal 3× + rouge 600ms</div>
+    </div>
+
+    <div style="width:300px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:20px">Cahier client</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:48px;height:48px;border-radius:100px;background:#1B4332;color:var(--accent,#F4A100);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">AD</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:16px;font-weight:700">Aïssatou Diop</div>
+          <div style="font-size:13px;color:#6B6B6B;margin-top:2px">Dernier bon · hier</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:19px;font-weight:800;font-variant-numeric:tabular-nums;font-family:var(--amount,Inter)">12 500</div>
+          <div style="font-size:11px;color:#6B6B6B;letter-spacing:.06em">FCFA</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;height:8px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:62%;height:100%;border-radius:100px;background:#2D6A4F"></div></div>
+      <div style="margin-top:24px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:14px">Chargement</div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="width:48px;height:48px;border-radius:100px;background:linear-gradient(90deg,#F2F2EF 0%,#FAFAF7 50%,#F2F2EF 100%);background-size:260px 100%;animation:bk-shimmer 1.3s linear infinite"></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+          <div style="height:14px;width:70%;border-radius:6px;background:linear-gradient(90deg,#F2F2EF 0%,#FAFAF7 50%,#F2F2EF 100%);background-size:260px 100%;animation:bk-shimmer 1.3s linear infinite"></div>
+          <div style="height:11px;width:45%;border-radius:6px;background:linear-gradient(90deg,#F2F2EF 0%,#FAFAF7 50%,#F2F2EF 100%);background-size:260px 100%;animation:bk-shimmer 1.3s linear infinite"></div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:11.5px;color:#6B6B6B;line-height:1.5">Skeleton shimmer 1.3s · jamais de spinner générique</div>
+    </div>
+
+    <div style="width:300px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:20px">Pavé numérique</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">1</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">2</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">3</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">4</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">5</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">6</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">7</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">8</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">9</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:#6B6B6B">000</div>
+        <div style="height:58px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600">0</div>
+        <div style="height:58px;border-radius:12px;background:#fff;border:1.5px solid rgba(27,67,50,.14);display:flex;align-items:center;justify-content:center;font-size:20px;color:#1B4332">⌫</div>
+      </div>
+      <div style="margin-top:14px;font-size:11.5px;color:#6B6B6B;line-height:1.5">Touches 58px · gris doux, jamais le clavier système · touche 000 pour les montants ronds</div>
+    </div>
+
+    <div style="width:300px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:20px">Élévation &amp; rayons</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="height:56px;border-radius:16px;background:#fff;box-shadow:0 1px 3px rgba(27,67,50,.10);display:flex;align-items:center;padding:0 16px;font-size:13px;color:#6B6B6B">Niveau 1 — cards au repos</div>
+        <div style="height:56px;border-radius:16px;background:#fff;box-shadow:0 6px 18px rgba(180,130,20,.14);display:flex;align-items:center;padding:0 16px;font-size:13px;color:#6B6B6B">Niveau 2 — card sélectionnée</div>
+        <div style="height:56px;border-radius:16px;background:#fff;box-shadow:0 -8px 32px rgba(27,67,50,.18);display:flex;align-items:center;padding:0 16px;font-size:13px;color:#6B6B6B">Niveau 3 — sheets remontantes</div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:10px;align-items:flex-end">
+        <div style="width:54px;height:54px;border-radius:16px;background:#F2F2EF;display:flex;align-items:flex-end;justify-content:center;font-size:11px;color:#6B6B6B;padding-bottom:6px">16</div>
+        <div style="width:54px;height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:flex-end;justify-content:center;font-size:11px;color:#6B6B6B;padding-bottom:6px">12</div>
+        <div style="width:80px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:11px;color:#6B6B6B">100</div>
+      </div>
+      <div style="margin-top:12px;font-size:11.5px;color:#6B6B6B;line-height:1.5">Ombres teintées or ou vert, jamais de noir pur. Aucun néomorphisme.</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:52px 60px 8px">
+  <div style="font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1B4332;margin-bottom:8px">04 — Aperçu en contexte</div>
+  <p style="margin:0 0 26px;font-size:14px;color:#6B6B6B;max-width:620px;line-height:1.55">Deux écrans du Groupe 4 pour juger la signature FCFA et le pavé numérique à l'échelle réelle (392 × 812).</p>
+  <div style="display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start">
+
+    <div style="width:326px">
+      <div style="width:326px;height:676px;border-radius:38px;background:#FAFAF7;box-shadow:0 0 0 9px #1A1A1A,0 18px 50px rgba(27,67,50,.20);overflow:hidden;display:flex;flex-direction:column;padding:16px 20px 20px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:#1A1A1A;padding:0 4px 12px">
+          <span>9:41</span><span>▮▮▮ ▲ 84%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:34px;height:34px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:16px;color:#1B4332">←</div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:16px">🧺</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Boutique Ndiaye</div>
+            <div style="font-size:11.5px;color:#2D6A4F;font-weight:600">Vérifiée ✓ · Sacré-Cœur 3</div>
+          </div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:14px">Montant du bon</div>
+          <div style="display:flex;align-items:flex-start;gap:8px">
+            <div style="font-size:66px;font-weight:800;letter-spacing:-.04em;line-height:.9;font-variant-numeric:tabular-nums;font-family:var(--amount,Inter)">5 000</div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#6B6B6B;padding-top:10px">FCFA</div>
+          </div>
+          <div style="margin-top:16px;padding:6px 14px;border-radius:100px;background:rgba(45,106,79,.12);color:#2D6A4F;font-size:12px;font-weight:600">Reste 7 500 avant plafond</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px">
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">1</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">2</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">3</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">4</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">5</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">6</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">7</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">8</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">9</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#6B6B6B">000</div>
+          <div style="height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600">0</div>
+          <div style="height:52px;border-radius:12px;background:#fff;border:1.5px solid rgba(27,67,50,.14);display:flex;align-items:center;justify-content:center;font-size:18px;color:#1B4332">⌫</div>
+        </div>
+        <div style="height:54px;border-radius:12px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">Envoyer le bon</div>
+      </div>
+      <div style="margin-top:14px;font-size:12.5px;color:#6B6B6B;line-height:1.5"><strong style="color:#1A1A1A">4.4 — Saisie du montant.</strong> Le nombre grandit de 40px à 66px au fil de la frappe.</div>
+    </div>
+
+    <div style="width:326px">
+      <div style="width:326px;height:676px;border-radius:38px;background:#1B4332;box-shadow:0 0 0 9px #1A1A1A,0 18px 50px rgba(27,67,50,.20);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;text-align:center">
+        <div style="width:104px;height:104px;border-radius:100px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;animation:bk-pulse 2.4s ease-in-out infinite">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><path d="M12 27.5 L22 37 L40 17" stroke="#F4A100" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" style="animation:bk-draw .6s cubic-bezier(.65,0,.35,1) forwards"></path></svg>
+        </div>
+        <div style="margin-top:34px;font-size:30px;font-weight:800;color:#fff;letter-spacing:-.02em">Bon envoyé !</div>
+        <div style="margin-top:12px;font-size:15px;line-height:1.55;color:rgba(255,255,255,.72);max-width:230px">En attente de validation de Boutique Ndiaye</div>
+        <div style="margin-top:30px;display:flex;align-items:flex-start;gap:7px;color:#fff">
+          <div style="font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;font-family:var(--amount,Inter)">5 000</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.6);padding:6px 0 0">FCFA</div>
+        </div>
+        <div style="margin-top:auto;width:100%;height:4px;border-radius:100px;background:rgba(255,255,255,.16);overflow:hidden"><div style="width:64%;height:100%;background:var(--accent,#F4A100)"></div></div>
+        <div style="margin-top:12px;font-size:12px;color:rgba(255,255,255,.5)">Retour au tableau de bord…</div>
+      </div>
+      <div style="margin-top:14px;font-size:12.5px;color:#6B6B6B;line-height:1.5"><strong style="color:#1A1A1A">4.5 — Confirmation.</strong> Checkmark dessiné 600ms, texte en fondu, retour auto après 3s.</div>
+    </div>
+
+    <div style="flex:1 1 300px;min-width:280px;max-width:400px;background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;margin-bottom:18px">Grammaire d'animation</div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div><div style="font-size:14px;font-weight:700">Push horizontal · 280ms</div><div style="font-size:12.5px;color:#6B6B6B;line-height:1.5;margin-top:3px">cubic-bezier(.2,.8,.2,1) — navigation standard</div></div>
+        <div><div style="font-size:14px;font-weight:700">Slide-up sheet · 340ms</div><div style="font-size:12.5px;color:#6B6B6B;line-height:1.5;margin-top:3px">spring cubic-bezier(.34,1.4,.64,1) — notifications, confirmations</div></div>
+        <div><div style="font-size:14px;font-weight:700">Fondu enchaîné · 240ms</div><div style="font-size:12.5px;color:#6B6B6B;line-height:1.5;margin-top:3px">ease-in-out — photo → scan QR</div></div>
+        <div><div style="font-size:14px;font-weight:700">Tap bouton · 120 / 180ms</div><div style="font-size:12.5px;color:#6B6B6B;line-height:1.5;margin-top:3px">scale 0.97 puis retour spring</div></div>
+        <div><div style="font-size:14px;font-weight:700">Flash scan réussi · 50ms</div><div style="font-size:12.5px;color:#6B6B6B;line-height:1.5;margin-top:3px">vert validation plein écran + haptic léger</div></div>
+        <div><div style="font-size:14px;font-weight:700">Checkmark · 600ms</div><div style="font-size:12.5px;color:#6B6B6B;line-height:1.5;margin-top:3px">stroke-dashoffset, cubic-bezier(.65,0,.35,1)</div></div>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(27,67,50,.10);font-size:12px;color:#6B6B6B;line-height:1.55">Plafond dur : aucune transition au-delà de 400ms. Sur connexion lente, l'écran se peint en skeleton avant les données.</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:52px 60px 76px">
+  <div style="font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#1B4332;margin-bottom:26px">05 — Garde-fous</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap">
+    <div style="flex:1 1 300px;min-width:280px;background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:14px;font-weight:700;color:#2D6A4F;margin-bottom:14px">On garde</div>
+      <div style="font-size:13.5px;line-height:1.75;color:#1A1A1A">Cards blanches sur fond chaud · icônes pleines · montants énormes · français partout · cibles tactiles larges · contraste fort pour le plein soleil</div>
+    </div>
+    <div style="flex:1 1 300px;min-width:280px;background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:14px;font-weight:700;color:#C1121F;margin-bottom:14px">On évite</div>
+      <div style="font-size:13.5px;line-height:1.75;color:#1A1A1A">Dark mode · dégradés · néomorphisme · icônes outline fines · spinners · animations &gt; 400ms · anglais · couleurs hors palette</div>
+    </div>
+    <div style="flex:1 1 300px;min-width:280px;background:#F2F2EF;border-radius:16px;padding:24px 26px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:14px">À trancher avec toi</div>
+      <div style="font-size:13.5px;line-height:1.75;color:#1A1A1A">La police des montants (Inter tabulaire ou JetBrains Mono) · le style d'icônes, faute de bibliothèque fournie · le placement du bouton retour sur les écrans caméra</div>
+    </div>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#F4A100&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#F4A100&quot;,&quot;#E08900&quot;,&quot;#F2B705&quot;,&quot;#D97706&quot;],&quot;section&quot;:&quot;Tokens&quot;},&quot;montantFont&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Inter tabulaire&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;Inter tabulaire&quot;,&quot;JetBrains Mono&quot;],&quot;section&quot;:&quot;Tokens&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const f = this.props.montantFont === "JetBrains Mono"
+      ? "'JetBrains Mono', monospace"
+      : "Inter, system-ui, sans-serif";
+    return { accent: this.props.accent ?? "#F4A100", montantFamily: f };
+  }
+}
+</script>
+</body>
+</html>

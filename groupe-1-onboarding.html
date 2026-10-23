@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;-webkit-font-smoothing:antialiased}
+a{color:#1B4332}a:hover{color:#2D6A4F}
+::-webkit-scrollbar{display:none}*{-ms-overflow-style:none;scrollbar-width:none}
+@keyframes bk-fade{from{opacity:0}to{opacity:1}}
+@keyframes bk-fadeup{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes bk-slideup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes bk-logopulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.07);opacity:.82}}
+@keyframes bk-ring{0%{transform:scale(.9);opacity:.5}70%{transform:scale(1.35);opacity:0}100%{transform:scale(1.35);opacity:0}}
+@keyframes bk-bounce{0%{transform:scale(.55);opacity:0}62%{transform:scale(1.16)}100%{transform:scale(1);opacity:1}}
+@keyframes bk-shake{0%,100%{transform:translateX(0)}18%{transform:translateX(-9px)}36%{transform:translateX(9px)}54%{transform:translateX(-6px)}78%{transform:translateX(5px)}}
+@keyframes bk-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes bk-bio{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;gap:44px;align-items:flex-start;justify-content:center;padding:44px 40px 64px;flex-wrap:wrap">
+
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+    <div style="display:flex;align-items:center;gap:11px;align-self:flex-start">
+      <div style="width:34px;height:34px;border-radius:10px;background:#1B4332;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#F4A100">B</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Boutik</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:1px">Groupe 1 — onboarding &amp; auth</div>
+      </div>
+    </div>
+
+    <div style="position:relative;width:378px;height:786px;border-radius:44px;background:#1A1A1A;padding:9px;box-shadow:0 24px 60px rgba(27,67,50,.20)">
+      <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#FAFAF7">
+
+        <sc-if value="{{ showStatus }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:12px;font-weight:600;z-index:8;color:{{ statusColor }}">
+            <div>9:41</div>
+            <div style="display:flex;gap:5px;align-items:center;font-family:'Material Symbols Rounded';font-size:15px">network_wifi<span>battery_full</span></div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;background:#0E2A1E;display:flex;flex-direction:column;align-items:center;justify-content:center">
+            <div style="position:relative;display:flex;align-items:center;justify-content:center">
+              <div style="position:absolute;width:130px;height:130px;border-radius:100px;border:2px solid rgba(244,161,0,.5);animation:bk-ring 2.4s ease-out infinite"></div>
+              <div style="position:absolute;width:130px;height:130px;border-radius:100px;border:2px solid rgba(244,161,0,.35);animation:bk-ring 2.4s .8s ease-out infinite"></div>
+              <div style="width:104px;height:104px;border-radius:28px;background:#F4A100;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:800;color:#0E2A1E;animation:bk-logopulse 2.4s ease-in-out infinite;box-shadow:0 14px 40px rgba(244,161,0,.34)">B</div>
+            </div>
+            <div style="margin-top:32px;font-size:30px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#fff;animation:bk-fadeup .5s .3s ease-out both">Boutik</div>
+            <div style="margin-top:12px;font-size:13.5px;color:rgba(255,255,255,.55);animation:bk-fadeup .5s .5s ease-out both">Le cahier de crédit, en confiance</div>
+            <div style="position:absolute;bottom:52px;left:0;right:0;display:flex;justify-content:center">
+              <div style="width:150px;height:3px;border-radius:100px;background:rgba(255,255,255,.14);overflow:hidden"><div style="height:100%;background:#F4A100;border-radius:100px;transition:width .1s linear;width:{{ splashProgress }}%"></div></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isRole }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:44px 24px 30px;animation:bk-fade .3s ease-out">
+            <div style="padding-top:34px">
+              <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#6B6B6B">Bienvenue</div>
+              <div style="margin-top:12px;font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.05">Tu es ?</div>
+              <div style="margin-top:12px;font-size:14px;line-height:1.55;color:#6B6B6B;max-width:250px">Choisis ton rôle pour adapter l'application à ton usage.</div>
+            </div>
+
+            <div style="margin-top:34px;display:flex;flex-direction:column;gap:14px">
+              <div onClick="{{ pickShop }}" style="border-radius:18px;padding:20px;cursor:pointer;transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .22s ease-out,border-color .2s;background:#fff;border:2px solid {{ shopBorder }};box-shadow:{{ shopShadow }};transform:{{ shopLift }}">
+                <div style="display:flex;align-items:center;gap:15px">
+                  <div style="width:58px;height:58px;border-radius:16px;background:{{ shopIconBg }};display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s"><span style="font-family:'Material Symbols Rounded';font-size:30px;color:{{ shopIconFg }}">storefront</span></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:18px;font-weight:800;letter-spacing:-.015em">Boutiquier</div>
+                    <div style="font-size:12.5px;line-height:1.45;color:#6B6B6B;margin-top:4px">Je gère les cahiers de mes clients</div>
+                  </div>
+                  <div style="width:24px;height:24px;border-radius:100px;border:2px solid {{ shopRadio }};display:flex;align-items:center;justify-content:center;flex:none;transition:border-color .2s">
+                    <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}"><div style="width:12px;height:12px;border-radius:100px;background:#1B4332;animation:bk-bounce .28s cubic-bezier(.34,1.56,.64,1)"></div></sc-if>
+                  </div>
+                </div>
+              </div>
+
+              <div onClick="{{ pickClient }}" style="border-radius:18px;padding:20px;cursor:pointer;transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .22s ease-out,border-color .2s;background:#fff;border:2px solid {{ cliBorder }};box-shadow:{{ cliShadow }};transform:{{ cliLift }}">
+                <div style="display:flex;align-items:center;gap:15px">
+                  <div style="width:58px;height:58px;border-radius:16px;background:{{ cliIconBg }};display:flex;align-items:center;justify-content:center;flex:none;transition:background .2s"><span style="font-family:'Material Symbols Rounded';font-size:30px;color:{{ cliIconFg }}">person</span></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:18px;font-weight:800;letter-spacing:-.015em">Client</div>
+                    <div style="font-size:12.5px;line-height:1.45;color:#6B6B6B;margin-top:4px">J'enregistre mes bons chez ma boutique</div>
+                  </div>
+                  <div style="width:24px;height:24px;border-radius:100px;border:2px solid {{ cliRadio }};display:flex;align-items:center;justify-content:center;flex:none;transition:border-color .2s">
+                    <sc-if value="{{ isClient }}" hint-placeholder-val="{{ false }}"><div style="width:12px;height:12px;border-radius:100px;background:#1B4332;animation:bk-bounce .28s cubic-bezier(.34,1.56,.64,1)"></div></sc-if>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="flex:1"></div>
+            <div onClick="{{ goPhone }}" style="height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16.5px;font-weight:700;cursor:pointer;transition:background .2s,transform .18s cubic-bezier(.34,1.56,.64,1);background:{{ roleBtnBg }};color:{{ roleBtnFg }}" style-active="transform:scale(.97)">
+              {{ roleBtnLabel }}<span style="font-family:'Material Symbols Rounded';font-size:21px">arrow_forward</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:44px 24px 30px;animation:bk-slideup .3s cubic-bezier(.2,.8,.2,1)">
+            <div style="padding-top:12px;display:flex;align-items:center;gap:12px">
+              <div onClick="{{ goRole }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</span></div>
+              <div style="flex:1;height:4px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:25%;height:100%;background:#1B4332;border-radius:100px"></div></div>
+              <div style="font-size:11.5px;font-weight:700;color:#6B6B6B">1 / 4</div>
+            </div>
+
+            <div style="margin-top:34px">
+              <div style="font-size:30px;font-weight:800;letter-spacing:-.028em;line-height:1.12">Ton numéro</div>
+              <div style="margin-top:11px;font-size:14px;line-height:1.55;color:#6B6B6B;max-width:260px">On t'envoie un code à 6 chiffres pour vérifier que c'est bien toi.</div>
+            </div>
+
+            <div style="margin-top:32px;display:flex;gap:10px">
+              <div style="height:64px;padding:0 15px;border-radius:14px;background:#fff;border:1.5px solid rgba(27,67,50,.14);display:flex;align-items:center;gap:9px;cursor:pointer;flex:none">
+                <div style="width:26px;height:18px;border-radius:3px;overflow:hidden;display:flex;flex:none">
+                  <div style="flex:1;background:#00853F"></div><div style="flex:1;background:#FDEF42;display:flex;align-items:center;justify-content:center;font-size:9px;color:#00853F">★</div><div style="flex:1;background:#E31B23"></div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700">+221</div>
+                <span style="font-family:'Material Symbols Rounded';font-size:18px;color:#6B6B6B">expand_more</span>
+              </div>
+              <div style="flex:1;height:64px;border-radius:14px;background:#fff;border:1.5px solid {{ phoneBorder }};display:flex;align-items:center;padding:0 16px;transition:border-color .2s;min-width:0">
+                <div style="font-family:'JetBrains Mono',monospace;font-weight:700;white-space:nowrap;overflow:hidden;font-size:{{ phoneSize }}px;letter-spacing:{{ phoneSpacing }};color:{{ phoneColor }}">{{ phoneDisplay }}</div>
+                <div style="width:2px;height:26px;background:#1B4332;margin-left:2px;animation:bk-caret 1.1s step-end infinite"></div>
+              </div>
+            </div>
+            <div style="margin-top:11px;font-size:12px;color:#6B6B6B;display:flex;align-items:center;gap:6px">
+              <span style="font-family:'Material Symbols Rounded';font-size:16px;color:#2D6A4F">lock</span>Ton numéro reste privé, jamais partagé.
+            </div>
+
+            <div style="flex:1"></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px">
+              <sc-for list="{{ phoneKeys }}" as="k" hint-placeholder-count="12">
+                <div onClick="{{ k.press }}" style="height:56px;border-radius:12px;background:{{ k.bg }};border:{{ k.border }};display:flex;align-items:center;justify-content:center;font-size:{{ k.size }}px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94)">{{ k.label }}</div>
+              </sc-for>
+            </div>
+            <div onClick="{{ goOtp }}" style="height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16.5px;font-weight:700;cursor:pointer;transition:background .2s,transform .18s cubic-bezier(.34,1.56,.64,1);background:{{ phoneBtnBg }};color:{{ phoneBtnFg }}" style-active="transform:scale(.97)">
+              {{ phoneBtnLabel }}<span style="font-family:'Material Symbols Rounded';font-size:21px">arrow_forward</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isOtp }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:44px 24px 30px;animation:bk-slideup .3s cubic-bezier(.2,.8,.2,1)">
+            <div style="padding-top:12px;display:flex;align-items:center;gap:12px">
+              <div onClick="{{ goPhone }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</span></div>
+              <div style="flex:1;height:4px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:50%;height:100%;background:#1B4332;border-radius:100px"></div></div>
+              <div style="font-size:11.5px;font-weight:700;color:#6B6B6B">2 / 4</div>
+            </div>
+
+            <div style="margin-top:30px">
+              <div style="font-size:30px;font-weight:800;letter-spacing:-.028em;line-height:1.12">Code de vérification</div>
+              <div style="margin-top:11px;font-size:14px;line-height:1.55;color:#6B6B6B">Envoyé au <strong style="color:#1A1A1A;font-family:'JetBrains Mono',monospace">+221 {{ phoneDisplay }}</strong></div>
+            </div>
+
+            <div style="margin-top:30px;display:flex;gap:9px;animation:{{ otpShake }}">
+              <sc-for list="{{ otpCells }}" as="c" hint-placeholder-count="6">
+                <div style="flex:1;height:62px;border-radius:13px;background:{{ c.bg }};border:2px solid {{ c.border }};display:flex;align-items:center;justify-content:center;transition:border-color .18s,background .18s">
+                  <sc-if value="{{ c.filled }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:800;animation:bk-bounce .3s cubic-bezier(.34,1.56,.64,1)">{{ c.digit }}</div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="margin-top:20px;display:flex;justify-content:center">
+              <sc-if value="{{ otpCanResend }}" hint-placeholder-val="{{ false }}">
+                <div onClick="{{ resendOtp }}" style="padding:10px 18px;border-radius:100px;background:#fff;border:1.5px solid rgba(27,67,50,.16);font-size:13px;font-weight:700;color:#1B4332;cursor:pointer;display:flex;align-items:center;gap:7px" style-active="transform:scale(.96)"><span style="font-family:'Material Symbols Rounded';font-size:18px">refresh</span>Renvoyer le code</div>
+              </sc-if>
+              <sc-if value="{{ otpWaiting }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size:13px;color:#6B6B6B">Renvoyer le code dans <strong style="font-family:'JetBrains Mono',monospace;color:#1A1A1A">{{ otpTimer }}s</strong></div>
+              </sc-if>
+            </div>
+
+            <div style="flex:1"></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px">
+              <sc-for list="{{ otpKeys }}" as="k" hint-placeholder-count="12">
+                <div onClick="{{ k.press }}" style="height:56px;border-radius:12px;background:{{ k.bg }};border:{{ k.border }};display:flex;align-items:center;justify-content:center;font-size:{{ k.size }}px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94)">{{ k.label }}</div>
+              </sc-for>
+            </div>
+            <div onClick="{{ submitOtp }}" style="height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16.5px;font-weight:700;cursor:pointer;transition:background .2s,transform .18s cubic-bezier(.34,1.56,.64,1);background:{{ otpBtnBg }};color:{{ otpBtnFg }}" style-active="transform:scale(.97)">
+              {{ otpBtnLabel }}<span style="font-family:'Material Symbols Rounded';font-size:21px">arrow_forward</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isPinScreen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:44px 24px 30px;animation:bk-fade .26s ease-out">
+            <div style="padding-top:12px;display:flex;align-items:center;gap:12px">
+              <div onClick="{{ pinBack }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</span></div>
+              <div style="flex:1;height:4px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="height:100%;background:#1B4332;border-radius:100px;transition:width .3s;width:{{ pinProgress }}%"></div></div>
+              <div style="font-size:11.5px;font-weight:700;color:#6B6B6B">{{ pinStepLabel }}</div>
+            </div>
+
+            <div style="margin-top:38px;text-align:center">
+              <div style="width:64px;height:64px;border-radius:18px;background:{{ pinIconBg }};display:flex;align-items:center;justify-content:center;margin:0 auto;transition:background .2s"><span style="font-family:'Material Symbols Rounded';font-size:32px;color:{{ pinIconFg }}">{{ pinIcon }}</span></div>
+              <div style="margin-top:20px;font-size:26px;font-weight:800;letter-spacing:-.025em;line-height:1.15">{{ pinTitle }}</div>
+              <div style="margin-top:11px;font-size:14px;line-height:1.55;color:{{ pinSubColor }};max-width:260px;margin-left:auto;margin-right:auto;transition:color .2s">{{ pinSub }}</div>
+            </div>
+
+            <div style="margin-top:36px;display:flex;justify-content:center;gap:18px;animation:{{ pinShake }}">
+              <sc-for list="{{ pinDots }}" as="d" hint-placeholder-count="4">
+                <div style="width:20px;height:20px;border-radius:100px;background:{{ d.bg }};border:2px solid {{ d.border }};transition:background .16s,border-color .16s,transform .16s;transform:{{ d.scale }};animation:{{ d.anim }}"></div>
+              </sc-for>
+            </div>
+
+            <div style="flex:1"></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px">
+              <sc-for list="{{ pinKeys }}" as="k" hint-placeholder-count="12">
+                <div onClick="{{ k.press }}" style="height:62px;border-radius:14px;background:{{ k.bg }};border:{{ k.border }};display:flex;align-items:center;justify-content:center;font-size:{{ k.size }}px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.93)">{{ k.label }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isBio }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#1B4332;display:flex;flex-direction:column;padding:44px 28px 34px;animation:bk-fade .3s ease-out">
+            <div style="padding-top:12px;display:flex;align-items:center;gap:12px">
+              <div style="flex:1;height:4px;border-radius:100px;background:rgba(255,255,255,.16);overflow:hidden"><div style="width:100%;height:100%;background:#F4A100;border-radius:100px"></div></div>
+              <div style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.6)">4 / 4</div>
+            </div>
+
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+              <div style="position:relative;display:flex;align-items:center;justify-content:center">
+                <div style="position:absolute;width:132px;height:132px;border-radius:100px;border:2px solid rgba(244,161,0,.4);animation:bk-ring 2.6s ease-out infinite"></div>
+                <div style="width:120px;height:120px;border-radius:100px;background:rgba(244,161,0,.14);display:flex;align-items:center;justify-content:center;animation:bk-bio 2.6s ease-in-out infinite">
+                  <span style="font-family:'Material Symbols Rounded';font-size:62px;color:#F4A100">fingerprint</span>
+                </div>
+              </div>
+              <div style="margin-top:34px;font-size:27px;font-weight:800;color:#fff;letter-spacing:-.025em;line-height:1.18;max-width:270px;animation:bk-fadeup .4s .18s ease-out both">Activer la reconnexion par empreinte ?</div>
+              <div style="margin-top:14px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.66);max-width:250px;animation:bk-fadeup .4s .32s ease-out both">Plus besoin de saisir ton code à chaque ouverture. Tu peux le changer plus tard dans les réglages.</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;align-items:center">
+              <div onClick="{{ finish }}" style="width:100%;height:56px;border-radius:14px;background:#F4A100;color:#1A1A1A;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16.5px;font-weight:800;cursor:pointer;box-shadow:0 10px 26px rgba(244,161,0,.30)" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:22px">fingerprint</span>Activer</div>
+              <div onClick="{{ finish }}" style="font-size:14px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;padding:8px 14px">Plus tard</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#2D6A4F;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 30px;text-align:center;animation:bk-fade .26s ease-out">
+            <div style="width:112px;height:112px;border-radius:100px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">
+              <svg width="56" height="56" viewBox="0 0 52 52" fill="none"><path d="M12 27.5 L22 37 L40 17" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60" style="animation:bk-draw .6s cubic-bezier(.65,0,.35,1) forwards"></path></svg>
+            </div>
+            <div style="margin-top:30px;font-size:29px;font-weight:800;color:#fff;letter-spacing:-.025em;animation:bk-fadeup .4s .45s ease-out both">Compte prêt</div>
+            <div style="margin-top:12px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.74);max-width:250px;animation:bk-fadeup .4s .6s ease-out both">{{ doneSub }}</div>
+            <div onClick="{{ restart }}" style="margin-top:34px;padding:13px 24px;border-radius:100px;background:rgba(255,255,255,.14);color:#fff;font-size:14px;font-weight:700;cursor:pointer;animation:bk-fadeup .4s .74s ease-out both" style-active="transform:scale(.96)">Rejouer le parcours</div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:378px">
+      <div onClick="{{ goSplash }}" style="padding:9px 13px;border-radius:100px;background:{{ tabSplash }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.1 Splash</div>
+      <div onClick="{{ goRole }}" style="padding:9px 13px;border-radius:100px;background:{{ tabRole }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.2 Rôle</div>
+      <div onClick="{{ jumpPhone }}" style="padding:9px 13px;border-radius:100px;background:{{ tabPhone }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.3 Numéro</div>
+      <div onClick="{{ jumpOtp }}" style="padding:9px 13px;border-radius:100px;background:{{ tabOtp }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.4 OTP</div>
+      <div onClick="{{ goPinCreate }}" style="padding:9px 13px;border-radius:100px;background:{{ tabPin }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.5 PIN</div>
+      <div onClick="{{ goPinConfirm }}" style="padding:9px 13px;border-radius:100px;background:{{ tabPin2 }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.6 Confirm</div>
+      <div onClick="{{ goBio }}" style="padding:9px 13px;border-radius:100px;background:{{ tabBio }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">1.7 Biométrie</div>
+      <div onClick="{{ demoError }}" style="padding:9px 13px;border-radius:100px;background:#fff;border:1px solid rgba(193,18,31,.28);font-size:12px;font-weight:700;color:#C1121F;cursor:pointer">Erreur PIN</div>
+    </div>
+  </div>
+
+  <div style="width:400px;display:flex;flex-direction:column;gap:16px;padding-top:8px">
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1B4332">Écran actif</div>
+      <div style="margin-top:10px;font-size:21px;font-weight:800;letter-spacing:-.02em;text-wrap:pretty">{{ panelTitle }}</div>
+      <div style="margin-top:9px;font-size:13.5px;line-height:1.62;color:#6B6B6B;text-wrap:pretty">{{ panelBody }}</div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(27,67,50,.10)">
+        <div style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:9px">Animations</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#1A1A1A;white-space:pre-line">{{ panelAnim }}</div>
+      </div>
+    </div>
+
+    <div style="background:#1B4332;border-radius:16px;padding:24px 26px;color:#fff">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F4A100;margin-bottom:15px">Principes du parcours</div>
+      <div style="display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)">
+        <div><strong style="color:#fff">Un seul choix par écran.</strong> Rôle, numéro, code, PIN, biométrie : jamais deux décisions sur le même écran.</div>
+        <div><strong style="color:#fff">Pavé numérique custom partout.</strong> Le clavier système n'apparaît jamais — chiffres larges, 56–62 px de hauteur, lisibles en plein soleil.</div>
+        <div><strong style="color:#fff">L'erreur se voit sans se lire.</strong> Un PIN faux fait trembler les points et les passe en rouge 600 ms, sans bloquer l'utilisateur.</div>
+        <div><strong style="color:#fff">La biométrie reste optionnelle.</strong> « Plus tard » est un vrai chemin, au même niveau visuel que l'activation.</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1B4332;margin-bottom:15px">Règles de validation</div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.55;color:#6B6B6B">
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:#1A1A1A;width:80px;flex:none">9 chiffres</div><div>Format sénégalais après l'indicatif +221.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:#1A1A1A;width:80px;flex:none">6 cases</div><div>OTP. Renvoi possible après 30 s de compte à rebours.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;color:#1A1A1A;width:80px;flex:none">4 chiffres</div><div>PIN, saisi puis confirmé. Non identiques → shake + reprise.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<helmet>
+<style>@keyframes bk-draw{to{stroke-dashoffset:0}}</style>
+</helmet>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:920,&quot;height&quot;:940}}">
+const SPECS = {
+  splash: ["1.1 — Splash", "Fond vert nuit, logo centré. Deux anneaux concentriques se propagent en boucle pendant le chargement, puis fondu automatique vers le choix du rôle.", "Logo · pulse scale 1 → 1.07, 2400ms infinite\nAnneaux · scale + fade 2400ms, décalés 800ms\nBarre · 2200ms linear\nSortie · fade 300ms"],
+  role: ["1.2 — Choix du rôle", "Deux cards pleine largeur. La card sélectionnée se lève, grandit légèrement et gagne une ombre portée plus dense. Le bouton reste inactif jusqu'au choix.", "Card sélectionnée · translateY(-3px) + scale(1.02), 220ms spring\nOmbre · 0 14px 30px, fade 220ms\nRadio · pop-in 280ms spring"],
+  phone: ["1.3 — Saisie du numéro", "Indicatif +221 pré-sélectionné avec drapeau. Champ large en monospace, curseur clignotant. Pavé numérique custom sous le champ.", "Entrée · slide-up 300ms\nCaret · blink 1100ms step-end\nTouches · scale 0.94 au tap\nBouton actif · background 200ms"],
+  otp: ["1.4 — Vérification OTP", "Six cases. Chaque chiffre saisi apparaît avec un micro-bounce et la case active porte un liseré vert. Renvoi du code déverrouillé après 30 s.", "Chiffre · pop-in scale .55 → 1.16 → 1, 300ms\nCase active · border 180ms\nCompte à rebours · tick 1000ms\nErreur · shake 400ms"],
+  pinCreate: ["1.5 — Création du code PIN", "Quatre points à remplir, pavé numérique custom. Chaque point rempli grandit brièvement puis se stabilise. Aucun chiffre n'est affiché.", "Point rempli · pop-in 280ms spring\nTouches · scale 0.93 au tap\nPassage à 1.6 · fade 260ms"],
+  pinConfirm: ["1.6 — Confirmation du PIN", "Même interface que 1.5, titre et icône changent. Si les deux codes diffèrent, les quatre points tremblent et passent en rouge, puis la saisie repart à zéro.", "Erreur · shake 420ms translateX ±9px\nPoints rouges · 600ms puis reset\nSuccès · fade vers 1.7, 260ms"],
+  bio: ["1.7 — Activation biométrie", "Fond vert, empreinte or au centre avec anneau qui se propage. « Plus tard » est un lien de même poids fonctionnel que le bouton.", "Empreinte · pulse scale 1 → 1.06, 2600ms\nAnneau · propagation 2600ms infinite\nTextes · fade-up décalées 140ms"],
+  done: ["Fin du parcours", "Écran de sortie du prototype, hors spécification. Confirme la création du compte et permet de rejouer le parcours.", "Checkmark · stroke-dashoffset 600ms\nTextes · fade-up décalées 150ms"]
+};
+
+class Component extends DCLogic {
+  state = {
+    screen: "splash", role: null, phone: "", otp: "", otpTimer: 30,
+    pin: "", pinConfirm: "", pinError: false, otpError: false, splashProgress: 0
+  };
+  timers = [];
+  clearTimers() { this.timers.forEach(t => { clearTimeout(t); clearInterval(t); }); this.timers = []; }
+  componentWillUnmount() { this.clearTimers(); }
+  componentDidMount() { this.runSplash(); }
+
+  runSplash = () => {
+    this.clearTimers();
+    this.setState({ screen: "splash", splashProgress: 0 });
+    const t0 = Date.now();
+    const iv = setInterval(() => {
+      const p = Math.min(100, ((Date.now() - t0) / 2200) * 100);
+      this.setState({ splashProgress: p });
+      if (p >= 100) { clearInterval(iv); this.goRole(); }
+    }, 60);
+    this.timers.push(iv);
+  };
+
+  goSplash = () => this.runSplash();
+  goRole = () => { this.clearTimers(); this.setState({ screen: "role" }); };
+  goPhone = () => {
+    if (this.state.screen === "role" && !this.state.role) return;
+    this.clearTimers(); this.setState({ screen: "phone" });
+  };
+  jumpPhone = () => { this.clearTimers(); this.setState({ screen: "phone", role: this.state.role || "client" }); };
+  jumpOtp = () => { this.setState({ role: this.state.role || "client", phone: this.state.phone.length === 9 ? this.state.phone : "771234567" }); this.goOtp(true); };
+  goOtp = (force) => {
+    if (!force && this.state.screen === "phone" && this.state.phone.length < 9) return;
+    this.clearTimers();
+    this.setState({ screen: "otp", otp: "", otpTimer: 30, otpError: false });
+    const iv = setInterval(() => {
+      const t = this.state.otpTimer - 1;
+      this.setState({ otpTimer: t });
+      if (t <= 0) clearInterval(iv);
+    }, 1000);
+    this.timers.push(iv);
+  };
+  resendOtp = () => this.goOtp(true);
+  goPinCreate = () => { this.clearTimers(); this.setState({ screen: "pinCreate", pin: "", pinError: false }); };
+  goPinConfirm = () => { this.clearTimers(); this.setState({ screen: "pinConfirm", pin: this.state.pin.length === 4 ? this.state.pin : "1234", pinConfirm: "", pinError: false }); };
+  goBio = () => { this.clearTimers(); this.setState({ screen: "bio" }); };
+  finish = () => { this.clearTimers(); this.setState({ screen: "done" }); };
+  restart = () => { this.setState({ role: null, phone: "", otp: "", pin: "", pinConfirm: "" }); this.runSplash(); };
+
+  pickShop = () => this.setState({ role: "shop" });
+  pickClient = () => this.setState({ role: "client" });
+
+  pressPhone = (d) => { if (this.state.phone.length < 9) this.setState({ phone: this.state.phone + d }); };
+  delPhone = () => this.setState({ phone: this.state.phone.slice(0, -1) });
+
+  pressOtp = (d) => {
+    if (this.state.otp.length >= 6) return;
+    const next = this.state.otp + d;
+    this.setState({ otp: next, otpError: false });
+    if (next.length === 6) { const t = setTimeout(() => this.goPinCreate(), 420); this.timers.push(t); }
+  };
+  delOtp = () => this.setState({ otp: this.state.otp.slice(0, -1) });
+  submitOtp = () => { if (this.state.otp.length === 6) this.goPinCreate(); };
+
+  pressPin = (d) => {
+    const s = this.state;
+    if (s.screen === "pinCreate") {
+      if (s.pin.length >= 4) return;
+      const next = s.pin + d;
+      this.setState({ pin: next, pinError: false });
+      if (next.length === 4) { const t = setTimeout(() => this.goPinConfirm(), 300); this.timers.push(t); }
+    } else {
+      if (s.pinConfirm.length >= 4) return;
+      const next = s.pinConfirm + d;
+      this.setState({ pinConfirm: next, pinError: false });
+      if (next.length === 4) {
+        const t = setTimeout(() => {
+          if (next === this.state.pin) { this.goBio(); }
+          else {
+            this.setState({ pinError: true });
+            const t2 = setTimeout(() => this.setState({ pinConfirm: "", pinError: false }), 700);
+            this.timers.push(t2);
+          }
+        }, 260);
+        this.timers.push(t);
+      }
+    }
+  };
+  delPin = () => {
+    const s = this.state;
+    if (s.screen === "pinCreate") this.setState({ pin: s.pin.slice(0, -1), pinError: false });
+    else this.setState({ pinConfirm: s.pinConfirm.slice(0, -1), pinError: false });
+  };
+
+  demoError = () => {
+    this.clearTimers();
+    this.setState({ screen: "pinConfirm", pin: "1234", pinConfirm: "9999", pinError: true });
+    const t = setTimeout(() => this.setState({ pinConfirm: "", pinError: false }), 900);
+    this.timers.push(t);
+  };
+
+  keypad(press, del, big) {
+    const size = big ? 24 : 23;
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map(d => ({
+      label: d, size: size, bg: "#F2F2EF", border: "none", press: () => press(d)
+    }));
+    keys.push({ label: "", size: size, bg: "transparent", border: "none", press: () => {} });
+    keys.push({ label: "0", size: size, bg: "#F2F2EF", border: "none", press: () => press("0") });
+    keys.push({ label: "⌫", size: 20, bg: "#fff", border: "1.5px solid rgba(27,67,50,.14)", press: del });
+    return keys;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const spec = SPECS[s.screen] || SPECS.splash;
+    const isShop = s.role === "shop", isClient = s.role === "client";
+    const pill = (on) => on ? "#F4A100" : "#fff";
+    const roleOk = !!s.role, phoneOk = s.phone.length === 9, otpOk = s.otp.length === 6;
+
+    const empty = !s.phone;
+    let pd = s.phone.replace(/(\d{2})(?=\d)/, "$1 ").replace(/^(\d{2} \d{3})(?=\d)/, "$1 ").replace(/^(\d{2} \d{3} \d{2})(?=\d)/, "$1 ");
+    if (empty) pd = "77 000 00 00";
+
+    const otpCells = [];
+    for (let i = 0; i < 6; i++) {
+      const filled = i < s.otp.length, active = i === s.otp.length;
+      otpCells.push({
+        digit: s.otp[i] || "", filled: filled,
+        bg: filled ? "#fff" : "#F2F2EF",
+        border: s.otpError ? "#C1121F" : (active ? "#1B4332" : (filled ? "rgba(27,67,50,.20)" : "transparent"))
+      });
+    }
+
+    const isCreate = s.screen === "pinCreate";
+    const cur = isCreate ? s.pin : s.pinConfirm;
+    const pinDots = [];
+    for (let i = 0; i < 4; i++) {
+      const filled = i < cur.length;
+      pinDots.push({
+        bg: s.pinError ? "#C1121F" : (filled ? "#1B4332" : "transparent"),
+        border: s.pinError ? "#C1121F" : (filled ? "#1B4332" : "rgba(27,67,50,.24)"),
+        scale: filled ? "scale(1.1)" : "scale(1)",
+        anim: filled && !s.pinError ? "bk-bounce .28s cubic-bezier(.34,1.56,.64,1)" : "none"
+      });
+    }
+
+    return {
+      showStatus: s.screen !== "splash" && s.screen !== "done",
+      statusColor: s.screen === "bio" ? "#fff" : "#1A1A1A",
+      isSplash: s.screen === "splash", isRole: s.screen === "role", isPhone: s.screen === "phone",
+      isOtp: s.screen === "otp", isPinScreen: isCreate || s.screen === "pinConfirm",
+      isBio: s.screen === "bio", isDone: s.screen === "done",
+      splashProgress: s.splashProgress,
+
+      isShop: isShop, isClient: isClient,
+      shopBorder: isShop ? "#1B4332" : "rgba(27,67,50,.10)",
+      shopShadow: isShop ? "0 14px 30px rgba(27,67,50,.20)" : "0 1px 3px rgba(27,67,50,.07)",
+      shopLift: isShop ? "translateY(-3px) scale(1.02)" : "translateY(0) scale(1)",
+      shopIconBg: isShop ? "#1B4332" : "#F2F2EF", shopIconFg: isShop ? "#F4A100" : "#6B6B6B",
+      shopRadio: isShop ? "#1B4332" : "rgba(27,67,50,.22)",
+      cliBorder: isClient ? "#1B4332" : "rgba(27,67,50,.10)",
+      cliShadow: isClient ? "0 14px 30px rgba(27,67,50,.20)" : "0 1px 3px rgba(27,67,50,.07)",
+      cliLift: isClient ? "translateY(-3px) scale(1.02)" : "translateY(0) scale(1)",
+      cliIconBg: isClient ? "#1B4332" : "#F2F2EF", cliIconFg: isClient ? "#F4A100" : "#6B6B6B",
+      cliRadio: isClient ? "#1B4332" : "rgba(27,67,50,.22)",
+      roleBtnBg: roleOk ? "#1B4332" : "#E6E6E1", roleBtnFg: roleOk ? "#fff" : "#9A9A94",
+      roleBtnLabel: roleOk ? "Continuer" : "Choisis ton rôle",
+
+      phoneDisplay: pd,
+      phoneSize: empty ? 19 : 22,
+      phoneSpacing: empty ? "0" : ".06em",
+      phoneColor: empty ? "#9A9A94" : "#1A1A1A",
+      phoneBorder: s.phone ? "#1B4332" : "rgba(27,67,50,.14)",
+      phoneKeys: this.keypad(this.pressPhone, this.delPhone, false),
+      phoneBtnBg: phoneOk ? "#1B4332" : "#E6E6E1", phoneBtnFg: phoneOk ? "#fff" : "#9A9A94",
+      phoneBtnLabel: "Continuer",
+
+      otpCells: otpCells, otpShake: s.otpError ? "bk-shake .4s ease-in-out" : "none",
+      otpTimer: s.otpTimer, otpCanResend: s.otpTimer <= 0, otpWaiting: s.otpTimer > 0,
+      otpKeys: this.keypad(this.pressOtp, this.delOtp, false),
+      otpBtnBg: otpOk ? "#1B4332" : "#E6E6E1", otpBtnFg: otpOk ? "#fff" : "#9A9A94",
+      otpBtnLabel: otpOk ? "Vérifier" : "Saisis les 6 chiffres",
+
+      pinDots: pinDots, pinKeys: this.keypad(this.pressPin, this.delPin, true),
+      pinShake: s.pinError ? "bk-shake .42s ease-in-out" : "none",
+      pinProgress: isCreate ? 75 : 90,
+      pinStepLabel: isCreate ? "3 / 4" : "3 / 4",
+      pinIcon: isCreate ? "lock" : "lock_reset",
+      pinIconBg: s.pinError ? "rgba(193,18,31,.10)" : "#F2F2EF",
+      pinIconFg: s.pinError ? "#C1121F" : "#1B4332",
+      pinTitle: isCreate ? "Créer ton code secret" : "Confirme ton code",
+      pinSub: s.pinError ? "Les deux codes ne correspondent pas. Réessaie." : (isCreate ? "Quatre chiffres qu'on te demandera à chaque ouverture." : "Saisis à nouveau les quatre mêmes chiffres."),
+      pinSubColor: s.pinError ? "#C1121F" : "#6B6B6B",
+      pinBack: isCreate ? this.goOtp : this.goPinCreate,
+
+      doneSub: isShop ? "Ta boutique est enregistrée. Tu peux ouvrir les cahiers de tes clients." : "Ton compte est prêt. Scanne le QR de ta boutique pour ton premier bon.",
+
+      goSplash: this.goSplash, goRole: this.goRole, goPhone: this.goPhone, goOtp: this.goOtp,
+      jumpPhone: this.jumpPhone, jumpOtp: this.jumpOtp,
+      goPinCreate: this.goPinCreate, goPinConfirm: this.goPinConfirm, goBio: this.goBio,
+      finish: this.finish, restart: this.restart, demoError: this.demoError,
+      pickShop: this.pickShop, pickClient: this.pickClient,
+      resendOtp: this.resendOtp, submitOtp: this.submitOtp,
+
+      tabSplash: pill(s.screen === "splash"), tabRole: pill(s.screen === "role"),
+      tabPhone: pill(s.screen === "phone"), tabOtp: pill(s.screen === "otp"),
+      tabPin: pill(isCreate), tabPin2: pill(s.screen === "pinConfirm"), tabBio: pill(s.screen === "bio"),
+
+      panelTitle: spec[0], panelBody: spec[1], panelAnim: spec[2]
+    };
+  }
+}
+</script>
+</body>
+</html>

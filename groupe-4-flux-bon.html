@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F2F2EF;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;-webkit-font-smoothing:antialiased}
+a{color:#1B4332}a:hover{color:#2D6A4F}
+@keyframes bk-corners{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes bk-draw{0%{stroke-dashoffset:60}100%{stroke-dashoffset:0}}
+@keyframes bk-fadeup{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes bk-confetti{0%{transform:translateY(-20px) rotate(0deg);opacity:0}12%{opacity:1}100%{transform:translateY(560px) rotate(540deg);opacity:0}}
+@keyframes bk-slideup{0%{transform:translateY(30px);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes bk-fade{0%{opacity:0}100%{opacity:1}}
+@keyframes bk-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes bk-sweep{0%{transform:translateY(-88px)}100%{transform:translateY(88px)}}
+@keyframes bk-dot{0%,100%{opacity:1}50%{opacity:.42}}
+::-webkit-scrollbar{display:none}*{-ms-overflow-style:none;scrollbar-width:none}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;gap:48px;align-items:flex-start;justify-content:center;padding:44px 40px 60px;flex-wrap:wrap">
+
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+    <a href="{{ exitHref }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:100px;background:#fff;border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;color:#1B4332;text-decoration:none"><span style="font-family:'Material Symbols Rounded';font-size:17px">arrow_back</span>Retour au dashboard client</a>
+    <div style="display:flex;align-items:center;gap:11px;align-self:flex-start">
+      <div style="width:34px;height:34px;border-radius:10px;background:#1B4332;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#F4A100">B</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Boutik</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:1px">Groupe 4 — enregistrement d'un bon</div>
+      </div>
+    </div>
+
+    <div style="position:relative;width:378px;height:786px;border-radius:44px;background:#1A1A1A;padding:9px;box-shadow:0 24px 60px rgba(27,67,50,.20)">
+      <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#FAFAF7">
+
+        <video ref="{{ videoRef }}" playsinline="true" muted="true" autoplay="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#111;pointer-events:none;transition:opacity .24s ease-in-out;opacity:{{ videoOpacity }}"></video>
+        <canvas ref="{{ canvasRef }}" style="display:none"></canvas>
+
+        <sc-if value="{{ hasPhotoLayer }}" hint-placeholder-val="{{ false }}">
+          <img ref="{{ photoRef0 }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:bk-fade .24s ease-in-out">
+        </sc-if>
+
+        <sc-if value="{{ isCamera }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px 20px 26px;background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 62%,rgba(0,0,0,.52) 100%)">
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <a href="{{ exitHref }}" style="width:40px;height:40px;border-radius:100px;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none"><span style="font-family:'Material Symbols Rounded';font-size:23px;color:#fff">arrow_back</span></a>
+                <div style="padding:7px 14px;border-radius:100px;background:rgba(0,0,0,.42);color:#fff;font-size:12px;font-weight:600">Étape 1 / 3</div>
+              </div>
+              <div style="align-self:center;padding:11px 18px;border-radius:100px;background:rgba(26,26,26,.62);color:#fff;font-size:14.5px;font-weight:600;backdrop-filter:blur(6px)">Prends une photo de tes produits</div>
+              <sc-if value="{{ camError }}" hint-placeholder-val="{{ false }}">
+                <div style="align-self:center;max-width:250px;text-align:center;padding:12px 16px;border-radius:12px;background:rgba(193,18,31,.90);color:#fff;font-size:12.5px;line-height:1.5">{{ camError }}<div onClick="{{ capture }}" style="margin-top:10px;padding:8px;border-radius:8px;background:#fff;color:#C1121F;font-weight:700;cursor:pointer">Continuer sans photo</div></div>
+              </sc-if>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:34px">
+              <span style="font-family:'Material Symbols Rounded';font-size:26px;color:rgba(255,255,255,.75)">bolt</span>
+              <div onClick="{{ capture }}" style="width:78px;height:78px;border-radius:100px;border:4px solid rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .16s cubic-bezier(.34,1.56,.64,1)" style-active="transform:scale(.93)">
+                <div style="width:60px;height:60px;border-radius:100px;background:#fff"></div>
+              </div>
+              <span style="font-family:'Material Symbols Rounded';font-size:26px;color:rgba(255,255,255,.75)">cameraswitch</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px 20px 26px;background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 64%,rgba(0,0,0,.50) 100%)">
+            <div>
+              <div style="height:5px;border-radius:100px;background:rgba(255,255,255,.30);overflow:hidden">
+                <div style="height:100%;background:#F4A100;border-radius:100px;transition:width .1s linear;width:{{ progress }}%"></div>
+              </div>
+              <div style="margin-top:14px;display:flex;justify-content:center"><div style="padding:8px 15px;border-radius:100px;background:rgba(26,26,26,.62);color:#fff;font-size:13px;font-weight:600">Scan de la boutique dans {{ countdown }}s</div></div>
+            </div>
+            <div style="display:flex;gap:12px">
+              <div onClick="{{ retake }}" style="flex:1;height:56px;border-radius:12px;border:1.5px solid #fff;color:#fff;background:rgba(0,0,0,.30);display:flex;align-items:center;justify-content:center;gap:8px;font-size:15.5px;font-weight:700;cursor:pointer" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:20px">refresh</span>Reprendre</div>
+              <div onClick="{{ goScan }}" style="flex:1;height:56px;border-radius:12px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15.5px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.28)" style-active="transform:scale(.97)">Continuer<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isScan }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;animation:bk-fade .24s ease-in-out">
+            <div style="position:absolute;top:16px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;z-index:3">
+              <div onClick="{{ backToPreview }}" style="width:40px;height:40px;border-radius:100px;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:23px;color:#fff">arrow_back</span></div>
+              <div style="padding:7px 14px;border-radius:100px;background:rgba(0,0,0,.45);color:#fff;font-size:12px;font-weight:600">Étape 2 / 3</div>
+            </div>
+            <div onClick="{{ scanSuccess }}" style="position:absolute;top:232px;left:69px;width:240px;height:240px;border-radius:22px;box-shadow:0 0 0 999px rgba(10,20,15,.62);cursor:pointer">
+              <div style="position:absolute;top:-2px;left:-2px;width:44px;height:44px;border-top:4px solid #F4A100;border-left:4px solid #F4A100;border-radius:18px 0 0 0;animation:bk-corners 1.6s ease-in-out infinite"></div>
+              <div style="position:absolute;top:-2px;right:-2px;width:44px;height:44px;border-top:4px solid #F4A100;border-right:4px solid #F4A100;border-radius:0 18px 0 0;animation:bk-corners 1.6s ease-in-out infinite"></div>
+              <div style="position:absolute;bottom:-2px;left:-2px;width:44px;height:44px;border-bottom:4px solid #F4A100;border-left:4px solid #F4A100;border-radius:0 0 0 18px;animation:bk-corners 1.6s ease-in-out infinite"></div>
+              <div style="position:absolute;bottom:-2px;right:-2px;width:44px;height:44px;border-bottom:4px solid #F4A100;border-right:4px solid #F4A100;border-radius:0 0 18px 0;animation:bk-corners 1.6s ease-in-out infinite"></div>
+              <div style="position:absolute;top:120px;left:14px;right:14px;height:2px;background:rgba(244,161,0,.85);animation:bk-sweep 1.9s ease-in-out infinite alternate"></div>
+            </div>
+            <div style="position:absolute;top:500px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3">
+              <div style="padding:11px 18px;border-radius:100px;background:rgba(26,26,26,.70);color:#fff;font-size:14.5px;font-weight:600">Pointe vers le QR code de la boutique</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.65)">Touche le cadre pour simuler la détection</div>
+            </div>
+            <sc-if value="{{ photoReady }}" hint-placeholder-val="{{ false }}"><img ref="{{ photoRef1 }}" alt="" style="position:absolute;bottom:26px;left:20px;width:54px;height:54px;border-radius:12px;object-fit:cover;border:2px solid rgba(255,255,255,.85);z-index:3"></sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isAmount }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#FAFAF7;display:flex;flex-direction:column;padding:14px 20px 22px;animation:bk-slideup .28s cubic-bezier(.2,.8,.2,1)">
+            <div style="display:flex;justify-content:space-between;font-size:11.5px;font-weight:600;padding-bottom:12px"><span>9:41</span><span>▮▮▮ ▲ 84%</span></div>
+            <div style="display:flex;align-items:center;gap:11px">
+              <div onClick="{{ goScan }}" style="width:36px;height:36px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</span></div>
+              <sc-if value="{{ photoReady }}" hint-placeholder-val="{{ false }}"><img ref="{{ photoRef2 }}" alt="" style="width:46px;height:46px;border-radius:11px;object-fit:cover;background:#F2F2EF"></sc-if>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ partyLabel }}</div>
+                <div style="font-size:11.5px;font-weight:600;color:#2D6A4F;display:flex;align-items:center;gap:3px"><span style="font-family:'Material Symbols Rounded';font-size:14px">verified</span>Vérifiée · Sacré-Cœur 3</div>
+              </div>
+              <div style="padding:6px 12px;border-radius:100px;background:#F2F2EF;font-size:11.5px;font-weight:600;color:#6B6B6B">3 / 3</div>
+            </div>
+
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px">
+              <div style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B">Montant du bon</div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <div style="font-family:'JetBrains Mono',monospace;font-weight:800;letter-spacing:-.045em;line-height:.9;transition:font-size .16s cubic-bezier(.34,1.56,.64,1);color:{{ amountColor }};font-size:{{ amountSize }}px">{{ amountLabel }}</div>
+                <div style="font-size:13px;font-weight:600;letter-spacing:.1em;color:#6B6B6B;padding-top:10px">FCFA</div>
+              </div>
+              <div style="padding:7px 15px;border-radius:100px;font-weight:600;font-size:12.5px;background:{{ hintBg }};color:{{ hintColor }}">{{ hint }}</div>
+              <div style="display:flex;gap:8px;margin-top:2px">
+                <div onClick="{{ setQuick1 }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1.5px solid rgba(27,67,50,.16);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;cursor:pointer" style-active="transform:scale(.96)">1 000</div>
+                <div onClick="{{ setQuick2 }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1.5px solid rgba(27,67,50,.16);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;cursor:pointer" style-active="transform:scale(.96)">2 500</div>
+                <div onClick="{{ setQuick3 }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1.5px solid rgba(27,67,50,.16);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;cursor:pointer" style-active="transform:scale(.96)">5 000</div>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px">
+              <div onClick="{{ k1 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">1</div>
+              <div onClick="{{ k2 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">2</div>
+              <div onClick="{{ k3 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">3</div>
+              <div onClick="{{ k4 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">4</div>
+              <div onClick="{{ k5 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">5</div>
+              <div onClick="{{ k6 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">6</div>
+              <div onClick="{{ k7 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">7</div>
+              <div onClick="{{ k8 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">8</div>
+              <div onClick="{{ k9 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94);background:#E6E6E1">9</div>
+              <div onClick="{{ k000 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:#6B6B6B;cursor:pointer" style-active="transform:scale(.94)">000</div>
+              <div onClick="{{ k0 }}" style="height:54px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600;cursor:pointer" style-active="transform:scale(.94)">0</div>
+              <div onClick="{{ kDel }}" style="height:54px;border-radius:12px;background:#fff;border:1.5px solid rgba(27,67,50,.14);display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="transform:scale(.94)"><span style="font-family:'Material Symbols Rounded';font-size:21px;color:#1B4332">backspace</span></div>
+            </div>
+            <div onClick="{{ send }}" style="height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16.5px;font-weight:700;cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1);background:{{ sendBg }};color:{{ sendColor }}" style-active="transform:scale(.97)">
+              <span style="font-family:'Material Symbols Rounded';font-size:21px">send</span>{{ sendLabel }}
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#1B4332;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 30px;text-align:center;animation:bk-fade .24s ease-in-out">
+            <div style="width:112px;height:112px;border-radius:100px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center">
+              <svg width="56" height="56" viewBox="0 0 52 52" fill="none"><path d="M12 27.5 L22 37 L40 17" stroke="#F4A100" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" style="animation:bk-draw .6s cubic-bezier(.65,0,.35,1) forwards"></path></svg>
+            </div>
+            <sc-if value="{{ showConfetti }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
+                <sc-for list="{{ confetti }}" as="c" hint-placeholder-count="14">
+                  <div style="position:absolute;top:-20px;left:{{ c.left }}%;width:{{ c.size }}px;height:{{ c.h }}px;border-radius:2px;background:{{ c.color }};animation:bk-confetti {{ c.dur }}s {{ c.delay }}s cubic-bezier(.35,.1,.7,1) both"></div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="margin-top:32px;font-size:30px;font-weight:800;color:#fff;letter-spacing:-.02em;animation:bk-fadeup .4s .5s ease-out both">{{ sentTitle }}</div>
+            <div style="margin-top:12px;font-size:15px;line-height:1.55;color:rgba(255,255,255,.72);max-width:252px;animation:bk-fadeup .4s .65s ease-out both">{{ sentSub }}</div>
+            <div style="margin-top:30px;display:flex;align-items:flex-start;gap:7px;color:#fff;animation:bk-fadeup .4s .78s ease-out both">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1">{{ amountLabel }}</div>
+              <div style="font-size:12px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.6);padding-top:5px">FCFA</div>
+            </div>
+            <div style="margin-top:26px;padding:9px 16px;border-radius:100px;background:{{ sentPillBg }};color:{{ sentPillFg }};font-size:12.5px;font-weight:600;animation:bk-fadeup .4s .9s ease-out both">{{ sentPill }}</div>
+            <div style="position:absolute;left:30px;right:30px;bottom:34px">
+              <div style="height:4px;border-radius:100px;background:rgba(255,255,255,.16);overflow:hidden"><div style="height:100%;background:#F4A100;transition:width .1s linear;width:{{ sentProgress }}%"></div></div>
+              <div style="margin-top:11px;font-size:12px;color:rgba(255,255,255,.5)">Retour au tableau de bord…</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ flash }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#2D6A4F;z-index:9"></div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:9px;align-items:center">
+      <div onClick="{{ startFlow }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:600;cursor:pointer">4.1 Photo</div>
+      <div onClick="{{ goScan }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:600;cursor:pointer">4.3 Scan</div>
+      <div onClick="{{ goAmount }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:600;cursor:pointer">4.4 Montant</div>
+      <div onClick="{{ send }}" style="padding:9px 15px;border-radius:100px;background:#fff;border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:600;cursor:pointer">4.5 Confirmation</div>
+      <div onClick="{{ toggleActor }}" style="padding:9px 15px;border-radius:100px;background:{{ actorBg }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:600;cursor:pointer">{{ actorLabel }}</div>
+      <div onClick="{{ toggleNewClient }}" style="padding:9px 15px;border-radius:100px;background:{{ variantBg }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:600;cursor:pointer">{{ variantLabel }}</div>
+    </div>
+  </div>
+
+  <div style="width:392px;display:flex;flex-direction:column;gap:16px;padding-top:8px">
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1B4332">Écran actif</div>
+      <div style="margin-top:10px;font-size:22px;font-weight:800;letter-spacing:-.02em">{{ specTitle }}</div>
+      <div style="margin-top:8px;font-size:13.5px;line-height:1.6;color:#6B6B6B;text-wrap:pretty">{{ specBody }}</div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(27,67,50,.10);display:flex;flex-direction:column;gap:9px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B">Animation</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;color:#1A1A1A">{{ specAnim }}</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1B4332;margin-bottom:16px">Règles métier proposées</div>
+      <div style="display:flex;flex-direction:column;gap:13px">
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:78px;flex:none">20 000</div><div style="font-size:13px;line-height:1.5;color:#6B6B6B">Plafond fixé manuellement par le boutiquier à l'ouverture — il peut aussi n'en poser aucun. Ici 12 500 déjà dus, donc 7 500 disponibles.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:78px;flex:none">200</div><div style="font-size:13px;line-height:1.5;color:#6B6B6B">Montant minimum d'un bon, pour éviter les micro-bons qui saturent le cahier.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:78px;flex:none">10 000</div><div style="font-size:13px;line-height:1.5;color:#6B6B6B">Maximum par bon unitaire, même si le plafond restant est plus élevé.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:78px;flex:none">Instant</div><div style="font-size:13px;line-height:1.5;color:#6B6B6B">Le bon s'enregistre dans le cahier du boutiquier. Pas d'étape d'approbation — juste une notification.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;width:78px;flex:none">Aucune</div><div style="font-size:13px;line-height:1.5;color:#6B6B6B">Pas d'échéance par défaut. Si le boutiquier en fixe une, le cahier se verrouille à cette date.</div></div>
+      </div>
+      <div style="margin-top:16px;padding:13px 15px;border-radius:12px;background:#F2F2EF;font-size:12.5px;line-height:1.55;color:#1A1A1A">Le blocage se joue à la saisie du montant, jamais après l'envoi : le client ne doit pas découvrir un refus qu'on pouvait prévoir.</div>
+    </div>
+
+    <div style="background:#1B4332;color:#fff;border-radius:16px;padding:24px 26px">
+      <div style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#F4A100;margin-bottom:14px">Notes de build</div>
+      <div style="font-size:13px;line-height:1.65;color:rgba(255,255,255,.82);text-wrap:pretty">La caméra du téléphone est réellement utilisée : autorise l'accès pour capturer une vraie photo (elle sert de miniature en 4.4 et en 4.3). Le scan QR est simulé — touche le cadre ou attends 3 s. Icônes : Material Symbols Rounded filled. Montants en JetBrains Mono, chiffres tabulaires.</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:900}}">
+const PLAFOND = 20000, DEJA_DU = 12500, MIN_BON = 200, MAX_BON = 10000;
+const DISPO = Math.min(MAX_BON, PLAFOND - DEJA_DU);
+const PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect width="80" height="80" fill="#F2F2EF"/><circle cx="40" cy="34" r="11" fill="#C9C9C2"/><rect x="18" y="50" width="44" height="8" rx="4" fill="#C9C9C2"/></svg>');
+
+const SPECS = {
+  home: ["5.1 — Accueil client", "Point d'entrée du flux, identique à l'écran 5.1 du Groupe 5 : carte de dette retournable, liste des cahiers, bouton « Nouveau bon ». C'est ce bouton qui déclenche tout le parcours ci-dessous.", "Flip carte · rotateY 620ms\nFAB tap · scale 0.96 → spring 180ms\nPush horizontal vers caméra · 280ms\ncubic-bezier(.2,.8,.2,1)"],
+  camera: ["4.1 — Caméra photo", "Flux caméra plein écran, overlay minimal. Le guide texte disparaît si l'utilisateur ne bouge pas pendant 4 s.", "Ouverture · fade 200ms\nDéclencheur · scale 0.93, 160ms\nCapture · flash blanc 60ms + gel de l'image"],
+  preview: ["4.2 — Aperçu + compte à rebours", "Deux secondes pour reprendre la photo. Sans action, on enchaîne sur le scan : le chemin par défaut est le plus rapide.", "Barre de progression · 2000ms linear\nSortie auto · fondu enchaîné 240ms ease-in-out\nReprendre · retour caméra en fade 200ms"],
+  scan: ["4.3 — Scan QR boutique", "Le cadre est la seule zone lumineuse. Retour arrière possible vers l'aperçu sans perdre la photo.", "Coins · pulse opacité 1600ms infinite\nLigne de balayage · 1900ms alternate\nSuccès · flash vert 120ms + haptic 30ms"],
+  amount: ["4.4 — Saisie du montant", "Le montant occupe le centre et grandit à la frappe. Les règles de plafond s'affichent avant l'envoi, jamais après.", "Entrée écran · slide-up 280ms\nChiffre · font-size 40→68px, spring 160ms\nTouche · scale 0.94, 120ms\nDépassement · pill rouge, pas de shake"],
+  sent: ["4.5 — Confirmation", "Le checkmark se dessine, puis le texte apparaît par fondu en cascade. Deux variantes : cahier déjà actif, ou tout premier bon — seul cas où des confettis tombent, moment d'onboarding. Retour automatique au tableau de bord après 3 s.", "Checkmark · stroke-dashoffset 600ms\ncubic-bezier(.65,0,.35,1)\nTextes · fade-up 400ms, décalés de 130ms\nRetour auto · 3000ms"]
+};
+
+const CONFETTI = [4, 11, 19, 26, 33, 41, 48, 55, 62, 70, 77, 84, 90, 96].map((left, i) => ({
+  left: left,
+  size: 5 + (i % 3) * 2,
+  h: 9 + (i % 4) * 3,
+  color: ["#F4A100", "#7FD1A8", "#fff", "#F4A100", "#B7E4C7"][i % 5],
+  dur: (1.5 + (i % 5) * 0.24).toFixed(2),
+  delay: (0.45 + (i % 7) * 0.11).toFixed(2)
+}));
+
+class Component extends DCLogic {
+  state = { screen: "camera", photo: null, amount: "", progress: 0, countdown: 2, flash: false, camError: null, sentProgress: 0, newClient: false, byShopkeeper: false };
+  videoRef = React.createRef();
+  photoRefs = [React.createRef(), React.createRef(), React.createRef()];
+  canvasRef = React.createRef();
+  timers = [];
+
+  clearTimers() { this.timers.forEach(t => { clearTimeout(t); clearInterval(t); }); this.timers = []; }
+  componentWillUnmount() { this.clearTimers(); this.stopCam(); }
+
+  async startCam() {
+    if (this.stream) { this.attach(); return; }
+    try {
+      this.stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
+      this.setState({ camError: null });
+      this.attach();
+    } catch (e) {
+      this.setState({ camError: "Caméra indisponible — autorise l'accès dans le navigateur pour tester la capture réelle." });
+    }
+  }
+  attach() {
+    const v = this.videoRef.current;
+    if (v && this.stream && v.srcObject !== this.stream) { v.srcObject = this.stream; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+  }
+  stopCam() { if (this.stream) { this.stream.getTracks().forEach(t => t.stop()); this.stream = null; } }
+  syncPhotos() {
+    const src = this.state.photo || PLACEHOLDER;
+    this.photoRefs.forEach(r => { if (r.current && r.current.getAttribute("src") !== src) r.current.setAttribute("src", src); });
+  }
+  componentDidMount() {
+    try {
+      const role = new URLSearchParams(window.location.search).get("role");
+      if (role === "boutiquier") this.setState({ byShopkeeper: true });
+      else if (role === "client") this.setState({ byShopkeeper: false });
+    } catch (e) {}
+    this.syncPhotos();
+  }
+  componentDidUpdate() { if (this.stream) this.attach(); this.syncPhotos(); }
+
+  fmt(n) {
+    const s = String(Math.max(0, Math.floor(n || 0)));
+    let out = "";
+    for (let i = 0; i < s.length; i++) { const left = s.length - i; out += s[i]; if (left > 1 && (left - 1) % 3 === 0) out += "\u202F"; }
+    return out;
+  }
+
+  toggleNewClient = () => this.setState({ newClient: !this.state.newClient });
+  toggleActor = () => this.setState({ byShopkeeper: !this.state.byShopkeeper });
+  startFlow = () => { this.clearTimers(); this.setState({ screen: "camera", photo: null, amount: "" }); this.startCam(); };
+
+  capture = () => {
+    const v = this.videoRef.current, c = this.canvasRef.current;
+    let data = null;
+    if (v && c && v.videoWidth) {
+      c.width = v.videoWidth; c.height = v.videoHeight;
+      c.getContext("2d").drawImage(v, 0, 0);
+      try { data = c.toDataURL("image/jpeg", 0.85); } catch (e) { data = null; }
+    }
+    if (navigator.vibrate) navigator.vibrate(20);
+    this.startPreview(data);
+  };
+
+  startPreview(photo) {
+    this.clearTimers();
+    this.setState({ screen: "preview", photo: photo, progress: 0, countdown: 2 });
+    const t0 = Date.now();
+    const iv = setInterval(() => {
+      const p = Math.min(100, ((Date.now() - t0) / 2000) * 100);
+      this.setState({ progress: p, countdown: Math.max(0, Math.ceil((2000 - (Date.now() - t0)) / 1000)) });
+      if (p >= 100) { clearInterval(iv); this.goScan(); }
+    }, 60);
+    this.timers.push(iv);
+  }
+
+  retake = () => { this.clearTimers(); this.setState({ screen: "camera", photo: null, progress: 0 }); this.startCam(); };
+  backToPreview = () => { this.startPreview(this.state.photo); };
+
+  goScan = () => {
+    this.clearTimers();
+    this.setState({ screen: "scan" });
+    this.startCam();
+    this.timers.push(setTimeout(this.scanSuccess, 3000));
+  };
+
+  scanSuccess = () => {
+    if (this.state.screen !== "scan") return;
+    this.clearTimers();
+    if (navigator.vibrate) navigator.vibrate(30);
+    this.setState({ flash: true });
+    this.timers.push(setTimeout(() => { this.setState({ flash: false }); this.goAmount(); }, 120));
+  };
+
+  goAmount = () => { this.clearTimers(); this.stopCam(); this.setState({ screen: "amount" }); };
+
+  press = (d) => {
+    const next = (this.state.amount + d).replace(/^0+/, "").slice(0, 6);
+    this.setState({ amount: next });
+    if (navigator.vibrate) navigator.vibrate(8);
+  };
+  del = () => this.setState({ amount: this.state.amount.slice(0, -1) });
+
+  send = () => {
+    const amt = parseInt(this.state.amount || "0", 10);
+    if (this.state.screen === "amount" && (amt < MIN_BON || amt > DISPO)) return;
+    this.clearTimers(); this.stopCam();
+    this.setState({ screen: "sent", amount: this.state.amount || "5000", sentProgress: 0 });
+    const t0 = Date.now();
+    const iv = setInterval(() => {
+      const p = Math.min(100, ((Date.now() - t0) / 3000) * 100);
+      this.setState({ sentProgress: p });
+      if (p >= 100) { clearInterval(iv); this.startFlow(); }
+    }, 80);
+    this.timers.push(iv);
+  };
+
+  renderVals() {
+    const s = this.state, amt = parseInt(s.amount || "0", 10);
+    const spec = SPECS[s.screen] || SPECS.home;
+    const over = amt > DISPO, under = amt > 0 && amt < MIN_BON, valid = amt >= MIN_BON && amt <= DISPO;
+    let hint = "Reste " + this.fmt(DISPO) + " FCFA disponibles", hintBg = "#F2F2EF", hintColor = "#6B6B6B";
+    if (over) { hint = "Plafond dépassé — maximum " + this.fmt(DISPO) + " FCFA"; hintBg = "rgba(193,18,31,.10)"; hintColor = "#C1121F"; }
+    else if (under) { hint = "Minimum " + this.fmt(MIN_BON) + " FCFA par bon"; hintBg = "rgba(244,161,0,.16)"; hintColor = "#8A5B00"; }
+    else if (!amt) { hint = "Plafond fixé par la boutique : " + this.fmt(DISPO) + " FCFA disponibles"; }
+    else if (valid) { hint = "Reste " + this.fmt(DISPO - amt) + " FCFA après ce bon"; hintBg = "rgba(45,106,79,.12)"; hintColor = "#2D6A4F"; }
+    const len = (s.amount || "0").length;
+    return {
+      videoRef: this.videoRef, canvasRef: this.canvasRef,
+      isCamera: s.screen === "camera", isPreview: s.screen === "preview",
+      isScan: s.screen === "scan", isAmount: s.screen === "amount", isSent: s.screen === "sent",
+      hasPhotoLayer: s.screen === "preview" && !!s.photo,
+      videoOpacity: (s.screen === "camera" || s.screen === "scan" || s.screen === "preview") ? 1 : 0,
+      photoRef0: this.photoRefs[0], photoRef1: this.photoRefs[1], photoRef2: this.photoRefs[2], photoReady: true,
+      sentTitle: "Bon enregistré !",
+      showConfetti: s.newClient && !s.byShopkeeper,
+      confetti: CONFETTI,
+      sentSub: s.byShopkeeper
+        ? "Le bon est inscrit dans le cahier d'Aïssatou Diop. Elle reçoit une notification."
+        : (s.newClient
+          ? "Demande envoyée — en attente de validation de Boutique Ndiaye"
+          : "Ton bon a bien été enregistré chez Boutique Ndiaye"),
+      sentPill: s.byShopkeeper
+        ? "Enregistré par la boutique"
+        : (s.newClient ? "Ouverture de cahier à valider" : "Ajouté à ton encours"),
+      sentPillBg: (s.newClient && !s.byShopkeeper) ? "rgba(244,161,0,.16)" : "rgba(255,255,255,.12)",
+      sentPillFg: (s.newClient && !s.byShopkeeper) ? "#F4A100" : "rgba(255,255,255,.82)",
+      toggleNewClient: this.toggleNewClient, toggleActor: this.toggleActor,
+      variantLabel: s.newClient ? "Variante : premier bon" : "Variante : cahier actif",
+      variantBg: s.newClient ? "#F4A100" : "#fff",
+      actorLabel: s.byShopkeeper ? "Scanné par : boutiquier" : "Scanné par : client",
+      actorBg: s.byShopkeeper ? "#F4A100" : "#fff",
+      exitHref: s.byShopkeeper ? "groupe-3-dashboard-boutiquier.html" : "groupe-5-dashboard-client.html",
+      scanGuide: s.byShopkeeper ? "Pointe vers le QR code du client" : "Pointe vers le QR code de la boutique",
+      partyLabel: s.byShopkeeper ? "Aïssatou Diop" : "Boutique Ndiaye",
+      partySub: s.byShopkeeper ? "Cliente vérifiée · cahier actif" : "Vérifiée · Sacré-Cœur 3",
+      camError: s.camError, flash: s.flash, progress: s.progress, countdown: s.countdown, sentProgress: s.sentProgress,
+      detteTotale: this.fmt(33500),
+      amountLabel: s.amount ? this.fmt(amt) : "0",
+      amountSize: s.amount ? Math.max(40, 68 - Math.max(0, len - 4) * 6) : 52,
+      amountColor: over ? "#C1121F" : (s.amount ? "#1A1A1A" : "#C9C9C2"),
+      hint: hint, hintBg: hintBg, hintColor: hintColor,
+      sendBg: valid ? "#1B4332" : "#F2F2EF", sendColor: valid ? "#fff" : "#A5A5A0",
+      sendLabel: valid ? "Envoyer " + this.fmt(amt) + " FCFA" : "Envoyer le bon",
+      specTitle: spec[0], specBody: spec[1], specAnim: spec[2],
+      startFlow: this.startFlow, capture: this.capture, retake: this.retake,
+      backToPreview: this.backToPreview, goScan: this.goScan, scanSuccess: this.scanSuccess, goAmount: this.goAmount,
+      send: this.send, kDel: this.del,
+      k0: () => this.press("0"), k1: () => this.press("1"), k2: () => this.press("2"), k3: () => this.press("3"),
+      k4: () => this.press("4"), k5: () => this.press("5"), k6: () => this.press("6"), k7: () => this.press("7"),
+      k8: () => this.press("8"), k9: () => this.press("9"), k000: () => this.press("000"),
+      setQuick1: () => this.setState({ amount: "1000" }), setQuick2: () => this.setState({ amount: "2500" }), setQuick3: () => this.setState({ amount: "5000" })
+    };
+  }
+}
+</script>
+</body>
+</html>

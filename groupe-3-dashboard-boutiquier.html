@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;-webkit-font-smoothing:antialiased}
+a{color:#1B4332}a:hover{color:#2D6A4F}
+::-webkit-scrollbar{display:none}*{-ms-overflow-style:none;scrollbar-width:none}
+@keyframes bk-fade{from{opacity:0}to{opacity:1}}
+@keyframes bk-up{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes bk-sheet{from{transform:translateY(102%)}to{transform:translateY(0)}}
+@keyframes bk-pop{0%{transform:scale(.82);opacity:0}62%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+@keyframes bk-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes bk-banner{from{transform:translateY(-120%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes bk-shimmer{0%{background-position:-240px 0}100%{background-position:240px 0}}
+@keyframes bk-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;gap:44px;align-items:flex-start;justify-content:center;padding:44px 40px 64px;flex-wrap:wrap">
+
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+    <div style="display:flex;align-items:center;gap:11px;align-self:flex-start">
+      <div style="width:34px;height:34px;border-radius:10px;background:#1B4332;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#F4A100">B</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Boutik</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:1px">Groupe 3 — dashboard boutiquier</div>
+      </div>
+    </div>
+
+    <div style="position:relative;width:378px;height:786px;border-radius:44px;background:#1A1A1A;padding:9px;box-shadow:0 24px 60px rgba(27,67,50,.20)">
+      <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#FAFAF7">
+
+        <div style="position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:12px;font-weight:600;z-index:6;color:{{ statusColor }}">
+          <div>9:41</div>
+          <div style="display:flex;gap:5px;align-items:center;font-family:'Material Symbols Rounded';font-size:15px">network_wifi<span>battery_full</span></div>
+        </div>
+
+        <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding-top:44px">
+            <div style="padding:8px 20px 0;display:flex;align-items:center;gap:13px">
+              <div style="width:46px;height:46px;border-radius:13px;background:linear-gradient(140deg,#1B4332,#2D6A4F);color:#F4A100;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;flex:none">BN</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Boutique Ndiaye</div>
+                <div style="font-size:12px;color:#6B6B6B;margin-top:2px;display:flex;align-items:center;gap:4px">Sacré-Cœur 3 <span style="color:#2D6A4F;font-weight:700">· Vérifiée</span></div>
+              </div>
+              <div onClick="{{ goNotif }}" style="width:42px;height:42px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;flex:none">
+                <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#1B4332">notifications</span>
+                <div style="position:absolute;top:6px;right:7px;width:9px;height:9px;border-radius:100%;background:#F4A100;border:2px solid #F2F2EF"></div>
+              </div>
+            </div>
+
+            <div style="margin:18px 20px 0;padding:22px;border-radius:16px;background:#1B4332;box-shadow:0 10px 26px rgba(27,67,50,.20);display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div style="font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);padding-top:8px">Encours total</div>
+                <a href="groupe-4-flux-bon.html?role=boutiquier" style="display:flex;align-items:center;gap:7px;height:36px;padding:0 13px;border-radius:11px;background:rgba(244,161,0,.16);cursor:pointer;transition:background .2s;text-decoration:none" style-hover="background:rgba(244,161,0,.26)" style-active="transform:scale(.95)">
+                  <span style="font-family:'Material Symbols Rounded';font-size:19px;color:#F4A100">qr_code_scanner</span>
+                  <span style="font-size:12.5px;font-weight:800;color:#F4A100">Nouveau bon</span>
+                </a>
+              </div>
+              <div onClick="{{ toggleMask }}" style="cursor:pointer;display:flex;align-items:flex-start;gap:7px;margin-top:12px">
+                <div style="font-weight:800;letter-spacing:-.045em;line-height:.9;color:#fff;font-variant-numeric:tabular-nums;font-size:{{ encoursSize }}px">{{ encoursDisplay }}</div>
+                <div style="font-size:12px;font-weight:700;letter-spacing:.1em;color:#F4A100;padding-top:5px">FCFA</div>
+              </div>
+              <div style="margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.13);display:flex;gap:22px">
+                <div><div style="font-size:16px;font-weight:800;color:#fff">14</div><div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:1px">cahiers actifs</div></div>
+                <div><div style="font-size:16px;font-weight:800;color:#F4A100">2</div><div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:1px">bloqués</div></div>
+                <div><div style="font-size:16px;font-weight:800;color:#fff">1</div><div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:1px">en attente</div></div>
+              </div>
+            </div>
+            <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:baseline">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B">Cahiers</div>
+              <div style="display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:100px;background:#F2F2EF;font-size:11.5px;font-weight:700;color:#1B4332;cursor:pointer" style-active="transform:scale(.96)">Tout voir<span style="font-family:'Material Symbols Rounded';font-size:15px">chevron_right</span></div>
+            </div>
+
+            <div style="flex:1;overflow-y:auto;padding:12px 20px 96px;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ cahiers }}" as="c" hint-placeholder-count="4">
+                <div onClick="{{ c.open }}" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(27,67,50,.09);cursor:pointer">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:42px;height:42px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#1B4332;flex:none">{{ c.initials }}</div>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</div>
+                      <div style="margin-top:5px;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;background:{{ c.badgeBg }};color:{{ c.badgeFg }};font-size:10.5px;font-weight:700">
+                        <span style="width:5px;height:5px;border-radius:100%;background:{{ c.badgeFg }};animation:{{ c.dotAnim }}"></span>{{ c.status }}
+                      </div>
+                    </div>
+                    <div style="text-align:right;flex:none">
+                      <div style="font-size:19px;font-weight:800;letter-spacing:-.025em;font-variant-numeric:tabular-nums;color:{{ c.amountColor }}">{{ c.amount }}</div>
+                      <div style="font-size:9.5px;font-weight:600;letter-spacing:.08em;color:#6B6B6B">FCFA</div>
+                    </div>
+                  </div>
+                  <sc-if value="{{ c.hasCap }}" hint-placeholder-val="{{ true }}">
+                    <div style="margin-top:12px;height:6px;border-radius:100px;background:#F2F2EF;overflow:hidden">
+                      <div style="height:100%;border-radius:100px;background:{{ c.barColor }};width:{{ c.pct }}%"></div>
+                    </div>
+                  </sc-if>
+                  <div style="margin-top:9px;display:flex;justify-content:space-between;font-size:10.5px;color:#6B6B6B">
+                    <div>{{ c.capLabel }}</div>
+                    <div>{{ c.echeance }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <a href="groupe-4-flux-bon.html?role=boutiquier" style="position:absolute;right:20px;bottom:92px;height:52px;padding:0 20px;border-radius:100px;background:#F4A100;display:flex;align-items:center;gap:9px;box-shadow:0 8px 22px rgba(244,161,0,.36);cursor:pointer;z-index:5;text-decoration:none" style-active="transform:scale(.97)">
+              <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#1A1A1A">qr_code_scanner</span>
+              <span style="font-size:14px;font-weight:700;color:#1A1A1A">Nouveau bon</span>
+            </a>
+
+            <sc-if value="{{ showBanner }}" hint-placeholder-val="{{ false }}">
+              <div onClick="{{ goCahier }}" style="position:absolute;top:52px;left:14px;right:14px;background:#fff;border-radius:16px;padding:13px 14px;box-shadow:0 12px 34px rgba(26,26,26,.20);display:flex;align-items:center;gap:12px;z-index:20;cursor:pointer;animation:bk-banner .34s cubic-bezier(.2,.9,.25,1)">
+                <div style="width:44px;height:44px;border-radius:11px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden">
+                  <span style="font-family:'Material Symbols Rounded';font-size:24px;color:#6B6B6B">photo_camera</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <div style="width:15px;height:15px;border-radius:4px;background:#1B4332;color:#F4A100;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center">B</div>
+                    <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6B6B6B">Boutik · maintenant</div>
+                  </div>
+                  <div style="font-size:13px;font-weight:700;margin-top:3px">Nouveau bon — Aïssatou Diop</div>
+                  <div style="font-size:12px;color:#6B6B6B;margin-top:1px">2 500 FCFA enregistrés</div>
+                </div>
+              </div>
+            </sc-if>
+
+            <div style="position:absolute;left:0;right:0;bottom:0;height:76px;background:#fff;border-top:1px solid rgba(27,67,50,.08);display:flex;align-items:center;justify-content:space-around;padding-bottom:10px;z-index:4">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#1B4332"><span style="font-family:'Material Symbols Rounded';font-size:23px">home</span><span style="font-size:10.5px;font-weight:700">Accueil</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#6B6B6B"><span style="font-family:'Material Symbols Rounded';font-size:23px">groups</span><span style="font-size:10.5px;font-weight:600">Clients</span></div>
+              <div onClick="{{ goVendors }}" style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#6B6B6B;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:23px">badge</span><span style="font-size:10.5px;font-weight:600">Vendeurs</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#6B6B6B"><span style="font-family:'Material Symbols Rounded';font-size:23px">settings</span><span style="font-size:10.5px;font-weight:600">Paramètres</span></div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isNotif }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#FAFAF7;display:flex;flex-direction:column;padding-top:44px;animation:bk-fade .22s ease-out">
+            <div style="padding:8px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(27,67,50,.08);background:#FAFAF7">
+              <div onClick="{{ goHome }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</div>
+              <div style="font-size:17px;font-weight:800;letter-spacing:-.01em">Notifications</div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:14px 20px 24px;display:flex;flex-direction:column;gap:10px">
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:2px">Aujourd'hui</div>
+
+              <div onClick="{{ goCahier }}" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(27,67,50,.09);display:flex;gap:12px;cursor:pointer;border-left:3px solid #F4A100">
+                <div style="width:52px;height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;flex:none">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;color:#6B6B6B">photo_camera</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13.5px;font-weight:700">Nouveau bon — Aïssatou Diop</div>
+                  <div style="display:flex;align-items:baseline;gap:5px;margin-top:4px">
+                    <div style="font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums">2 500</div>
+                    <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:#6B6B6B">FCFA</div>
+                  </div>
+                  <div style="font-size:11.5px;color:#6B6B6B;margin-top:4px">09:38 · enregistré automatiquement</div>
+                </div>
+              </div>
+
+              <div onClick="{{ goSheet }}" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(27,67,50,.09);display:flex;gap:12px;cursor:pointer;border-left:3px solid #1B4332">
+                <div style="width:52px;height:52px;border-radius:12px;background:rgba(27,67,50,.08);display:flex;align-items:center;justify-content:center;flex:none">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;color:#1B4332">person_add</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13.5px;font-weight:700">Ousmane Fall veut ouvrir un nouveau cahier</div>
+                  <div style="font-size:11.5px;color:#6B6B6B;margin-top:4px">09:12 · action requise</div>
+                  <div style="margin-top:8px;display:inline-flex;padding:4px 10px;border-radius:100px;background:rgba(244,161,0,.16);color:#B87A00;font-size:10.5px;font-weight:700">À valider</div>
+                </div>
+              </div>
+
+              <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(27,67,50,.09);display:flex;gap:12px">
+                <div style="width:52px;height:52px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;flex:none">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;color:#6B6B6B">photo_camera</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13.5px;font-weight:700">Nouveau bon — Malick Kane</div>
+                  <div style="display:flex;align-items:baseline;gap:5px;margin-top:4px">
+                    <div style="font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums">5 000</div>
+                    <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:#6B6B6B">FCFA</div>
+                  </div>
+                  <div style="font-size:11.5px;color:#6B6B6B;margin-top:4px">08:47 · enregistré automatiquement</div>
+                </div>
+              </div>
+
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin:10px 0 2px">Hier</div>
+
+              <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(27,67,50,.09);display:flex;gap:12px">
+                <div style="width:52px;height:52px;border-radius:12px;background:rgba(193,18,31,.08);display:flex;align-items:center;justify-content:center;flex:none">
+                  <span style="font-family:'Material Symbols Rounded';font-size:26px;color:#C1121F">lock</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13.5px;font-weight:700">Cahier bloqué — Fatou Sow</div>
+                  <div style="font-size:11.5px;color:#6B6B6B;margin-top:4px">18:00 · échéance atteinte</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isCahier }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#FAFAF7;display:flex;flex-direction:column;padding-top:44px;animation:bk-fade .22s ease-out">
+            <div style="padding:8px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ goHome }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332;flex:none">arrow_back</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:15.5px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:5px">{{ cName }} <span style="font-family:'Material Symbols Rounded';font-size:16px;color:{{ cVerifiedColor }}">{{ cVerifiedIcon }}</span></div>
+                <div style="font-size:11.5px;color:#6B6B6B;margin-top:1px">{{ cSince }}</div>
+              </div>
+            </div>
+
+            <div style="flex:1;overflow-y:auto;padding:16px 20px 108px;display:flex;flex-direction:column;gap:14px">
+              <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(27,67,50,.09)">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B">Montant dû</div>
+                  <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:{{ cStatusBg }};color:{{ cStatusFg }};font-size:10.5px;font-weight:700"><span style="width:5px;height:5px;border-radius:100%;background:{{ cStatusFg }};animation:{{ cStatusDot }}"></span>{{ cStatusLabel }}</div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:7px">
+                  <div style="font-size:56px;font-weight:800;letter-spacing:-.05em;line-height:.88;font-variant-numeric:tabular-nums;color:{{ cAmountColor }}">{{ cAmount }}</div>
+                  <div style="font-size:12px;font-weight:700;letter-spacing:.1em;color:#6B6B6B;padding-top:6px">FCFA</div>
+                </div>
+                <sc-if value="{{ cHasCap }}" hint-placeholder-val="{{ true }}">
+                  <div style="margin-top:20px;height:8px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="height:100%;border-radius:100px;background:{{ cBarColor }};width:{{ cPct }}%"></div></div>
+                </sc-if>
+                <div style="margin-top:14px;display:flex;justify-content:space-between;font-size:11.5px;color:#6B6B6B">
+                  <div>{{ cLeft }}</div>
+                  <div>{{ cCapLabel }}</div>
+                </div>
+                <div style="margin-top:14px;padding-top:13px;border-top:1px solid rgba(27,67,50,.09);font-size:12px;color:{{ cDueColor }};display:flex;align-items:center;gap:6px">
+                  <span style="font-family:'Material Symbols Rounded';font-size:17px;color:{{ cDueIconColor }}">{{ cDueIcon }}</span>{{ cDue }}
+                </div>
+              </div>
+
+              <div>
+                <div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:11px">Bons du cahier</div>
+                <div style="background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(27,67,50,.09);overflow:hidden">
+                  <sc-for list="{{ bons }}" as="b" hint-placeholder-count="4">
+                    <div style="padding:13px 14px;display:flex;align-items:center;gap:12px;border-top:{{ b.border }}">
+                      <div style="width:46px;height:46px;border-radius:11px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;flex:none">
+                        <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#6B6B6B">{{ b.icon }}</span>
+                      </div>
+                      <div style="flex:1;min-width:0">
+                        <div style="font-size:13px;font-weight:700">{{ b.date }}</div>
+                        <div style="font-size:11px;color:#6B6B6B;margin-top:2px">{{ b.by }}</div>
+                      </div>
+                      <div style="text-align:right;flex:none">
+                        <div style="font-size:17px;font-weight:800;letter-spacing:-.025em;font-variant-numeric:tabular-nums;color:{{ b.color }}">{{ b.amount }}</div>
+                        <div style="font-size:9.5px;font-weight:600;letter-spacing:.08em;color:#6B6B6B">FCFA</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 22px;background:rgba(250,250,247,.96);border-top:1px solid rgba(27,67,50,.08);display:flex;gap:10px">
+              <sc-for list="{{ cActions }}" as="a" hint-placeholder-count="2">
+                <div style="flex:1;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:700;cursor:pointer;background:{{ a.bg }};color:{{ a.fg }};border:{{ a.border }};box-shadow:{{ a.shadow }}" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:19px">{{ a.icon }}</span>{{ a.label }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isQr }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;padding-top:44px;animation:bk-fade .22s ease-out">
+            <div style="padding:8px 20px 0;display:flex;align-items:center;gap:12px">
+              <div onClick="{{ goHome }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">close</div>
+              <div style="font-size:17px;font-weight:800;letter-spacing:-.01em">Mon QR Code</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 34px;gap:26px">
+              <div style="width:250px;height:250px;border-radius:20px;border:1.5px solid rgba(27,67,50,.12);padding:18px;display:flex;align-items:center;justify-content:center;background:#fff;box-shadow:0 8px 28px rgba(27,67,50,.10)">
+                <div style="width:100%;height:100%;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:repeat(11,1fr);gap:3px">
+                  <sc-for list="{{ qrCells }}" as="cell" hint-placeholder-count="121">
+                    <div style="border-radius:2px;background:{{ cell.bg }}"></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-size:19px;font-weight:800;letter-spacing:-.02em">Boutique Ndiaye</div>
+                <div style="font-size:12.5px;color:#6B6B6B;margin-top:5px">Sacré-Cœur 3, Dakar</div>
+                <div style="margin-top:12px;display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;background:rgba(45,106,79,.12);color:#2D6A4F;font-size:11px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:15px">verified</span>Boutique vérifiée</div>
+              </div>
+              <div style="font-size:12.5px;line-height:1.55;color:#6B6B6B;text-align:center;max-width:250px">Le client scanne ce code pour enregistrer un bon dans son cahier.</div>
+            </div>
+            <div style="padding:0 20px 26px;display:flex;gap:10px">
+              <div style="flex:1;height:52px;border-radius:12px;border:1.5px solid rgba(27,67,50,.18);display:flex;align-items:center;justify-content:center;gap:7px;font-size:14.5px;font-weight:700;color:#1B4332;cursor:pointer" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:20px">download</span>Télécharger</div>
+              <div style="flex:1;height:52px;border-radius:12px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(27,67,50,.20)" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:20px">share</span>Partager</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isVendors }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#FAFAF7;display:flex;flex-direction:column;padding-top:44px;animation:bk-fade .24s ease-out">
+            <div style="padding:10px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ goHome }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:17px;font-weight:800;letter-spacing:-.015em">Mes vendeurs</div>
+                <div style="font-size:11.5px;color:#6B6B6B;margin-top:1px">{{ vendorSub }}</div>
+              </div>
+              <div onClick="{{ toggleEmpty }}" style="font-size:11px;font-weight:700;color:#1B4332;cursor:pointer;flex:none">{{ emptySwitch }}</div>
+            </div>
+
+            <sc-if value="{{ hasVendors }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:1;overflow-y:auto;padding:14px 20px 104px;display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ vendors }}" as="v" hint-placeholder-count="3">
+                  <div onClick="{{ v.open }}" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(27,67,50,.09);cursor:pointer;display:flex;align-items:center;gap:12px" style-active="transform:scale(.99)">
+                    <div style="width:46px;height:46px;border-radius:12px;background:{{ v.avatarBg }};display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:{{ v.avatarFg }};flex:none">{{ v.initials }}</div>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ v.name }}</div>
+                      <div style="margin-top:5px;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;background:{{ v.badgeBg }};color:{{ v.badgeFg }};font-size:10.5px;font-weight:800">
+                        <span style="width:4px;height:4px;border-radius:100%;background:{{ v.badgeFg }}"></span>{{ v.status }}
+                      </div>
+                    </div>
+                    <div style="text-align:right;flex:none;display:flex;align-items:center;gap:6px">
+                      <div>
+                        <div style="font-size:18px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:{{ v.countColor }}">{{ v.count }}</div>
+                        <div style="font-size:9.5px;font-weight:600;letter-spacing:.06em;color:#6B6B6B;margin-top:1px">BONS</div>
+                      </div>
+                      <span style="font-family:'Material Symbols Rounded';font-size:19px;color:#C4C4BE">chevron_right</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ noVendors }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 40px 104px;text-align:center;animation:bk-up .34s ease-out both">
+                <div style="width:76px;height:76px;border-radius:22px;background:#F2F2EF;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:38px;color:#C4C4BE">group_off</span></div>
+                <div style="margin-top:20px;font-size:17px;font-weight:800;letter-spacing:-.015em">Aucun vendeur pour l'instant</div>
+                <div style="margin-top:9px;font-size:13.5px;line-height:1.55;color:#6B6B6B;max-width:236px">Invite ton premier vendeur pour qu'il aide tes clients à enregistrer leurs bons.</div>
+              </div>
+            </sc-if>
+
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 22px;background:rgba(250,250,247,.97);border-top:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ goInviteVendor }}" style="height:54px;border-radius:13px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(27,67,50,.20)" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:21px">person_add</span>Inviter un vendeur</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isInviteVendor }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#FAFAF7;display:flex;flex-direction:column;padding-top:44px;animation:bk-up .3s cubic-bezier(.2,.8,.2,1)">
+            <div style="padding:10px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ goVendors }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</div>
+              <div style="font-size:17px;font-weight:800;letter-spacing:-.015em">Inviter un vendeur</div>
+            </div>
+
+            <div style="flex:1;padding:18px 20px 0;display:flex;flex-direction:column;gap:15px;min-height:0">
+              <div>
+                <div style="font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B;margin-bottom:8px">Numéro de téléphone</div>
+                <div style="height:56px;border-radius:13px;background:#fff;border:1.5px solid {{ vPhoneBorder }};display:flex;align-items:center;padding:0 14px;gap:10px;transition:border-color .2s">
+                  <div style="width:24px;height:17px;border-radius:3px;overflow:hidden;display:flex;flex:none">
+                    <div style="flex:1;background:#00853F"></div><div style="flex:1;background:#FDEF42"></div><div style="flex:1;background:#E31B23"></div>
+                  </div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:#6B6B6B;flex:none">+221</div>
+                  <div style="flex:1;min-width:0;font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:{{ vPhoneColor }};white-space:nowrap;overflow:hidden">{{ vPhoneDisplay }}</div>
+                  <div style="width:2px;height:22px;background:#1B4332;animation:bk-caret 1.1s step-end infinite;flex:none"></div>
+                </div>
+              </div>
+
+              <div style="padding:14px;border-radius:13px;background:rgba(27,67,50,.05);display:flex;gap:10px;align-items:flex-start">
+                <span style="font-family:'Material Symbols Rounded';font-size:19px;color:#1B4332;flex:none;padding-top:1px">info</span>
+                <div style="font-size:12.5px;line-height:1.55;color:#3D5A4C;text-wrap:pretty">Le vendeur pourra voir les cahiers et aider les clients à enregistrer leurs bons. Il ne peut pas gérer les remboursements ni ouvrir des cahiers.</div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto">
+                <sc-for list="{{ vendorKeys }}" as="k" hint-placeholder-count="12">
+                  <div onClick="{{ k.press }}" style="height:50px;border-radius:12px;background:{{ k.bg }};border:{{ k.border }};display:flex;align-items:center;justify-content:center;font-size:{{ k.size }}px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94)">{{ k.label }}</div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding:14px 20px 22px">
+              <div onClick="{{ sendVendorInvite }}" style="height:54px;border-radius:13px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s,transform .18s cubic-bezier(.34,1.56,.64,1);background:{{ vBtnBg }};color:{{ vBtnFg }}" style-active="transform:scale(.97)">
+                <span style="font-family:'Material Symbols Rounded';font-size:20px">send</span>{{ vBtnLabel }}
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isVendorDetail }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#FAFAF7;display:flex;flex-direction:column;padding-top:44px;animation:bk-fade .24s ease-out">
+            <div style="padding:10px 20px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ goVendors }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</div>
+              <div style="width:42px;height:42px;border-radius:12px;background:{{ vdAvatarBg }};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:{{ vdAvatarFg }};flex:none">{{ vdInitials }}</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:15.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ vdName }}</div>
+                <div style="font-size:11.5px;color:#6B6B6B;margin-top:1px">{{ vdSince }}</div>
+              </div>
+              <div style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:100px;background:{{ vdBadgeBg }};color:{{ vdBadgeFg }};font-size:10px;font-weight:800;flex:none">
+                <span style="width:4px;height:4px;border-radius:100%;background:{{ vdBadgeFg }}"></span>{{ vdStatus }}
+              </div>
+            </div>
+
+            <div style="flex:1;overflow-y:auto;padding:16px 20px 100px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;gap:10px">
+                <div style="flex:1;background:#fff;border-radius:14px;padding:15px;box-shadow:0 1px 3px rgba(27,67,50,.09)">
+                  <div style="font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B">Bons ce mois</div>
+                  <div style="margin-top:8px;font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums">{{ vdCount }}</div>
+                </div>
+                <div style="flex:1;background:#fff;border-radius:14px;padding:15px;box-shadow:0 1px 3px rgba(27,67,50,.09)">
+                  <div style="font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B">Montant aidé</div>
+                  <div style="margin-top:8px;font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.2;font-variant-numeric:tabular-nums">{{ vdTotal }}</div>
+                  <div style="font-size:10px;font-weight:600;letter-spacing:.06em;color:#6B6B6B;margin-top:2px">FCFA</div>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:10px">Derniers bons enregistrés</div>
+                <sc-if value="{{ vdHasBons }}" hint-placeholder-val="{{ true }}">
+                  <div style="background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(27,67,50,.09);overflow:hidden">
+                    <sc-for list="{{ vdBons }}" as="b" hint-placeholder-count="4">
+                      <div style="padding:13px 14px;display:flex;align-items:center;gap:12px;border-top:{{ b.border }}">
+                        <div style="width:42px;height:42px;border-radius:11px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#6B6B6B;flex:none">{{ b.initials }}</div>
+                        <div style="flex:1;min-width:0">
+                          <div style="font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.client }}</div>
+                          <div style="font-size:11px;color:#6B6B6B;margin-top:2px">{{ b.date }}</div>
+                        </div>
+                        <div style="text-align:right;flex:none">
+                          <div style="font-size:16px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums">{{ b.amount }}</div>
+                          <div style="font-size:9px;font-weight:600;letter-spacing:.06em;color:#6B6B6B;margin-top:1px">FCFA</div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ vdNoBons }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#fff;border-radius:16px;padding:26px 18px;box-shadow:0 1px 3px rgba(27,67,50,.09);text-align:center">
+                    <span style="font-family:'Material Symbols Rounded';font-size:34px;color:#C4C4BE">receipt_long</span>
+                    <div style="margin-top:10px;font-size:13.5px;font-weight:700">Aucun bon ce mois</div>
+                    <div style="margin-top:5px;font-size:12px;line-height:1.5;color:#6B6B6B">Ce vendeur n'a pas encore aidé de client.</div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 22px;background:rgba(250,250,247,.97);border-top:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ askRemove }}" style="height:52px;border-radius:12px;border:1.5px solid rgba(193,18,31,.30);display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700;color:#C1121F;cursor:pointer;background:#fff" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:20px">person_remove</span>Retirer ce vendeur</div>
+            </div>
+
+            <sc-if value="{{ showRemoveConfirm }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;justify-content:flex-end">
+                <div onClick="{{ cancelRemove }}" style="position:absolute;inset:0;background:rgba(26,26,26,.48);animation:bk-fade .24s ease-out"></div>
+                <div style="position:relative;background:#fff;border-radius:26px 26px 36px 36px;padding:10px 22px 26px;animation:bk-sheet .38s cubic-bezier(.18,.9,.24,1)">
+                  <div style="width:38px;height:4px;border-radius:100px;background:rgba(27,67,50,.16);margin:0 auto 18px"></div>
+                  <div style="width:52px;height:52px;border-radius:15px;background:rgba(193,18,31,.10);display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:27px;color:#C1121F">person_remove</span></div>
+                  <div style="margin-top:16px;font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.28;text-wrap:pretty">Retirer {{ vdName }} ?</div>
+                  <div style="margin-top:10px;font-size:13.5px;line-height:1.55;color:#6B6B6B;text-wrap:pretty">Il perdra l'accès aux cahiers immédiatement. Les bons déjà enregistrés restent dans l'historique.</div>
+                  <div style="margin-top:22px;display:flex;gap:10px">
+                    <div onClick="{{ cancelRemove }}" style="flex:1;height:52px;border-radius:12px;border:1.5px solid rgba(27,67,50,.18);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#1B4332;cursor:pointer" style-active="transform:scale(.97)">Annuler</div>
+                    <div onClick="{{ confirmRemove }}" style="flex:1;height:52px;border-radius:12px;background:#C1121F;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(193,18,31,.24)" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:19px">check</span>Retirer</div>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showSheet }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;justify-content:flex-end">
+            <div onClick="{{ goHome }}" style="position:absolute;inset:0;background:rgba(26,26,26,.48);animation:bk-fade .24s ease-out"></div>
+            <div style="position:relative;background:#fff;border-radius:26px 26px 36px 36px;padding:10px 22px 26px;animation:bk-sheet .38s cubic-bezier(.18,.9,.24,1)">
+              <div style="width:38px;height:4px;border-radius:100px;background:rgba(27,67,50,.16);margin:0 auto 18px"></div>
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:rgba(244,161,0,.16);color:#B87A00;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase">Action requise</div>
+              <div style="margin-top:14px;font-size:22px;font-weight:800;letter-spacing:-.025em;line-height:1.25;text-wrap:pretty">Ousmane Fall veut ouvrir un nouveau cahier</div>
+
+              <div style="margin-top:18px;display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:#F2F2EF">
+                <div style="width:46px;height:46px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#1B4332;flex:none">OF</div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:14px;font-weight:700">Ousmane Fall</div>
+                  <div style="margin-top:4px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#C1121F"><span style="font-family:'Material Symbols Rounded';font-size:15px">error</span>Non vérifié · nouveau client</div>
+                </div>
+              </div>
+
+              <div style="margin-top:12px;padding:16px;border-radius:14px;border:1.5px dashed rgba(27,67,50,.16)">
+                <div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:12px">Premier bon inclus</div>
+                <div style="display:flex;align-items:center;gap:14px">
+                  <div style="width:66px;height:66px;border-radius:12px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;flex:none">
+                    <span style="font-family:'Material Symbols Rounded';font-size:28px;color:#6B6B6B">photo_camera</span>
+                  </div>
+                  <div style="display:flex;align-items:flex-start;gap:6px">
+                    <div style="font-size:40px;font-weight:800;letter-spacing:-.045em;line-height:.9;font-variant-numeric:tabular-nums">3 000</div>
+                    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#6B6B6B;padding-top:3px">FCFA</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:12px;padding:15px;border-radius:14px;background:#fff;border:1.5px solid rgba(27,67,50,.10)">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B">Conditions du cahier</div>
+                  <div style="font-size:10.5px;font-weight:700;color:#9A9A94">Optionnel</div>
+                </div>
+                <div style="display:flex;gap:9px">
+                  <div onClick="{{ toggleCap }}" style="flex:1;padding:12px;border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s;background:{{ capFieldBg }};border:1.5px solid {{ capFieldBorder }}" style-active="transform:scale(.97)">
+                    <div style="display:flex;align-items:center;gap:6px">
+                      <span style="font-family:'Material Symbols Rounded';font-size:16px;color:{{ capFieldFg }}">speed</span>
+                      <div style="font-size:10.5px;font-weight:700;color:#6B6B6B">Plafond</div>
+                    </div>
+                    <div style="margin-top:7px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:{{ capFieldFg }};font-variant-numeric:tabular-nums">{{ capFieldValue }}</div>
+                  </div>
+                  <div onClick="{{ toggleDue }}" style="flex:1;padding:12px;border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s;background:{{ dueFieldBg }};border:1.5px solid {{ dueFieldBorder }}" style-active="transform:scale(.97)">
+                    <div style="display:flex;align-items:center;gap:6px">
+                      <span style="font-family:'Material Symbols Rounded';font-size:16px;color:{{ dueFieldFg }}">event</span>
+                      <div style="font-size:10.5px;font-weight:700;color:#6B6B6B">Échéance</div>
+                    </div>
+                    <div style="margin-top:7px;font-size:16px;font-weight:800;letter-spacing:-.02em;color:{{ dueFieldFg }}">{{ dueFieldValue }}</div>
+                  </div>
+                </div>
+                <div style="margin-top:11px;font-size:11.5px;line-height:1.5;color:#6B6B6B">{{ conditionsHint }}</div>
+              </div>
+
+              <div style="margin-top:18px;display:flex;gap:10px">
+                <div onClick="{{ goHome }}" style="flex:1;height:54px;border-radius:12px;border:1.5px solid rgba(193,18,31,.34);color:#C1121F;display:flex;align-items:center;justify-content:center;gap:7px;font-size:15px;font-weight:700;cursor:pointer" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:19px">close</span>Refuser</div>
+                <div onClick="{{ goHome }}" style="flex:1;height:54px;border-radius:12px;background:#2D6A4F;color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 7px 18px rgba(45,106,79,.26)" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:19px">check</span>Accepter</div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:378px">
+      <div onClick="{{ goHome }}" style="padding:9px 14px;border-radius:100px;background:{{ tabHome }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.1 Accueil</div>
+      <div onClick="{{ goBanner }}" style="padding:9px 14px;border-radius:100px;background:{{ tabBanner }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.2 Notif bon</div>
+      <div onClick="{{ goSheet }}" style="padding:9px 14px;border-radius:100px;background:{{ tabSheet }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.3 Ouverture</div>
+      <div onClick="{{ goCahier }}" style="padding:9px 14px;border-radius:100px;background:{{ tabCahier }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.4 Cahier</div>
+      <div onClick="{{ goQr }}" style="padding:9px 14px;border-radius:100px;background:{{ tabQr }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.5 QR</div>
+      <div onClick="{{ goVendors }}" style="padding:9px 14px;border-radius:100px;background:{{ tabVendors }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.6 Vendeurs</div>
+      <div onClick="{{ goInviteVendor }}" style="padding:9px 14px;border-radius:100px;background:{{ tabInviteVendor }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.7 Inviter</div>
+      <div onClick="{{ openFirstVendor }}" style="padding:9px 14px;border-radius:100px;background:{{ tabVendorDetail }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">3.8 Détail vendeur</div>
+      <div onClick="{{ goNotif }}" style="padding:9px 14px;border-radius:100px;background:{{ tabNotif }};font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(27,67,50,.14)">Centre notifs</div>
+    </div>
+  </div>
+
+  <div style="width:400px;display:flex;flex-direction:column;gap:16px;padding-top:8px">
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1B4332">Écran actif</div>
+      <div style="margin-top:10px;font-size:21px;font-weight:800;letter-spacing:-.02em;text-wrap:pretty">{{ panelTitle }}</div>
+      <div style="margin-top:9px;font-size:13.5px;line-height:1.62;color:#6B6B6B;text-wrap:pretty">{{ panelBody }}</div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(27,67,50,.10)">
+        <div style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:9px">Specs animation</div>
+        <div style="font-size:12.5px;line-height:1.75;color:#1A1A1A;white-space:pre-line">{{ panelAnim }}</div>
+      </div>
+    </div>
+
+    <div style="background:#1B4332;border-radius:16px;padding:24px 26px;color:#fff">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F4A100;margin-bottom:15px">Règle fondamentale</div>
+      <div style="display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)">
+        <div><strong style="color:#fff">Plafond et échéance sont facultatifs.</strong> Aucun n'est appliqué par défaut : le boutiquier les fixe manuellement à l'ouverture du cahier (écran 3.3), ou les laisse vides. Montant minimum d'un bon : 200 FCFA.</div>
+        <div><strong style="color:#fff">Un bon ne se valide pas.</strong> Si le cahier est actif et dans le plafond, le bon est enregistré automatiquement. Le boutiquier reçoit une notification informative — aucun bouton d'action (écran 3.2).</div>
+        <div><strong style="color:#fff">L'ouverture d'un cahier se valide.</strong> C'est le seul endroit avec Accepter / Refuser (écran 3.3), présenté en sheet remontant du bas.</div>
+        <div><strong style="color:#fff">Le blocage n'existe que si une condition a été posée.</strong> Un cahier sans plafond ni échéance ne se bloque jamais tout seul. Sinon, au premier seuil atteint il passe en <em>bloqué</em> — plus aucun bon possible jusqu'au déblocage manuel par le boutiquier.</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1B4332;margin-bottom:15px">Statuts de cahier</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:rgba(45,106,79,.12);color:#2D6A4F;font-size:10.5px;font-weight:700;flex:none;margin-top:1px">Actif</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#6B6B6B">Bons enregistrés automatiquement, dans la limite du plafond s'il y en a un.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:rgba(193,18,31,.10);color:#C1121F;font-size:10.5px;font-weight:700;flex:none;margin-top:1px">Bloqué</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#6B6B6B">Plafond ou échéance atteint. Badge en pulse subtil. Aucun nouveau bon.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:rgba(244,161,0,.16);color:#B87A00;font-size:10.5px;font-weight:700;flex:none;margin-top:1px">En attente</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#6B6B6B">Ouverture demandée, en attente de la décision du boutiquier.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:#F2F2EF;color:#6B6B6B;font-size:10.5px;font-weight:700;flex:none;margin-top:1px">Clôturé</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#6B6B6B">Soldé et fermé définitivement. Sort de la liste principale.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:920,&quot;height&quot;:940}}">
+const SPECS = {
+  vendors: ["3.6 — Liste des vendeurs",
+    "Une ligne par vendeur : initiales, nom, statut et nombre de bons enregistrés ce mois. Le détail est derrière le tap. Le lien en tête permet de voir l'empty state.",
+    "Entrée · fade 240ms\nCard · scale 0.99 au tap\nEmpty state · fade-up 340ms\nBouton · scale 0.97 au tap"],
+  inviteVendor: ["3.7 — Inviter un vendeur",
+    "Un seul champ, un rappel de périmètre, un bouton. Le vendeur aide à enregistrer les bons mais ne touche ni aux remboursements ni à l'ouverture de cahier.",
+    "Entrée · slide-up 300ms\nCaret · blink 1100ms step-end\nTouches · scale 0.94 au tap\nBouton actif · background 200ms"],
+  vendorDetail: ["3.8 — Détail vendeur",
+    "Statut en tête, bons du mois et montant aidé, puis la timeline des derniers bons avec le client concerné. Le retrait passe par une confirmation en sheet.",
+    "Entrée · fade 240ms\nSheet de confirmation · slide-up spring 380ms\nOverlay · fade 240ms\nBoutons · scale 0.97 au tap"],
+  home: ["3.1 — Accueil boutiquier",
+    "Encours dominant, masquable d'un tap. Le bouton « Nouveau bon » de la carte lance directement le flux d'enregistrement — caméra, scan du QR client, montant, confirmation. La barre de progression n'apparaît que sur les cahiers avec plafond, et l'historique s'ouvre par « Tout voir ».",
+    "Masquage · tap sur le montant\nBouton nouveau bon · scale 0.95 au tap\nFAB · scale 0.97 au tap, retour spring\nBadge bloqué · pulse 2000ms infinite"],
+  banner: ["3.2 — Notification d'un bon (informatif)",
+    "Bannière push style Wave. Miniature de la photo produits, nom du client, montant, heure. Aucun bouton Accepter / Refuser — le bon est déjà enregistré. Le tap ouvre le cahier du client.",
+    "Bannière · slide-down 340ms cubic-bezier(.2,.9,.25,1)\nAuto-dismiss · 4000ms\nTap · push horizontal vers 3.4"],
+  sheet: ["3.3 — Demande d'ouverture de cahier",
+    "Le seul écran où le boutiquier décide. Sheet remontant du bas : identité du client, badge vérifié / non vérifié, et le premier bon s'il est inclus. Accepter en vert, Refuser en contour rouge.",
+    "Sheet · slide-up 380ms cubic-bezier(.18,.9,.24,1)\nOverlay · fade 240ms\nBoutons · scale 0.97 au tap"],
+  cahier: ["3.4 — Détail cahier client",
+    "Statut du cahier, montant dû en très grand, progression vers le plafond quand il en existe un, puis la timeline des bons avec l'auteur de chaque enregistrement. Les actions du bas changent avec le statut : actif → Suspendre + Clôturer ; bloqué → Clôturer + Débloquer ; en attente → Refuser + Accepter ; clôturé → aucune action. Tape n'importe quel cahier de la liste 3.1 pour voir sa variante.",
+    "Entrée · push horizontal 300ms\nTimeline · stagger fade-up 40ms/ligne\nActions sticky · scale 0.97 au tap"],
+  qr: ["3.5 — QR Code boutique",
+    "Fond blanc pur pour maximiser le contraste de scan en plein soleil. Nom et badge vérifié sous le code, puis partage et téléchargement.",
+    "Entrée · fade 220ms\nQR · pop-in 320ms spring\nBoutons · scale 0.97 au tap"],
+  notif: ["Centre de notifications",
+    "Journal groupé par jour. Les bons sont informatifs (liseré or), les demandes d'ouverture portent un badge « À valider » (liseré vert) et ouvrent la sheet 3.3.",
+    "Entrée · fade 220ms\nLignes · stagger fade-up 40ms\nTap ouverture · slide-up sheet 380ms"]
+};
+
+const CAHIERS = [
+  { initials: "AD", name: "Aïssatou Diop", amount: "12 500", plafond: "20 000", pct: 62.5, echeance: "Échéance 30 août", status: "Actif", badgeBg: "rgba(45,106,79,.12)", badgeFg: "#2D6A4F", barColor: "#2D6A4F", amountColor: "#1A1A1A", dotAnim: "none",
+    hasCap: true, hasDue: true, capLabel: "Plafond 20 000 FCFA",
+    verified: true, since: "Cliente depuis mars 2026", left: "7 500 FCFA restants", due: "Échéance le 30 août 2026" },
+  { initials: "FS", name: "Fatou Sow", amount: "18 000", plafond: "18 000", pct: 100, echeance: "Échu le 17 août", status: "Bloqué", badgeBg: "rgba(193,18,31,.10)", badgeFg: "#C1121F", barColor: "#C1121F", amountColor: "#C1121F", dotAnim: "bk-pulse 2s infinite",
+    hasCap: true, hasDue: true, capLabel: "Plafond 18 000 FCFA",
+    verified: true, since: "Cliente depuis janvier 2026", left: "Plafond atteint", due: "Échu le 17 août 2026" },
+  { initials: "OF", name: "Ousmane Fall", amount: "3 000", plafond: "—", pct: 0, echeance: "Ouverture demandée", status: "En attente", badgeBg: "rgba(244,161,0,.16)", badgeFg: "#B87A00", barColor: "#F4A100", amountColor: "#1A1A1A", dotAnim: "none",
+    hasCap: false, hasDue: false, capLabel: "Plafond à définir",
+    verified: false, since: "Nouveau client", left: "Sans plafond", due: "Sans échéance" },
+  { initials: "MK", name: "Malick Kane", amount: "7 500", plafond: "—", pct: 0, echeance: "Sans échéance", status: "Actif", badgeBg: "rgba(45,106,79,.12)", badgeFg: "#2D6A4F", barColor: "#2D6A4F", amountColor: "#1A1A1A", dotAnim: "none",
+    hasCap: false, hasDue: false, capLabel: "Sans plafond",
+    verified: true, since: "Client depuis avril 2026", left: "Sans plafond fixé", due: "Sans échéance fixée" },
+  { initials: "NB", name: "Ndèye Bâ", amount: "4 200", plafond: "15 000", pct: 28, echeance: "Clôturé", status: "Clôturé", badgeBg: "#F2F2EF", badgeFg: "#6B6B6B", barColor: "#D8D8D2", amountColor: "#6B6B6B", dotAnim: "none",
+    hasCap: true, hasDue: true, capLabel: "Plafond 15 000 FCFA",
+    verified: true, since: "Cliente depuis février 2026", left: "Soldé", due: "Clôturé le 15 août 2026" }
+];
+
+const BTN_OUTLINE = { bg: "transparent", fg: "#1B4332", border: "1.5px solid rgba(27,67,50,.18)", shadow: "none" };
+const BTN_SOLID = { bg: "#1B4332", fg: "#fff", border: "none", shadow: "0 6px 16px rgba(27,67,50,.20)" };
+const BTN_UNLOCK = { bg: "#2D6A4F", fg: "#fff", border: "none", shadow: "0 6px 16px rgba(45,106,79,.24)" };
+
+function actionsFor(status) {
+  if (status === "Actif") return [
+    Object.assign({ label: "Suspendre", icon: "pause_circle" }, BTN_OUTLINE),
+    Object.assign({ label: "Clôturer", icon: "task_alt" }, BTN_SOLID)
+  ];
+  if (status === "Bloqué") return [
+    Object.assign({ label: "Clôturer", icon: "task_alt" }, BTN_OUTLINE),
+    Object.assign({ label: "Débloquer", icon: "lock_open" }, BTN_UNLOCK)
+  ];
+  if (status === "En attente") return [
+    Object.assign({ label: "Refuser", icon: "close" }, { bg: "transparent", fg: "#C1121F", border: "1.5px solid rgba(193,18,31,.30)", shadow: "none" }),
+    Object.assign({ label: "Accepter", icon: "check" }, BTN_UNLOCK)
+  ];
+  return [Object.assign({ label: "Cahier clôturé", icon: "lock" }, { bg: "#F2F2EF", fg: "#9A9A94", border: "none", shadow: "none" })];
+}
+
+const BONS = [
+  { date: "Aujourd'hui · 09:38", by: "Enregistré par la cliente", amount: "+2 500", icon: "photo_camera", color: "#1A1A1A", border: "none" },
+  { date: "16 août · 18:22", by: "Enregistré par le vendeur", amount: "+4 000", icon: "photo_camera", color: "#1A1A1A", border: "1px solid rgba(27,67,50,.08)" },
+  { date: "12 août · 11:05", by: "Remboursement Wave", amount: "−5 000", icon: "payments", color: "#2D6A4F", border: "1px solid rgba(27,67,50,.08)" },
+  { date: "9 août · 08:41", by: "Enregistré par la cliente", amount: "+6 000", icon: "photo_camera", color: "#1A1A1A", border: "1px solid rgba(27,67,50,.08)" },
+  { date: "4 août · 19:12", by: "Enregistré par la cliente", amount: "+5 000", icon: "photo_camera", color: "#1A1A1A", border: "1px solid rgba(27,67,50,.08)" }
+];
+
+const QR_PATTERN = [
+  "11111010101011111","10001011100010001","10111010001010111","10111000111010111",
+  "10111011010010111","10001001101010001","11111010101011111","00000011001000000",
+  "10101110011101011","01110001100110110","11011010101001101","00100111010110010",
+  "11111010011010111","00000110101100100","10101011011011011","01110100110101100","11011011001010111"
+];
+
+const VENDORS = [
+  { initials: "IS", name: "Ibrahima Sarr", status: "Actif", count: 34, since: "Vendeur depuis mai 2026", totalN: 128500,
+    bons: [
+      { initials: "AD", client: "Aïssatou Diop", date: "Aujourd'hui · 09:38", amount: "2 500" },
+      { initials: "MK", client: "Malick Kane", date: "Aujourd'hui · 08:12", amount: "4 000" },
+      { initials: "NB", client: "Ndèye Bâ", date: "18 août · 19:04", amount: "1 800" },
+      { initials: "FS", client: "Fatou Sow", date: "17 août · 16:22", amount: "3 000" },
+      { initials: "AD", client: "Aïssatou Diop", date: "16 août · 18:22", amount: "4 000" }
+    ] },
+  { initials: "CD", name: "Cheikh Diallo", status: "Actif", count: 21, since: "Vendeur depuis juin 2026", totalN: 74200,
+    bons: [
+      { initials: "MK", client: "Malick Kane", date: "Aujourd'hui · 07:44", amount: "1 200" },
+      { initials: "NB", client: "Ndèye Bâ", date: "18 août · 11:30", amount: "2 400" },
+      { initials: "FS", client: "Fatou Sow", date: "14 août · 12:15", amount: "7 000" }
+    ] },
+  { initials: "MG", name: "Mame Gueye", status: "Inactif", count: 0, since: "Invitée le 12 août", totalN: 0, bons: [] }
+];
+
+class Component extends DCLogic {
+  state = { screen: "home", banner: false, cahierIdx: 0, vendorIdx: 0, vendorPhone: "", emptyVendors: false, removeConfirm: false, newCap: 0, newDue: null, masked: false };
+  timer = null;
+  componentWillUnmount() { clearTimeout(this.timer); }
+  go = (screen) => { clearTimeout(this.timer); this.setState({ screen: screen, banner: false }); };
+  goHome = () => this.go("home");
+  goNotif = () => this.go("notif");
+  goCahier = () => this.go("cahier");
+  openCahier = (i) => { clearTimeout(this.timer); this.setState({ screen: "cahier", banner: false, cahierIdx: i }); };
+  goQr = () => this.go("qr");
+  toggleMask = () => this.setState({ masked: !this.state.masked });
+  toggleCap = () => this.setState({ newCap: this.state.newCap ? 0 : 20000 });
+  toggleDue = () => this.setState({ newDue: this.state.newDue ? null : "30 sept." });
+  goVendors = () => { clearTimeout(this.timer); this.setState({ screen: "vendors", banner: false, removeConfirm: false }); };
+  goInviteVendor = () => { clearTimeout(this.timer); this.setState({ screen: "inviteVendor", banner: false }); };
+  openVendor = (i) => { clearTimeout(this.timer); this.setState({ screen: "vendorDetail", banner: false, vendorIdx: i, removeConfirm: false }); };
+  openFirstVendor = () => this.openVendor(0);
+  toggleEmpty = () => this.setState({ emptyVendors: !this.state.emptyVendors });
+  pressVendor = (d) => { if (this.state.vendorPhone.length < 9) this.setState({ vendorPhone: this.state.vendorPhone + d }); };
+  delVendor = () => this.setState({ vendorPhone: this.state.vendorPhone.slice(0, -1) });
+  sendVendorInvite = () => { if (this.state.vendorPhone.length === 9) this.goVendors(); };
+  askRemove = () => this.setState({ removeConfirm: true });
+  cancelRemove = () => this.setState({ removeConfirm: false });
+  confirmRemove = () => this.setState({ removeConfirm: false, screen: "vendors" });
+  vendorKeypad() {
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map(d => ({
+      label: d, size: 22, bg: "#F2F2EF", border: "none", press: () => this.pressVendor(d)
+    }));
+    keys.push({ label: "", size: 22, bg: "transparent", border: "none", press: () => {} });
+    keys.push({ label: "0", size: 22, bg: "#F2F2EF", border: "none", press: () => this.pressVendor("0") });
+    keys.push({ label: "⌫", size: 19, bg: "#fff", border: "1.5px solid rgba(27,67,50,.14)", press: this.delVendor });
+    return keys;
+  }
+  goSheet = () => { clearTimeout(this.timer); this.setState({ screen: "sheet", banner: false }); };
+  goBanner = () => {
+    clearTimeout(this.timer);
+    this.setState({ screen: "banner", banner: true });
+    this.timer = setTimeout(() => this.setState({ banner: false }), 4000);
+  };
+
+  renderVals() {
+    const s = this.state;
+    const key = s.screen === "banner" ? "banner" : s.screen;
+    const spec = SPECS[key] || SPECS.home;
+    const cc = CAHIERS[s.cahierIdx] || CAHIERS[0];
+    const vd = VENDORS[s.vendorIdx] || VENDORS[0];
+    const vOk = s.vendorPhone.length === 9;
+    const vp = s.vendorPhone.replace(/(\d{2})(?=\d)/, "$1 ").replace(/^(\d{2} \d{3})(?=\d)/, "$1 ").replace(/^(\d{2} \d{3} \d{2})(?=\d)/, "$1 ");
+    const pill = (on) => on ? "#F4A100" : "#fff";
+    const cells = [];
+    for (let r = 0; r < 11; r++) for (let c = 0; c < 11; c++) {
+      cells.push({ bg: QR_PATTERN[r + 3][c + 3] === "1" ? "#1B4332" : "transparent" });
+    }
+    return {
+      isHome: s.screen === "home" || s.screen === "banner" || s.screen === "sheet",
+      isNotif: s.screen === "notif",
+      isCahier: s.screen === "cahier",
+      isQr: s.screen === "qr",
+      isVendors: s.screen === "vendors",
+      isInviteVendor: s.screen === "inviteVendor",
+      isVendorDetail: s.screen === "vendorDetail",
+      hasVendors: !s.emptyVendors, noVendors: s.emptyVendors,
+      emptySwitch: s.emptyVendors ? "Voir la liste" : "Voir vide",
+      vendorSub: s.emptyVendors ? "Aucun vendeur" : VENDORS.length + " vendeurs · " + VENDORS.filter(v => v.status === "Actif").length + " actifs",
+      vendors: VENDORS.map((v, i) => ({
+        initials: v.initials, name: v.name, status: v.status, count: v.count,
+        badgeBg: v.status === "Actif" ? "rgba(45,106,79,.12)" : "#F2F2EF",
+        badgeFg: v.status === "Actif" ? "#2D6A4F" : "#6B6B6B",
+        avatarBg: v.status === "Actif" ? "rgba(27,67,50,.08)" : "#F2F2EF",
+        avatarFg: v.status === "Actif" ? "#1B4332" : "#9A9A94",
+        countColor: v.count ? "#1A1A1A" : "#9A9A94",
+        open: () => this.openVendor(i)
+      })),
+      vPhoneDisplay: vp || "77 000 00 00",
+      vPhoneColor: s.vendorPhone ? "#1A1A1A" : "#9A9A94",
+      vPhoneBorder: s.vendorPhone ? "#1B4332" : "rgba(27,67,50,.14)",
+      vendorKeys: this.vendorKeypad(),
+      vBtnBg: vOk ? "#1B4332" : "#E6E6E1",
+      vBtnFg: vOk ? "#fff" : "#9A9A94",
+      vBtnLabel: vOk ? "Envoyer l'invitation" : "Saisis un numéro",
+      vdInitials: vd.initials, vdName: vd.name, vdSince: vd.since, vdStatus: vd.status, vdCount: vd.count,
+      vdTotal: String(vd.totalN).replace(/\B(?=(\d{3})+(?!\d))/g, " "),
+      vdBadgeBg: vd.status === "Actif" ? "rgba(45,106,79,.12)" : "#F2F2EF",
+      vdBadgeFg: vd.status === "Actif" ? "#2D6A4F" : "#6B6B6B",
+      vdAvatarBg: vd.status === "Actif" ? "rgba(27,67,50,.08)" : "#F2F2EF",
+      vdAvatarFg: vd.status === "Actif" ? "#1B4332" : "#9A9A94",
+      vdBons: vd.bons.map((b, i) => Object.assign({}, b, { border: i === 0 ? "none" : "1px solid rgba(27,67,50,.08)" })),
+      vdHasBons: vd.bons.length > 0, vdNoBons: vd.bons.length === 0,
+      showRemoveConfirm: s.removeConfirm,
+      goVendors: this.goVendors, goInviteVendor: this.goInviteVendor, openFirstVendor: this.openFirstVendor,
+      toggleEmpty: this.toggleEmpty, sendVendorInvite: this.sendVendorInvite,
+      askRemove: this.askRemove, cancelRemove: this.cancelRemove, confirmRemove: this.confirmRemove,
+      tabVendors: pill(s.screen === "vendors"), tabInviteVendor: pill(s.screen === "inviteVendor"),
+      tabVendorDetail: pill(s.screen === "vendorDetail"),
+      showBanner: s.banner,
+      showSheet: s.screen === "sheet",
+      encoursDisplay: s.masked ? "•••••" : "128 500",
+      encoursSize: s.masked ? 46 : 52,
+
+      toggleMask: this.toggleMask,
+      toggleCap: this.toggleCap, toggleDue: this.toggleDue,
+      capFieldValue: s.newCap ? String(s.newCap).replace(/\B(?=(\d{3})+(?!\d))/g, " ") : "Aucun",
+      capFieldBg: s.newCap ? "rgba(45,106,79,.07)" : "#F2F2EF",
+      capFieldBorder: s.newCap ? "rgba(45,106,79,.32)" : "transparent",
+      capFieldFg: s.newCap ? "#2D6A4F" : "#9A9A94",
+      dueFieldValue: s.newDue || "Aucune",
+      dueFieldBg: s.newDue ? "rgba(45,106,79,.07)" : "#F2F2EF",
+      dueFieldBorder: s.newDue ? "rgba(45,106,79,.32)" : "transparent",
+      dueFieldFg: s.newDue ? "#2D6A4F" : "#9A9A94",
+      conditionsHint: (!s.newCap && !s.newDue)
+        ? "Sans plafond ni échéance, le cahier reste ouvert jusqu'à ta décision."
+        : (s.newCap && s.newDue)
+          ? "Le cahier se bloquera au plafond ou à l'échéance, au premier atteint."
+          : (s.newCap ? "Le cahier se bloquera une fois le plafond atteint." : "Le cahier se bloquera à l'échéance."),
+      statusColor: s.screen === "qr" ? "#1A1A1A" : "#1A1A1A",
+      cahiers: CAHIERS.map((c, i) => Object.assign({}, c, { open: () => this.openCahier(i) })),
+      bons: BONS, qrCells: cells,
+      cName: cc.name, cSince: cc.since,
+      cVerifiedIcon: cc.verified ? "verified" : "error",
+      cVerifiedColor: cc.verified ? "#2D6A4F" : "#C1121F",
+      cStatusLabel: cc.status, cStatusBg: cc.badgeBg, cStatusFg: cc.badgeFg, cStatusDot: cc.dotAnim,
+      cAmount: cc.amount, cAmountColor: cc.amountColor, cBarColor: cc.barColor, cPct: cc.pct,
+      cLeft: cc.left, cCap: cc.plafond, cDue: cc.due,
+      cHasCap: cc.hasCap,
+      cCapLabel: cc.hasCap ? "Plafond " + cc.plafond : "Sans plafond",
+      cDueColor: cc.status === "Bloqué" ? "#C1121F" : "#6B6B6B",
+      cDueIcon: cc.status === "Bloqué" ? "event_busy" : (cc.status === "Clôturé" ? "task_alt" : (cc.hasDue ? "event" : "event_available")),
+      cDueIconColor: cc.status === "Bloqué" ? "#C1121F" : (cc.status === "Clôturé" ? "#6B6B6B" : "#F4A100"),
+      cActions: actionsFor(cc.status),
+      goHome: this.goHome, goNotif: this.goNotif, goCahier: this.goCahier, goQr: this.goQr, goSheet: this.goSheet, goBanner: this.goBanner,
+      tabHome: pill(s.screen === "home"), tabBanner: pill(s.screen === "banner"), tabSheet: pill(s.screen === "sheet"),
+      tabCahier: pill(s.screen === "cahier"), tabQr: pill(s.screen === "qr"), tabNotif: pill(s.screen === "notif"),
+      panelTitle: spec[0], panelBody: spec[1], panelAnim: spec[2]
+    };
+  }
+}
+</script>
+</body>
+</html>

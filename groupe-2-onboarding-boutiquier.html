@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;-webkit-font-smoothing:antialiased}
+a{color:#1B4332}a:hover{color:#2D6A4F}
+::-webkit-scrollbar{display:none}*{-ms-overflow-style:none;scrollbar-width:none}
+@keyframes bk-fade{from{opacity:0}to{opacity:1}}
+@keyframes bk-fadeup{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes bk-slideup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes bk-pop{0%{transform:scale(.7);opacity:0}62%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+@keyframes bk-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes bk-draw{to{stroke-dashoffset:0}}
+@keyframes bk-shimmer{0%,100%{opacity:.55}50%{opacity:1}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;gap:44px;align-items:flex-start;justify-content:center;padding:44px 40px 64px;flex-wrap:wrap">
+
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:center">
+    <div style="display:flex;align-items:center;gap:11px;align-self:flex-start">
+      <div style="width:34px;height:34px;border-radius:10px;background:#1B4332;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#F4A100">B</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Boutik</div>
+        <div style="font-size:12px;color:#6B6B6B;margin-top:1px">Groupe 2 — onboarding boutiquier</div>
+      </div>
+    </div>
+
+    <div style="position:relative;width:378px;height:786px;border-radius:44px;background:#1A1A1A;padding:9px;box-shadow:0 24px 60px rgba(27,67,50,.20)">
+      <div style="position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#FAFAF7">
+
+        <div style="position:absolute;top:0;left:0;right:0;height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;font-size:12px;font-weight:600;z-index:8;color:{{ statusColor }}">
+          <div>9:41</div>
+          <div style="display:flex;gap:5px;align-items:center;font-family:'Material Symbols Rounded';font-size:15px">network_wifi<span>battery_full</span></div>
+        </div>
+
+        <sc-if value="{{ isInfo }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding-top:44px;animation:bk-fade .28s ease-out">
+            <div style="padding:12px 24px 0;display:flex;align-items:center;gap:12px">
+              <div style="flex:1;height:4px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:50%;height:100%;background:#1B4332;border-radius:100px"></div></div>
+              <div style="font-size:11.5px;font-weight:700;color:#6B6B6B">Étape 1 / 2</div>
+            </div>
+
+            <div style="padding:26px 24px 0">
+              <div style="font-size:28px;font-weight:800;letter-spacing:-.028em;line-height:1.14">Ta boutique</div>
+              <div style="margin-top:10px;font-size:13.5px;line-height:1.55;color:#6B6B6B;max-width:262px">Ces infos apparaîtront sur ton QR code et dans l'app de tes clients.</div>
+            </div>
+
+            <div style="flex:1;overflow-y:auto;padding:22px 24px 110px;display:flex;flex-direction:column;gap:18px">
+              <div onClick="{{ togglePhoto }}" style="border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s;border:2px dashed {{ photoBorder }};background:{{ photoBg }};height:150px;position:relative;display:flex;align-items:center;justify-content:center">
+                <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:0;background:linear-gradient(140deg,#2D6A4F,#F4A100);animation:bk-fade .3s ease-out"></div>
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%)"></div>
+                  <div style="position:absolute;left:14px;bottom:13px;display:flex;align-items:center;gap:7px;color:#fff">
+                    <span style="font-family:'Material Symbols Rounded';font-size:19px">check_circle</span>
+                    <span style="font-size:13px;font-weight:700">Photo ajoutée</span>
+                  </div>
+                  <div style="position:absolute;right:12px;top:12px;padding:6px 12px;border-radius:100px;background:rgba(255,255,255,.92);font-size:11.5px;font-weight:700;color:#1A1A1A">Changer</div>
+                </sc-if>
+                <sc-if value="{{ noPhoto }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+                    <div style="width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(27,67,50,.10)"><span style="font-family:'Material Symbols Rounded';font-size:26px;color:#1B4332">add_a_photo</span></div>
+                    <div style="font-size:14px;font-weight:700">Photo de la boutique</div>
+                    <div style="font-size:12px;color:#6B6B6B">Aide tes clients à te reconnaître</div>
+                  </div>
+                </sc-if>
+              </div>
+
+              <sc-for list="{{ fields }}" as="f" hint-placeholder-count="3">
+                <div onClick="{{ f.focus }}">
+                  <div style="font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B;margin-bottom:9px">{{ f.label }}</div>
+                  <div style="height:56px;border-radius:13px;background:#fff;border:1.5px solid {{ f.border }};display:flex;align-items:center;padding:0 15px;gap:10px;cursor:text;transition:border-color .2s">
+                    <span style="font-family:'Material Symbols Rounded';font-size:20px;color:{{ f.iconColor }};flex:none">{{ f.icon }}</span>
+                    <div style="flex:1;min-width:0;font-size:15.5px;font-weight:{{ f.weight }};color:{{ f.color }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:{{ f.font }}">{{ f.value }}</div>
+                    <sc-if value="{{ f.active }}" hint-placeholder-val="{{ false }}">
+                      <div style="width:2px;height:24px;background:#1B4332;animation:bk-caret 1.1s step-end infinite;flex:none"></div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:16px 24px 26px;background:rgba(250,250,247,.96);border-top:1px solid rgba(27,67,50,.08)">
+              <div onClick="{{ goNinea }}" style="height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16.5px;font-weight:700;cursor:pointer;transition:background .2s,transform .18s cubic-bezier(.34,1.56,.64,1);background:{{ infoBtnBg }};color:{{ infoBtnFg }}" style-active="transform:scale(.97)">
+                {{ infoBtnLabel }}<span style="font-family:'Material Symbols Rounded';font-size:21px">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isNinea }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;padding-top:44px;animation:bk-slideup .3s cubic-bezier(.2,.8,.2,1)">
+            <div style="padding:12px 24px 0;display:flex;align-items:center;gap:12px">
+              <div onClick="{{ goInfo }}" style="width:38px;height:38px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#1B4332">arrow_back</span></div>
+              <div style="flex:1;height:4px;border-radius:100px;background:#F2F2EF;overflow:hidden"><div style="width:100%;height:100%;background:#1B4332;border-radius:100px"></div></div>
+              <div style="font-size:11.5px;font-weight:700;color:#6B6B6B">Étape 2 / 2</div>
+            </div>
+
+            <div style="padding:22px 24px 0">
+              <div style="display:inline-flex;padding:5px 12px;border-radius:100px;background:#F2F2EF;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B">Optionnel</div>
+              <div style="margin-top:13px;font-size:26px;font-weight:800;letter-spacing:-.028em;line-height:1.16">Ta boutique est-elle enregistrée ?</div>
+            </div>
+
+            <div style="flex:1;padding:20px 24px 0;display:flex;flex-direction:column;gap:16px;min-height:0">
+              <div onClick="{{ focusNinea }}">
+                <div style="font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6B6B6B;margin-bottom:8px">Numéro NINEA</div>
+                <div style="height:56px;border-radius:13px;background:#fff;border:1.5px solid {{ nineaBorder }};display:flex;align-items:center;padding:0 15px;gap:10px;cursor:text;transition:border-color .2s">
+                  <span style="font-family:'Material Symbols Rounded';font-size:20px;color:{{ nineaIconColor }};flex:none">badge</span>
+                  <div style="flex:1;min-width:0;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;letter-spacing:.04em;color:{{ nineaColor }};white-space:nowrap;overflow:hidden">{{ nineaDisplay }}</div>
+                  <sc-if value="{{ nineaValid }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-family:'Material Symbols Rounded';font-size:22px;color:#2D6A4F;flex:none;animation:bk-pop .3s cubic-bezier(.34,1.56,.64,1)">check_circle</span>
+                  </sc-if>
+                </div>
+                <div style="margin-top:8px;font-size:11.5px;color:#6B6B6B">7 chiffres, tel qu'inscrit sur ton registre de commerce.</div>
+              </div>
+
+              <div style="border-radius:14px;padding:14px;transition:background .25s,border-color .25s;background:{{ cardBg }};border:1.5px solid {{ cardBorder }};display:flex;align-items:center;gap:12px">
+                <div style="width:46px;height:46px;border-radius:12px;background:{{ badgeIconBg }};display:flex;align-items:center;justify-content:center;flex:none;transition:background .25s">
+                  <span style="font-family:'Material Symbols Rounded';font-size:24px;color:{{ badgeIconFg }}">{{ badgeIcon }}</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:14.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ shopName }}</div>
+                  <div style="font-size:11.5px;color:#6B6B6B;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ shopAddress }}</div>
+                  <div style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:100px;transition:background .25s,color .25s;background:{{ badgePillBg }};color:{{ badgePillFg }};font-size:10.5px;font-weight:800">
+                    <span style="font-family:'Material Symbols Rounded';font-size:14px">{{ badgePillIcon }}</span>{{ badgePillLabel }}
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+                <sc-for list="{{ nineaKeys }}" as="k" hint-placeholder-count="12">
+                  <div onClick="{{ k.press }}" style="height:50px;border-radius:12px;background:{{ k.bg }};border:{{ k.border }};display:flex;align-items:center;justify-content:center;font-size:{{ k.size }}px;font-weight:600;cursor:pointer;transition:transform .12s" style-active="transform:scale(.94)">{{ k.label }}</div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding:14px 24px 20px;display:flex;flex-direction:column;gap:10px;align-items:center">
+              <div onClick="{{ finish }}" style="width:100%;height:54px;border-radius:14px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(27,67,50,.20)" style-active="transform:scale(.97)"><span style="font-family:'Material Symbols Rounded';font-size:20px">check</span>Terminer</div>
+              <div onClick="{{ skip }}" style="font-size:14px;font-weight:600;color:#6B6B6B;cursor:pointer;padding:2px 12px">Passer cette étape</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;background:#1B4332;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 30px;text-align:center;animation:bk-fade .26s ease-out">
+            <div style="width:112px;height:112px;border-radius:100px;background:rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center">
+              <svg width="56" height="56" viewBox="0 0 52 52" fill="none"><path d="M12 27.5 L22 37 L40 17" stroke="#F4A100" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60" style="animation:bk-draw .6s cubic-bezier(.65,0,.35,1) forwards"></path></svg>
+            </div>
+            <div style="margin-top:30px;font-size:29px;font-weight:800;color:#fff;letter-spacing:-.025em;animation:bk-fadeup .4s .45s ease-out both">{{ shopName }} est en ligne</div>
+            <div style="margin-top:12px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.74);max-width:256px;animation:bk-fadeup .4s .6s ease-out both">{{ doneSub }}</div>
+            <div style="margin-top:26px;padding:9px 16px;border-radius:100px;background:rgba(244,161,0,.16);color:#F4A100;font-size:12.5px;font-weight:700;animation:bk-fadeup .4s .74s ease-out both">Ton QR code est prêt à être affiché</div>
+            <div onClick="{{ restart }}" style="margin-top:32px;padding:13px 24px;border-radius:100px;background:rgba(255,255,255,.14);color:#fff;font-size:14px;font-weight:700;cursor:pointer;animation:bk-fadeup .4s .88s ease-out both" style-active="transform:scale(.96)">Rejouer le parcours</div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:378px">
+      <div onClick="{{ goInfo }}" style="padding:9px 14px;border-radius:100px;background:{{ tabInfo }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">2.1 Info boutique</div>
+      <div onClick="{{ jumpNinea }}" style="padding:9px 14px;border-radius:100px;background:{{ tabNinea }};border:1px solid rgba(27,67,50,.14);font-size:12px;font-weight:700;cursor:pointer">2.2 NINEA</div>
+      <div onClick="{{ demoVerified }}" style="padding:9px 14px;border-radius:100px;background:#fff;border:1px solid rgba(45,106,79,.3);font-size:12px;font-weight:700;color:#2D6A4F;cursor:pointer">Badge vérifié</div>
+    </div>
+  </div>
+
+  <div style="width:400px;display:flex;flex-direction:column;gap:16px;padding-top:8px">
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1B4332">Écran actif</div>
+      <div style="margin-top:10px;font-size:21px;font-weight:800;letter-spacing:-.02em;text-wrap:pretty">{{ panelTitle }}</div>
+      <div style="margin-top:9px;font-size:13.5px;line-height:1.62;color:#6B6B6B;text-wrap:pretty">{{ panelBody }}</div>
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(27,67,50,.10)">
+        <div style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6B6B6B;margin-bottom:9px">Animations</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#1A1A1A;white-space:pre-line">{{ panelAnim }}</div>
+      </div>
+    </div>
+
+    <div style="background:#1B4332;border-radius:16px;padding:24px 26px;color:#fff">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F4A100;margin-bottom:15px">Logique d'inscription</div>
+      <div style="display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)">
+        <div><strong style="color:#fff">Deux étapes, pas plus.</strong> Info boutique puis NINEA. Un boutiquier doit pouvoir être opérationnel en moins de deux minutes.</div>
+        <div><strong style="color:#fff">Le NINEA reste optionnel.</strong> « Passer cette étape » est un vrai chemin — la majorité des boutiques de quartier ne sont pas enregistrées.</div>
+        <div><strong style="color:#fff">Le badge se construit en direct.</strong> Dès le 7ᵉ chiffre saisi, la card de prévisualisation passe de « Non vérifiée » à « Boutique vérifiée » sans rechargement.</div>
+        <div><strong style="color:#fff">La photo n'est pas bloquante.</strong> Elle améliore la reconnaissance côté client mais ne conditionne jamais la validation.</div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px 26px;box-shadow:0 1px 3px rgba(27,67,50,.10)">
+      <div style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1B4332;margin-bottom:15px">Champs requis</div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.55;color:#6B6B6B">
+        <div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:800;color:#1A1A1A;width:96px;flex:none">Nom</div><div>Obligatoire. Apparaît sur le QR et chez le client.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:800;color:#1A1A1A;width:96px;flex:none">Quartier</div><div>Obligatoire. Sert à la recherche de boutiques proches.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:800;color:#1A1A1A;width:96px;flex:none">Téléphone</div><div>Obligatoire. Pré-rempli depuis l'auth du Groupe 1.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:800;color:#1A1A1A;width:96px;flex:none">Photo</div><div>Optionnelle. Recadrage 4:3 automatique.</div></div>
+        <div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:800;color:#1A1A1A;width:96px;flex:none">NINEA</div><div>Optionnel, 7 chiffres. Déclenche le badge vérifié.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:920,&quot;height&quot;:940}}">
+const SPECS = {
+  info: ["2.1 — Info boutique", "Photo en tête, puis trois champs. Le champ actif porte un liseré vert et un curseur clignotant. Le bouton reste inactif tant que nom, quartier et téléphone ne sont pas remplis.", "Entrée · fade 280ms\nChamp focus · border-color 200ms\nCaret · blink 1100ms step-end\nPhoto ajoutée · fade 300ms\nBouton actif · background 200ms"],
+  ninea: ["2.2 — NINEA (optionnel)", "Champ NINEA à 7 chiffres avec pavé custom. La card de prévisualisation passe en vérifiée en direct au 7ᵉ chiffre. « Passer cette étape » est au même niveau fonctionnel que « Terminer ».", "Card vérifiée · background + border 250ms\nCheck NINEA · pop-in 300ms spring\nBadge pill · crossfade 250ms\nTouches · scale 0.94 au tap"],
+  done: ["Fin du parcours", "Écran de sortie du prototype, hors spécification. Confirme la mise en ligne de la boutique.", "Checkmark · stroke-dashoffset 600ms\nTextes · fade-up décalées 145ms"]
+};
+
+class Component extends DCLogic {
+  state = {
+    screen: "info", name: "Boutique Ndiaye", address: "Sacré-Cœur 3, Dakar",
+    phone: "77 123 45 67", photo: false, ninea: "", active: null
+  };
+
+  goInfo = () => this.setState({ screen: "info" });
+  goNinea = () => {
+    const s = this.state;
+    if (s.screen === "info" && !(s.name && s.address && s.phone)) return;
+    this.setState({ screen: "ninea", active: null });
+  };
+  jumpNinea = () => this.setState({ screen: "ninea", active: null });
+  finish = () => this.setState({ screen: "done" });
+  skip = () => this.setState({ screen: "done", ninea: "" });
+  restart = () => this.setState({ screen: "info", ninea: "", photo: false, active: null });
+  demoVerified = () => this.setState({ screen: "ninea", ninea: "1234567", active: "ninea" });
+
+  togglePhoto = () => this.setState({ photo: !this.state.photo });
+  focusName = () => this.setState({ active: "name" });
+  focusAddress = () => this.setState({ active: "address" });
+  focusPhone = () => this.setState({ active: "phone" });
+  focusNinea = () => this.setState({ active: "ninea" });
+
+  pressNinea = (d) => { if (this.state.ninea.length < 7) this.setState({ ninea: this.state.ninea + d, active: "ninea" }); };
+  delNinea = () => this.setState({ ninea: this.state.ninea.slice(0, -1) });
+
+  keypad() {
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map(d => ({
+      label: d, size: 22, bg: "#F2F2EF", border: "none", press: () => this.pressNinea(d)
+    }));
+    keys.push({ label: "", size: 22, bg: "transparent", border: "none", press: () => {} });
+    keys.push({ label: "0", size: 22, bg: "#F2F2EF", border: "none", press: () => this.pressNinea("0") });
+    keys.push({ label: "⌫", size: 19, bg: "#fff", border: "1.5px solid rgba(27,67,50,.14)", press: this.delNinea });
+    return keys;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const spec = SPECS[s.screen] || SPECS.info;
+    const pill = (on) => on ? "#F4A100" : "#fff";
+    const verified = s.ninea.length === 7;
+    const infoOk = !!(s.name && s.address && s.phone);
+
+    const field = (key, label, icon, value, placeholder, mono) => {
+      const active = s.active === key, empty = !value;
+      return {
+        label: label, icon: icon, value: empty ? placeholder : value,
+        active: active,
+        border: active ? "#1B4332" : (empty ? "rgba(27,67,50,.14)" : "rgba(27,67,50,.20)"),
+        iconColor: active ? "#1B4332" : "#6B6B6B",
+        color: empty ? "#9A9A94" : "#1A1A1A",
+        weight: empty ? 500 : 600,
+        font: mono ? "'JetBrains Mono',monospace" : "inherit",
+        focus: key === "name" ? this.focusName : key === "address" ? this.focusAddress : this.focusPhone
+      };
+    };
+
+    return {
+      statusColor: s.screen === "done" ? "#fff" : "#1A1A1A",
+      isInfo: s.screen === "info", isNinea: s.screen === "ninea", isDone: s.screen === "done",
+
+      hasPhoto: s.photo, noPhoto: !s.photo,
+      photoBorder: s.photo ? "transparent" : "rgba(27,67,50,.18)",
+      photoBg: s.photo ? "#1B4332" : "#F2F2EF",
+      togglePhoto: this.togglePhoto,
+
+      fields: [
+        field("name", "Nom de la boutique", "storefront", s.name, "Ex. Boutique Ndiaye", false),
+        field("address", "Quartier / adresse", "location_on", s.address, "Ex. Sacré-Cœur 3, Dakar", false),
+        field("phone", "Téléphone", "call", s.phone, "77 000 00 00", true)
+      ],
+      infoBtnBg: infoOk ? "#1B4332" : "#E6E6E1",
+      infoBtnFg: infoOk ? "#fff" : "#9A9A94",
+      infoBtnLabel: "Continuer",
+
+      nineaDisplay: s.ninea ? s.ninea.replace(/(\d{3})(?=\d)/, "$1 ") : "0 000 000",
+      nineaColor: s.ninea ? "#1A1A1A" : "#9A9A94",
+      nineaBorder: verified ? "#2D6A4F" : (s.active === "ninea" ? "#1B4332" : "rgba(27,67,50,.14)"),
+      nineaIconColor: verified ? "#2D6A4F" : (s.active === "ninea" ? "#1B4332" : "#6B6B6B"),
+      nineaValid: verified,
+      nineaKeys: this.keypad(),
+      focusNinea: this.focusNinea,
+
+      cardBg: verified ? "rgba(45,106,79,.07)" : "#fff",
+      cardBorder: verified ? "rgba(45,106,79,.28)" : "rgba(27,67,50,.10)",
+      badgeIconBg: verified ? "#2D6A4F" : "#F2F2EF",
+      badgeIconFg: verified ? "#F4A100" : "#6B6B6B",
+      badgeIcon: verified ? "verified" : "storefront",
+      badgePillBg: verified ? "rgba(45,106,79,.16)" : "#F2F2EF",
+      badgePillFg: verified ? "#2D6A4F" : "#6B6B6B",
+      badgePillIcon: verified ? "verified" : "help",
+      badgePillLabel: verified ? "Boutique vérifiée" : "Non vérifiée",
+      shopName: s.name || "Ta boutique",
+      shopAddress: s.address || "Quartier à renseigner",
+      doneSub: verified
+        ? "Ta boutique est vérifiée. Affiche ton QR code pour que tes clients ouvrent leur cahier."
+        : "Tu pourras ajouter ton NINEA plus tard depuis les réglages pour obtenir le badge vérifié.",
+
+      goInfo: this.goInfo, goNinea: this.goNinea, jumpNinea: this.jumpNinea,
+      finish: this.finish, skip: this.skip, restart: this.restart, demoVerified: this.demoVerified,
+
+      tabInfo: pill(s.screen === "info"), tabNinea: pill(s.screen === "ninea"),
+      panelTitle: spec[0], panelBody: spec[1], panelAnim: spec[2]
+    };
+  }
+}
+</script>
+</body>
+</html>
