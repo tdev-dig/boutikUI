@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Boutiquier · NINEA</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 20px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:13px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <a href="O1-Boutique.dc.html" aria-label="Retour" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Boutique · étape 2 sur 2</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1.15">Ta boutique est-elle enregistrée ?</div>
+      <div style="font-size:14.5px;line-height:1.4;color:#3D3D39">Facultatif. Avec un NINEA, elle porte le badge vérifiée.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <label for="ninea" style="font-size:13px;font-weight:600;color:#5F5F5A">Numéro NINEA · 7 chiffres</label>
+      <div style="display:flex;align-items:center;gap:10px;height:56px;padding:0 14px 0 16px;border-radius:16px;border:1.5px solid #1B4332;background:#fff">
+        <input id="ninea" type="text" inputmode="none" value="{{ nTxt }}" onChange="{{ onType }}" placeholder="0000 000" style="flex-grow:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:22px;font-weight:700;letter-spacing:.04em;color:#1A1A1A;padding:0">
+        <span aria-hidden="true" style="width:26px;height:26px;border-radius:100px;background:#2D6A4F;color:#fff;display:flex;align-items:center;justify-content:center;flex:none">
+          <svg width="15" height="15" viewBox="0 0 24 24" style="stroke-width:2.8"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
+        </span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:rgba(45,106,79,.1);border:1.5px solid rgba(45,106,79,.3)">
+      <div style="width:44px;height:44px;border-radius:14px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex:none">BN</div>
+      <div style="flex-grow:1;min-width:0">
+        <div style="font-size:15px;font-weight:700">Boutique Ndiaye</div>
+        <div style="font-size:12.5px;color:#3D3D39;margin-top:2px">Sacré-Cœur 3</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:100px;background:#1B4332;color:#fff;font-size:12px;font-weight:700;flex:none">
+        <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.2"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.8-7 9.5-4.1-1.7-7-5.2-7-9.5V6l7-3ZM9 12l2.2 2.2L15.5 10"></path></svg>Vérifiée
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:7px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style-active="background:#E0E0DA" style="grid-column:{{ k.col }};height:50px;border-radius:16px;background:#F2F2EF;font-size:22px;font-weight:600;display:flex;align-items:center;justify-content:center">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <a href="Main.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.2"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>Terminer
+    </a>
+    <a href="Main.dc.html" style="height:44px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#1B4332">Passer cette étape</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { n: "00543" };
+  }
+  renderVals() {
+    const s = this.state;
+    const show = (d) => [d.slice(0, 4), d.slice(4, 7)].filter(Boolean).join(" ");
+    const set = (d) => this.setState({ n: d.replace(/\D/g, "").slice(0, 7) });
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto", tap: () => set(s.n + d) }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2", tap: () => set(s.n + "0") });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto", tap: () => set(s.n.slice(0, -1)) });
+    return { keys: keys, nTxt: show(s.n), onType: (e) => set(e.target.value) };
+  }
+}
+</script>
+</body>
+</html>

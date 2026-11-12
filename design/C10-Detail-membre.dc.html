@@ -84,15 +84,23 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   </div>
 
   <div style="position:absolute;left:20px;right:20px;bottom:24px;display:flex;gap:10px">
-    <a href="C9-Inviter-membre.dc.html" style="flex:1.5;height:54px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">Changer le sous-plafond</a>
-    <button type="button" style="flex:1;height:54px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);box-sizing:border-box;background:#FAFAF7;color:#C1121F;font-size:15px;font-weight:700">Retirer</button>
+    <sc-if value="{{ calm }}" hint-placeholder-val="{{ true }}">
+      <a href="C9-Inviter-membre.dc.html" style="flex:1.5;height:54px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">Changer le sous-plafond</a>
+      <button type="button" onClick="{{ arm }}" style="flex:1;height:54px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);box-sizing:border-box;background:#FAFAF7;color:#C1121F;font-size:15px;font-weight:700">Retirer</button>
+    </sc-if>
+    <sc-if value="{{ armed }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ disarm }}" style="flex:1;height:54px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;background:#FAFAF7;color:#1B4332;font-size:15px;font-weight:700">Annuler</button>
+      <a href="C2-Famille.dc.html" style="flex:1.5;height:54px;border-radius:18px;background:#C1121F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">Oui, retirer du cahier</a>
+    </sc-if>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { armed: false }; }
   renderVals() {
     return {
+      armed: this.state.armed, calm: !this.state.armed, arm: () => this.setState({ armed: true }), disarm: () => this.setState({ armed: false }),
       bons: [
         { date: "Aujourd'hui · 08:02", amount: "+1 400" },
         { date: "Mardi 10 nov. · 17:35", amount: "+2 000" },

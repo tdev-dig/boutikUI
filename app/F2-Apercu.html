@@ -13,47 +13,20 @@
 <body>
 <header class="bk-top">
   <a class="bk-pill" href="../index.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Tous les écrans</a>
-  <div class="bk-title"><span>Noter un bon</span><strong>Bon · aperçu</strong></div>
-  <div class="bk-count">23 / 45</div>
+  <div class="bk-title"><span id="bk-group">Noter un bon</span><strong id="bk-name">Bon · aperçu</strong></div>
+  <div class="bk-count" id="bk-count">23 / 45</div>
 </header>
 <main class="bk-stage">
-  <div class="bk-fit" id="bk-fit"><div class="bk-screen" id="bk-screen"><div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: rgb(11, 26, 20); font-family: Inter, system-ui, sans-serif; color: rgb(255, 255, 255); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; padding: 40px 20px 34px; display: flex; flex-direction: column; gap: 16px;">
-
-  <div style="display: flex; align-items: center; justify-content: space-between; height: 44px; flex: 0 0 auto;">
-    <a href="F1-Camera.html" aria-label="Retour à la caméra" style="width: 44px; height: 44px; border-radius: 100px; background: rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center;">
-      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
-    </a>
-    <div style="padding: 7px 14px; border-radius: 100px; background: rgba(255, 255, 255, 0.1); font-size: 13px; font-weight: 600;">Étape 1 sur 3</div>
-    <div aria-hidden="true" style="width: 44px;"></div>
+  <div class="bk-fit" id="bk-fit">
+    <iframe class="bk-screen" id="bk-screen" src="F2-Apercu.dc.html" title="Écran de l'application Boutik" width="390" height="844"></iframe>
   </div>
-
-  <div style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; text-align: center; flex: 0 0 auto;">La photo est bonne ?</div>
-
-  <div style="flex: 1 1 0%; min-height: 0px; border-radius: 28px; background: rgb(43, 61, 53); border: 1.5px solid rgba(255, 255, 255, 0.16); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(255, 255, 255, 0.78);">
-    <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width: 1.4;"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1ZM3 16l5-5 4 4 3-3 6 6M15.5 9.5h.01"></path></svg>
-    <div style="font-size: 13px;">Ta photo des produits</div>
-  </div>
-
-  <div style="display: flex; flex-direction: column; gap: 14px; flex: 0 0 auto;">
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <div style="font-size: 13.5px; text-align: center; color: rgba(255, 255, 255, 0.82);">Scan de la boutique dans 2 secondes</div>
-      <div role="progressbar" aria-label="Passage automatique au scan" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 5px; border-radius: 100px; background: rgba(255, 255, 255, 0.16); overflow: hidden;"><div style="width: 60%; height: 100%; border-radius: 100px; background: rgb(244, 161, 0);"></div></div>
-    </div>
-    <div style="display: flex; gap: 10px;">
-      <a href="F1-Camera.html" style="flex: 1 1 0%; height: 56px; border-radius: 18px; border: 1.5px solid rgba(255, 255, 255, 0.3); box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 700;">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 0 1 13-5.1L19.5 9M19.5 4.5V9H15M19.5 12a7.5 7.5 0 0 1-13 5.1L4.5 15M4.5 19.5V15H9"></path></svg>Reprendre
-      </a>
-      <a href="F3-Scan.html" style="flex: 1.3 1 0%; height: 56px; border-radius: 18px; background: rgb(250, 250, 247); color: rgb(15, 42, 32); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 700;">
-        Continuer<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-      </a>
-    </div>
-  </div></div></div></div>
 </main>
 <nav class="bk-bottom" aria-label="Écrans">
-  <a class="bk-pill" rel="prev" href="F1-Camera.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
+  <a class="bk-pill" id="bk-prev" rel="prev" href="F1-Camera.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
   <a class="bk-pill bk-home" href="../index.html">Écrans</a>
-  <a class="bk-pill" rel="next" href="F3-Scan.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+  <a class="bk-pill" id="bk-next" rel="next" href="F3-Scan.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
 </nav>
+<script src="screens.js"></script>
 <script src="viewer.js"></script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Client · mes informations</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:center;align-items:center;height:44px">
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Client · étape 1 sur 2</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Tes informations</div>
+      <div style="font-size:15px;line-height:1.45;color:#3D3D39">C'est le nom que les boutiquiers verront sur ton cahier.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px">
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label for="c-prenom" style="font-size:13px;font-weight:600;color:#5F5F5A">Prénom</label>
+        <input id="c-prenom" type="text" value="{{ prenom }}" onChange="{{ set_prenom }}" onFocus="{{ foc_prenom }}" style="height:56px;min-width:0;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid {{ bd_prenom }};background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label for="c-nom" style="font-size:13px;font-weight:600;color:#5F5F5A">Nom</label>
+        <input id="c-nom" type="text" value="{{ nom }}" onChange="{{ set_nom }}" onFocus="{{ foc_nom }}" style="height:56px;min-width:0;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid {{ bd_nom }};background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <label for="c-tel" style="font-size:13px;font-weight:600;color:#5F5F5A">Téléphone</label>
+      <input id="c-tel" type="tel" value="{{ tel }}" onChange="{{ set_tel }}" onFocus="{{ foc_tel }}" style="height:56px;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid {{ bd_tel }};background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+      <div style="font-size:12.5px;color:#5F5F5A">Repris de ton numéro. Tu peux le changer.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
+      <div style="font-size:13px;font-weight:600;color:#5F5F5A">Ce que verra le boutiquier</div>
+      <div style="box-sizing:border-box;border-radius:20px;background:#0F2A20;color:#fff;padding:14px 18px 14px;display:flex;flex-direction:column;box-shadow:0 12px 24px rgba(15,42,32,.18)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;height:22px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72)">Titulaire du cahier</div>
+          <div style="padding:3px 10px;border-radius:100px;background:rgba(244,161,0,.2);color:#F4A100;font-size:12px;font-weight:700">Non vérifiée</div>
+        </div>
+        <div style="margin-top:9px;font-size:20px;font-weight:700;letter-spacing:-.015em;line-height:1.15">{{ fullName }}</div>
+        <div style="margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;line-height:1.25;color:rgba(255,255,255,.78)">Identité à vérifier à l'étape suivante</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="O4-CNI.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+    Continuer<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  </a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { prenom: "Aïssatou", nom: "Diop", tel: "+221 77 512 00 00", focus: 'nom' }; }
+  renderVals() {
+    const s = this.state;
+    return {
+      prenom: s.prenom, set_prenom: (e) => this.setState({ prenom: e.target.value }), foc_prenom: () => this.setState({ focus: "prenom" }), bd_prenom: s.focus === "prenom" ? "#1B4332" : "rgba(27,67,50,.2)",
+      nom: s.nom, set_nom: (e) => this.setState({ nom: e.target.value }), foc_nom: () => this.setState({ focus: "nom" }), bd_nom: s.focus === "nom" ? "#1B4332" : "rgba(27,67,50,.2)",
+      tel: s.tel, set_tel: (e) => this.setState({ tel: e.target.value }), foc_tel: () => this.setState({ focus: "tel" }), bd_tel: s.focus === "tel" ? "#1B4332" : "rgba(27,67,50,.2)",
+      fullName: ((s.prenom.trim() + " " + s.nom.trim()).trim()) || "Ton nom"
+    };
+  }
+}
+</script>
+</body>
+</html>

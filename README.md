@@ -6,18 +6,20 @@ En ligne : https://boutikui.vercel.app
 
 ## Version actuelle : refonte de novembre 2026
 
-45 écrans, côté boutiquier et côté client, reliés entre eux comme dans l'app.
+45 écrans, côté boutiquier et côté client, reliés entre eux et interactifs : claviers et montants, codes, piles de cahiers, réglages, filtres, recherche, confirmations, « glisser pour confirmer ».
 
 | Dossier | Contenu |
 | --- | --- |
 | `index.html` | Sommaire des écrans, par parcours |
-| `app/` | Les 45 écrans en HTML statique, un fichier par écran (`app/Main.html` = accueil boutiquier, `app/C1-Accueil.html` = accueil client) |
+| `app/<Écran>.html` | Cadre de présentation d'un écran : titre, téléphone, précédent / suivant (`app/Main.html` = accueil boutiquier, `app/C1-Accueil.html` = accueil client) |
+| `app/<Écran>.dc.html` | L'écran lui-même, identique au canvas Claude Design, exécuté par `app/support.js` (le runtime du canvas, qui charge React depuis jsDelivr) |
+| `app/screens.js`, `app/viewer.*` | Liste des écrans et script du cadre |
 | `app/thumbs/` | Vignettes du sommaire |
-| `design/` | Sources du canvas Claude Design (`.dc.html` + `canvas.json`). Elles ne s'ouvrent pas seules dans un navigateur et ne sont pas déployées (`.vercelignore`) |
+| `design/` | Copie des sources du canvas (`.dc.html` + `canvas.json`), non déployée (`.vercelignore`) |
 
-`app/` est généré à partir de `design/` (export du canvas Claude Design). Les modifications se font dans le canvas : une retouche directe de `app/` serait écrasée au prochain export.
+Les écrans se modifient dans le canvas Claude Design, puis sont recopiés ici. Une retouche directe de `app/*.dc.html` serait écrasée à la copie suivante.
 
-Navigation : flèches gauche et droite du clavier pour passer d'un écran à l'autre. Sur téléphone, l'écran prend toute la largeur.
+Navigation : flèches gauche et droite du clavier pour passer d'un écran à l'autre. Dans l'écran, les boutons mènent aux écrans suivants et le cadre suit. Sur téléphone, l'écran prend toute la largeur.
 
 ### Repères de design
 

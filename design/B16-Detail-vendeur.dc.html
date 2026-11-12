@@ -67,17 +67,27 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   </div>
 
   <div style="position:absolute;left:20px;right:20px;bottom:24px;display:flex;flex-direction:column;gap:8px">
-    <button type="button" style="height:52px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);color:#C1121F;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;background:#FAFAF7">
-      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM3 20c.6-3.6 3.2-5.5 7-5.5 1.2 0 2.3.2 3.2.6M15 17h6"></path></svg>Retirer ce vendeur
-    </button>
+    <sc-if value="{{ calm }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ arm }}" style="height:52px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);color:#C1121F;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;background:#FAFAF7">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM3 20c.6-3.6 3.2-5.5 7-5.5 1.2 0 2.3.2 3.2.6M15 17h6"></path></svg>Retirer ce vendeur
+      </button>
+    </sc-if>
+    <sc-if value="{{ armed }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:8px">
+        <button type="button" onClick="{{ disarm }}" style="flex:1;height:52px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;background:#FAFAF7;color:#1B4332;font-size:15px;font-weight:700">Annuler</button>
+        <a href="B2-Vendeurs.dc.html" style="flex:1.4;height:52px;border-radius:18px;background:#C1121F;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center">Oui, le retirer</a>
+      </div>
+    </sc-if>
     <div style="font-size:12.5px;line-height:1.4;color:#5F5F5A;text-align:center">Il perd l'accès aux cahiers tout de suite. Ses bons restent dans l'historique.</div>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { armed: false }; }
   renderVals() {
     return {
+      armed: this.state.armed, calm: !this.state.armed, arm: () => this.setState({ armed: true }), disarm: () => this.setState({ armed: false }),
       bons: [
         { ini: "MK", client: "Malick Kane", date: "Aujourd'hui · 08:47", amount: "+5 000" },
         { ini: "AD", client: "Aïssatou Diop", date: "Mardi 10 nov. · 18:22", amount: "+4 000" },

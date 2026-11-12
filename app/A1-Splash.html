@@ -9,37 +9,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="viewer.css">
-<style>
-@keyframes bk-pop{0%{opacity:0;transform:scale(.84)}100%{opacity:1;transform:scale(1)}}
-@keyframes bk-up{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
-@keyframes bk-fill{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
-@media (prefers-reduced-motion:reduce){[data-anim]{animation:none!important}}
-</style>
 </head>
 <body>
 <header class="bk-top">
   <a class="bk-pill" href="../index.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Tous les écrans</a>
-  <div class="bk-title"><span>Connexion</span><strong>Splash</strong></div>
-  <div class="bk-count">35 / 45</div>
+  <div class="bk-title"><span id="bk-group">Connexion</span><strong id="bk-name">Splash</strong></div>
+  <div class="bk-count" id="bk-count">35 / 45</div>
 </header>
 <main class="bk-stage">
-  <div class="bk-fit" id="bk-fit"><div class="bk-screen" id="bk-screen"><div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: rgb(27, 67, 50); font-family: Inter, system-ui, sans-serif; color: rgb(255, 255, 255); -webkit-font-smoothing: antialiased;">
-
-  <a href="A2-Role.html" aria-label="Boutik, ouvrir l'application" style="position: absolute; inset: 0px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;">
-    <div data-anim="" style="width: 92px; height: 92px; border-radius: 28px; background: rgb(244, 161, 0); color: rgb(15, 42, 32); display: flex; align-items: center; justify-content: center; font-size: 50px; font-weight: 800; letter-spacing: -0.04em; box-shadow: rgba(6, 22, 16, 0.4) 0px 18px 40px; animation: 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 0s 1 normal both running bk-pop;">B</div>
-    <div data-anim="" style="display: flex; flex-direction: column; align-items: center; gap: 10px; animation: 0.5s ease-out 0.25s 1 normal both running bk-up;">
-      <div style="font-size: 40px; font-weight: 800; letter-spacing: -0.04em; line-height: 1;">Boutik</div>
-      <div style="font-size: 15px; color: rgba(255, 255, 255, 0.82);">Le cahier de crédit, en confiance</div>
-    </div>
-  </a>
-
-  <div role="progressbar" aria-label="Chargement" style="position: absolute; left: 135px; right: 135px; bottom: 64px; height: 4px; border-radius: 100px; background: rgba(255, 255, 255, 0.18); overflow: hidden;"><div data-anim="" style="width: 100%; height: 100%; border-radius: 100px; background: rgb(244, 161, 0); transform-origin: left center; animation: 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.35s 1 normal both running bk-fill;"></div></div></div></div></div>
+  <div class="bk-fit" id="bk-fit">
+    <iframe class="bk-screen" id="bk-screen" src="A1-Splash.dc.html" title="Écran de l'application Boutik" width="390" height="844"></iframe>
+  </div>
 </main>
 <nav class="bk-bottom" aria-label="Écrans">
-  <a class="bk-pill" rel="prev" href="C10-Detail-membre.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
+  <a class="bk-pill" id="bk-prev" rel="prev" href="C10-Detail-membre.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
   <a class="bk-pill bk-home" href="../index.html">Écrans</a>
-  <a class="bk-pill" rel="next" href="A2-Role.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+  <a class="bk-pill" id="bk-next" rel="next" href="A2-Role.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
 </nav>
+<script src="screens.js"></script>
 <script src="viewer.js"></script>
 </body>
 </html>

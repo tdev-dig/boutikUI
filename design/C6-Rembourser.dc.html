@@ -36,22 +36,23 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px">
       <div style="display:flex;align-items:flex-start;gap:8px">
-        <div style="font-size:64px;font-weight:700;letter-spacing:-.045em;line-height:1">18&#8239;000</div>
+        <div style="font-size:64px;font-weight:700;letter-spacing:-.045em;line-height:1;color:{{ amtColor }}">{{ amtTxt }}</div>
         <div style="font-size:13px;font-weight:700;letter-spacing:.08em;color:#F4A100;padding-top:8px">FCFA</div>
       </div>
-      <div style="font-size:13.5px;color:rgba(255,255,255,.78)">Le cahier sera soldé, puis clôturé</div>
+      <div role="status" style="font-size:13.5px;color:{{ hintColor }}">{{ hint }}</div>
     </div>
 
     <div style="display:flex;gap:8px;padding-top:4px">
-      <button type="button" aria-pressed="true" style="height:44px;padding:0 16px;border-radius:100px;background:#FAFAF7;color:#0F2A20;font-size:13.5px;font-weight:700">Tout · 18&#8239;000</button>
-      <button type="button" style="height:44px;padding:0 16px;border-radius:100px;background:rgba(255,255,255,.08);font-size:13.5px;font-weight:600">10&#8239;000</button>
-      <button type="button" style="height:44px;padding:0 16px;border-radius:100px;background:rgba(255,255,255,.08);font-size:13.5px;font-weight:600">5&#8239;000</button>
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}" style="height:44px;padding:0 16px;border-radius:100px;background:{{ c.bg }};color:{{ c.fg }};font-size:13.5px;font-weight:{{ c.fw }}">{{ c.label }}</button>
+      </sc-for>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:8px;width:100%">
       <div style="display:flex;width:100%;padding:4px;box-sizing:border-box;border-radius:100px;background:rgba(255,255,255,.08)">
-        <button type="button" aria-pressed="true" style="flex:1;height:44px;border-radius:100px;background:#FAFAF7;color:#0F2A20;font-size:13.5px;font-weight:700">Wave</button>
-        <button type="button" style="flex:1;height:44px;border-radius:100px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85)">Orange Money</button>
+        <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
+          <button type="button" aria-pressed="{{ m.on }}" onClick="{{ m.pick }}" style="flex:1;height:44px;border-radius:100px;background:{{ m.bg }};color:{{ m.fg }};font-size:13.5px;font-weight:{{ m.fw }}">{{ m.label }}</button>
+        </sc-for>
       </div>
       <div style="font-size:12.5px;color:rgba(255,255,255,.75);text-align:center">L'argent va directement à la boutique</div>
     </div>
@@ -60,28 +61,88 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   <div style="display:flex;flex-direction:column;gap:18px">
     <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
       <sc-for list="{{ keys }}" as="k" hint-placeholder-count="12">
-        <button type="button" aria-label="{{ k.aria }}" style="height:56px;border-radius:18px;background:rgba(255,255,255,.07);font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style="height:56px;border-radius:18px;background:rgba(255,255,255,.07);font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center" style-active="background:rgba(255,255,255,.18)">
           <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
           <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
         </button>
       </sc-for>
     </div>
 
-    <a href="C7-Paiement-reussi.dc.html" aria-label="Glisser pour payer 18 000 FCFA" style="position:relative;height:64px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88)">
-      <span aria-hidden="true" style="position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:100px;background:#F4A100;color:#0F2A20;display:flex;align-items:center;justify-content:center">
-        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-      </span>
-      Glisser pour payer
-    </a>
+    <sc-if value="{{ ok }}" hint-placeholder-val="{{ true }}">
+      <a href="C7-Paiement-reussi.dc.html" aria-label="{{ slideAria }}" draggable="false" onPointerDown="{{ slideDown }}" onPointerMove="{{ slideMove }}" onPointerUp="{{ slideUp }}" onPointerCancel="{{ slideCancel }}" onClick="{{ slideClick }}" onDragStart="{{ noDrag }}" style="position:relative;height:64px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88);touch-action:none;user-select:none;-webkit-user-select:none">
+        <span aria-hidden="true" style="position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:100px;background:#F4A100;color:#0F2A20;display:flex;align-items:center;justify-content:center;transform:translateX({{ sx }}px);transition:{{ thumbTr }}">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+        <span style="opacity:{{ labelOp }}">{{ slideLabel }}</span>
+      </a>
+    </sc-if>
+    <sc-if value="{{ ko }}" hint-placeholder-val="{{ false }}">
+      <div aria-disabled="true" style="height:64px;border-radius:100px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.6)">Saisis un montant pour payer</div>
+    </sc-if>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { amt: "18000", mode: "wave", capped: false, sx: 0, drag: false };
+  }
   renderVals() {
-    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "000", "0"].map((d) => ({ label: d, aria: d, txt: true, del: false }));
-    keys.push({ label: "", aria: "Effacer", txt: false, del: true });
-    return { keys: keys };
+    const DUE = 18000, TRAVEL = 286, s = this.state;
+    const fmt = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const n = parseInt(s.amt || "0", 10);
+    const set = (raw) => {
+      const v = parseInt(raw || "0", 10);
+      if (v > DUE) return this.setState({ capped: true });
+      this.setState({ amt: v ? String(v) : "", capped: false });
+    };
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "000", "0"].map((d) => ({ label: d, aria: d, txt: true, del: false, tap: () => set(s.amt + d) }));
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, tap: () => set(s.amt.slice(0, -1)) });
+    const chip = (label, v) => {
+      const on = n === v;
+      return { label: label, on: on, pick: () => set(String(v)), bg: on ? "#FAFAF7" : "rgba(255,255,255,.08)", fg: on ? "#0F2A20" : "#fff", fw: on ? 700 : 600 };
+    };
+    const mode = (id, label) => {
+      const on = s.mode === id;
+      return { label: label, on: on, pick: () => this.setState({ mode: id }), bg: on ? "#FAFAF7" : "transparent", fg: on ? "#0F2A20" : "rgba(255,255,255,.85)", fw: on ? 700 : 600 };
+    };
+    let hint = "Restera dû : " + fmt(DUE - n) + " FCFA";
+    if (s.capped) hint = "Pas plus que ta dette : " + fmt(DUE) + " FCFA";
+    else if (!n) hint = "Saisis le montant à payer";
+    else if (n === DUE) hint = "Le cahier sera soldé, puis clôturé";
+    return {
+      amtTxt: fmt(n), amtColor: n ? "#fff" : "rgba(255,255,255,.4)",
+      hint: hint, hintColor: s.capped ? "#FFB4B8" : "rgba(255,255,255,.78)",
+      chips: [chip("Tout · " + fmt(DUE), DUE), chip(fmt(10000), 10000), chip(fmt(5000), 5000)],
+      modes: [mode("wave", "Wave"), mode("om", "Orange Money")],
+      keys: keys, ok: n > 0, ko: !n,
+      slideLabel: s.mode === "wave" ? "Glisser pour payer avec Wave" : "Glisser pour payer avec Orange Money",
+      slideAria: "Glisser pour payer " + fmt(n) + " FCFA",
+      sx: s.sx, thumbTr: s.drag ? "none" : "transform .25s ease", labelOp: Math.max(0, 1 - s.sx / 140),
+      noDrag: (e) => e.preventDefault(),
+      slideDown: (e) => {
+        this.sl = { x0: e.clientX, k: e.currentTarget.getBoundingClientRect().width / 350, moved: false };
+        this.slOk = undefined;
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+      },
+      slideMove: (e) => {
+        const d = this.sl;
+        if (!d) return;
+        const dx = (e.clientX - d.x0) / (d.k || 1);
+        if (Math.abs(dx) > 6) d.moved = true;
+        if (d.moved) this.setState({ sx: Math.max(0, Math.min(TRAVEL, dx)), drag: true });
+      },
+      slideUp: () => {
+        const d = this.sl;
+        this.sl = null;
+        if (!d) return;
+        this.slOk = !d.moved || this.state.sx >= TRAVEL * 0.85;
+        this.setState({ sx: d.moved && this.slOk ? TRAVEL : 0, drag: false });
+      },
+      slideCancel: () => { this.sl = null; this.slOk = undefined; this.setState({ sx: 0, drag: false }); },
+      slideClick: (e) => { if (this.slOk === false) e.preventDefault(); this.slOk = undefined; }
+    };
   }
 }
 </script>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Numéro</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+input::placeholder{color:#8A8A84}
+</style>
+</helmet>
+<div onKeyDown="{{ onKey }}" style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <a href="A2-Role.dc.html" aria-label="Retour" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Étape 1 sur 4</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Ton numéro</div>
+      <div style="font-size:15px;line-height:1.45;color:#3D3D39">On t'envoie un code à 6 chiffres pour vérifier que c'est bien toi.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:12px;height:64px;padding:0 16px;border-radius:18px;border:1.5px solid #1B4332;background:#fff">
+        <div style="display:flex;align-items:center;gap:7px;font-size:18px;font-weight:700;flex:none">
+          <span aria-hidden="true" style="display:flex;width:22px;height:15px;border-radius:3px;overflow:hidden"><span style="flex:1;background:#00853F"></span><span style="flex:1;background:#FDEF42"></span><span style="flex:1;background:#E31B23"></span></span>
+          +221
+        </div>
+        <div aria-hidden="true" style="width:1px;height:28px;background:rgba(27,67,50,.18)"></div>
+        <input type="tel" inputmode="none" value="{{ telTxt }}" onChange="{{ onType }}" placeholder="77 000 00 00" aria-label="Numéro de téléphone" style="flex-grow:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:24px;font-weight:700;letter-spacing:.01em;color:#1A1A1A;padding:0">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#5F5F5A">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1ZM8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+        Ton numéro reste privé, jamais partagé.
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style="grid-column:{{ k.col }};height:58px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center" style-active="background:#E0E0DA">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ ok }}" hint-placeholder-val="{{ true }}">
+      <a href="A4-OTP.dc.html" onClick="{{ remember }}" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+        Recevoir le code<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </sc-if>
+    <sc-if value="{{ ko }}" hint-placeholder-val="{{ false }}">
+      <div aria-disabled="true" style="height:56px;border-radius:18px;background:#E3E3DD;color:#5F5F5A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">{{ koLabel }}</div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tel: "7751200" };
+  }
+  renderVals() {
+    const s = this.state;
+    const show = (d) => [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(" ");
+    const set = (d) => this.setState({ tel: d.replace(/\D/g, "").slice(0, 9) });
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto", tap: () => set(s.tel + d) }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2", tap: () => set(s.tel + "0") });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto", tap: () => set(s.tel.slice(0, -1)) });
+    const left = 9 - s.tel.length;
+    return {
+      telTxt: show(s.tel), keys: keys, ok: left === 0, ko: left > 0,
+      koLabel: left === 9 ? "Entre ton numéro" : "Encore " + left + (left > 1 ? " chiffres" : " chiffre"),
+      onType: (e) => set(e.target.value),
+      onKey: (e) => {
+        if (e.target && e.target.tagName === "INPUT") return;
+        if (/^\d$/.test(e.key)) set(s.tel + e.key);
+        else if (e.key === "Backspace") set(s.tel.slice(0, -1));
+      },
+      // Le numéro suit sur l'écran du code (même onglet).
+      remember: () => {
+        try {
+          const o = window.name ? JSON.parse(window.name) : {};
+          if (o && typeof o === "object") { o.bkTel = show(s.tel); window.name = JSON.stringify(o); }
+        } catch (err) {}
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

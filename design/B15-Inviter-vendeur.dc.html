@@ -34,7 +34,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
           +221
         </div>
         <div aria-hidden="true" style="width:1px;height:26px;background:rgba(27,67,50,.18)"></div>
-        <input id="tel-vendeur" type="tel" inputmode="none" value="77 512 00 00" style="flex-grow:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:22px;font-weight:700;letter-spacing:.01em;color:#1A1A1A;padding:0">
+        <input id="tel-vendeur" type="tel" inputmode="none" value="{{ telTxt }}" onChange="{{ onType }}" placeholder="77 000 00 00" style="flex-grow:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:22px;font-weight:700;letter-spacing:.01em;color:#1A1A1A;padding:0">
       </div>
     </div>
 
@@ -47,7 +47,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   <div style="display:flex;flex-direction:column;gap:16px">
     <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
       <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
-        <button type="button" aria-label="{{ k.aria }}" style="grid-column:{{ k.col }};height:58px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style="grid-column:{{ k.col }};height:58px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center" style-active="background:#E0E0DA">
           <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
           <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
         </button>
@@ -61,11 +61,18 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tel: "7620" };
+  }
   renderVals() {
-    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto" }));
-    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2" });
-    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto" });
-    return { keys: keys };
+    const s = this.state;
+    const show = (d) => [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(" ");
+    const set = (d) => this.setState({ tel: d.replace(/\D/g, "").slice(0, 9) });
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto", tap: () => set(s.tel + d) }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2", tap: () => set(s.tel + "0") });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto", tap: () => set(s.tel.slice(0, -1)) });
+    return { keys: keys, telTxt: show(s.tel), onType: (e) => set(e.target.value) };
   }
 }
 </script>

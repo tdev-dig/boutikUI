@@ -23,7 +23,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
     </a>
     <div style="padding:7px 14px;border-radius:100px;background:rgba(255,255,255,.1);font-size:13px;font-weight:600">Étape 1 sur 3</div>
-    <button type="button" aria-label="Flash" style="width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center">
+    <button type="button" aria-label="Flash" aria-pressed="{{ flash }}" onClick="{{ toggleFlash }}" style="width:44px;height:44px;border-radius:100px;background:{{ flashBg }};color:{{ flashFg }};display:flex;align-items:center;justify-content:center">
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6l1-7.5Z"></path></svg>
     </button>
   </div>
@@ -44,7 +44,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
     <a href="F2-Apercu.dc.html" aria-label="Prendre la photo" style="width:80px;height:80px;border-radius:100px;border:4px solid #FAFAF7;box-sizing:border-box;display:flex;align-items:center;justify-content:center">
       <span aria-hidden="true" style="width:62px;height:62px;border-radius:100px;background:#FAFAF7"></span>
     </a>
-    <button type="button" aria-label="Changer de caméra" style="width:48px;height:48px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center">
+    <button type="button" aria-label="Changer de caméra" aria-pressed="{{ front }}" onClick="{{ flip }}" style="width:48px;height:48px;border-radius:100px;background:{{ flipBg }};color:{{ flipFg }};display:flex;align-items:center;justify-content:center">
       <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 0 1 13-5.1L19.5 9M19.5 4.5V9H15M19.5 12a7.5 7.5 0 0 1-13 5.1L4.5 15M4.5 19.5V15H9"></path></svg>
     </button>
   </div>
@@ -52,7 +52,14 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(props) { super(props); this.state = { flash: false, front: false }; }
+  renderVals() {
+    const s = this.state;
+    return {
+      flash: s.flash, toggleFlash: () => this.setState({ flash: !s.flash }), flashBg: s.flash ? "#F4A100" : "rgba(255,255,255,.1)", flashFg: s.flash ? "#0F2A20" : "#fff",
+      front: s.front, flip: () => this.setState({ front: !s.front }), flipBg: s.front ? "#FAFAF7" : "rgba(255,255,255,.1)", flipFg: s.front ? "#0F2A20" : "#fff"
+    };
+  }
 }
 </script>
 </body>

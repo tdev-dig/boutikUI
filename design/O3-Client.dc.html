@@ -31,16 +31,16 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
     <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px">
       <div style="display:flex;flex-direction:column;gap:7px">
         <label for="c-prenom" style="font-size:13px;font-weight:600;color:#5F5F5A">Prénom</label>
-        <input id="c-prenom" type="text" value="Aïssatou" style="height:56px;min-width:0;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+        <input id="c-prenom" type="text" value="{{ prenom }}" onChange="{{ set_prenom }}" onFocus="{{ foc_prenom }}" style="height:56px;min-width:0;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid {{ bd_prenom }};background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
       </div>
       <div style="display:flex;flex-direction:column;gap:7px">
         <label for="c-nom" style="font-size:13px;font-weight:600;color:#5F5F5A">Nom</label>
-        <input id="c-nom" type="text" value="Diop" style="height:56px;min-width:0;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid #1B4332;background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+        <input id="c-nom" type="text" value="{{ nom }}" onChange="{{ set_nom }}" onFocus="{{ foc_nom }}" style="height:56px;min-width:0;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid {{ bd_nom }};background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:7px">
       <label for="c-tel" style="font-size:13px;font-weight:600;color:#5F5F5A">Téléphone</label>
-      <input id="c-tel" type="tel" value="+221 77 512 00 00" style="height:56px;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+      <input id="c-tel" type="tel" value="{{ tel }}" onChange="{{ set_tel }}" onFocus="{{ foc_tel }}" style="height:56px;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid {{ bd_tel }};background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
       <div style="font-size:12.5px;color:#5F5F5A">Repris de ton numéro. Tu peux le changer.</div>
     </div>
 
@@ -51,7 +51,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
           <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72)">Titulaire du cahier</div>
           <div style="padding:3px 10px;border-radius:100px;background:rgba(244,161,0,.2);color:#F4A100;font-size:12px;font-weight:700">Non vérifiée</div>
         </div>
-        <div style="margin-top:9px;font-size:20px;font-weight:700;letter-spacing:-.015em;line-height:1.15">Aïssatou Diop</div>
+        <div style="margin-top:9px;font-size:20px;font-weight:700;letter-spacing:-.015em;line-height:1.15">{{ fullName }}</div>
         <div style="margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;line-height:1.25;color:rgba(255,255,255,.78)">Identité à vérifier à l'étape suivante</div>
       </div>
     </div>
@@ -64,7 +64,16 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(props) { super(props); this.state = { prenom: "Aïssatou", nom: "Diop", tel: "+221 77 512 00 00", focus: 'nom' }; }
+  renderVals() {
+    const s = this.state;
+    return {
+      prenom: s.prenom, set_prenom: (e) => this.setState({ prenom: e.target.value }), foc_prenom: () => this.setState({ focus: "prenom" }), bd_prenom: s.focus === "prenom" ? "#1B4332" : "rgba(27,67,50,.2)",
+      nom: s.nom, set_nom: (e) => this.setState({ nom: e.target.value }), foc_nom: () => this.setState({ focus: "nom" }), bd_nom: s.focus === "nom" ? "#1B4332" : "rgba(27,67,50,.2)",
+      tel: s.tel, set_tel: (e) => this.setState({ tel: e.target.value }), foc_tel: () => this.setState({ focus: "tel" }), bd_tel: s.focus === "tel" ? "#1B4332" : "rgba(27,67,50,.2)",
+      fullName: ((s.prenom.trim() + " " + s.nom.trim()).trim()) || "Ton nom"
+    };
+  }
 }
 </script>
 </body>

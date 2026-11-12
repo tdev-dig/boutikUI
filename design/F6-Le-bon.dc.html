@@ -23,7 +23,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
     </a>
     <div style="font-size:16px;font-weight:700">Bon n° 0147</div>
-    <button type="button" aria-label="Partager le bon" style="width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center">
+    <button type="button" aria-label="Partager le bon" onClick="{{ share }}" style="width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center">
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5l4-4 4 4M5 13v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"></path></svg>
     </button>
   </div>
@@ -65,14 +65,20 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   </div>
 
   <div style="display:flex;gap:10px">
-    <button type="button" style="flex:1;height:56px;border-radius:18px;border:1.5px solid rgba(255,255,255,.34);box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">Partager</button>
+    <button type="button" onClick="{{ share }}" style="flex:1;height:56px;border-radius:18px;border:1.5px solid rgba(255,255,255,.34);box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">Partager</button>
     <a href="C1-Accueil.dc.html" style="flex:1;height:56px;border-radius:18px;background:#FAFAF7;color:#0F2A20;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">Terminé</a>
   </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:absolute;left:20px;right:20px;top:92px;padding:13px 16px;border-radius:16px;background:#FAFAF7;color:#0F2A20;font-size:14px;font-weight:600;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(0,0,0,.4)">{{ toast }}</div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(props) { super(props); this.state = { toast: "" }; }
+  say(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2600); }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  renderVals() { return { toast: this.state.toast, share: () => this.say("Image du bon prête à envoyer") }; }
 }
 </script>
 </body>

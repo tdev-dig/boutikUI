@@ -48,17 +48,23 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   </div>
 
   <div style="display:flex;gap:10px">
-    <button type="button" style="flex:1;height:56px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;color:#1B4332;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
+    <button type="button" onClick="{{ dl }}" style="flex:1;height:56px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;color:#1B4332;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M8 11.5l4 4 4-4M5 20h14"></path></svg>Télécharger
     </button>
-    <button type="button" style="flex:1;height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
+    <button type="button" onClick="{{ share }}" style="flex:1;height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5l4-4 4 4M5 13v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"></path></svg>Partager
     </button>
   </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:absolute;left:20px;right:20px;top:92px;padding:13px 16px;border-radius:16px;background:#0F2A20;color:#fff;font-size:14px;font-weight:600;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(6,22,16,.35)">{{ toast }}</div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: "" }; }
+  say(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2600); }
+  componentWillUnmount() { clearTimeout(this.tt); }
   renderVals() {
     const N = 25, seed = 7;
     const finders = [[0, 0], [0, N - 7], [N - 7, 0]];
@@ -78,7 +84,7 @@ class Component extends DCLogic {
     }
     const cells = [];
     for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) cells.push({ bg: on(r, c) ? "#0F2A20" : "transparent" });
-    return { cells: cells };
+    return { cells: cells, toast: this.state.toast, dl: () => this.say("QR enregistré dans tes photos, prêt à imprimer"), share: () => this.say("Lien du QR copié, à envoyer à tes clients") };
   }
 }
 </script>

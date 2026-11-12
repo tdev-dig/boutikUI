@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Code OTP</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div onKeyDown="{{ onKey }}" style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <a href="A3-Numero.dc.html" aria-label="Retour" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Étape 2 sur 4</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Code de vérification</div>
+      <div style="font-size:15px;line-height:1.45;color:#3D3D39">Envoyé par SMS au <span style="font-weight:700;color:#1A1A1A">+221 {{ tel }}</span></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ cells }}" as="c" hint-placeholder-count="6">
+        <input inputmode="none" readonly="{{ yes }}" maxlength="1" value="{{ c.v }}" aria-label="{{ c.aria }}" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:{{ c.border }};background:{{ c.bg }};font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0;box-shadow:{{ c.ring }}">
+      </sc-for>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;height:44px;font-size:14px;color:#3D3D39">
+      <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" style="color:#1B4332"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7.5V12l3 2"></path></svg>
+      <sc-if value="{{ waiting }}" hint-placeholder-val="{{ true }}">
+        <span>Renvoyer le code dans <span style="font-weight:700;color:#1A1A1A">{{ secs }} s</span></span>
+      </sc-if>
+      <sc-if value="{{ canResend }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ resend }}" style="height:44px;font-size:14px;font-weight:700;color:#1B4332;text-decoration:underline;text-underline-offset:3px">Renvoyer le code</button>
+      </sc-if>
+      <sc-if value="{{ resent }}" hint-placeholder-val="{{ false }}">
+        <span role="status" style="font-weight:600;color:#1F5A40">· nouveau code envoyé</span>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style="grid-column:{{ k.col }};height:58px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center" style-active="background:#E0E0DA">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ ok }}" hint-placeholder-val="{{ false }}">
+      <a href="A5-PIN.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+        Vérifier<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </sc-if>
+    <sc-if value="{{ ko }}" hint-placeholder-val="{{ true }}">
+      <div aria-disabled="true" style="height:56px;border-radius:18px;background:#E3E3DD;color:#5F5F5A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">{{ koLabel }}</div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let tel = "77 512 00 00";
+    try { const o = window.name ? JSON.parse(window.name) : {}; if (o && o.bkTel) tel = String(o.bkTel); } catch (err) {}
+    this.state = { code: "4291", secs: 24, resent: false, tel: tel };
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => { if (this.state.secs > 0) this.setState({ secs: this.state.secs - 1 }); }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  renderVals() {
+    const s = this.state, N = 6;
+    const set = (c) => this.setState({ code: c.replace(/\D/g, "").slice(0, N) });
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto", tap: () => set(s.code + d) }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2", tap: () => set(s.code + "0") });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto", tap: () => set(s.code.slice(0, -1)) });
+    const cells = [];
+    for (let i = 0; i < N; i++) {
+      const active = i === s.code.length, filled = i < s.code.length;
+      cells.push({
+        v: s.code[i] || "", aria: "Chiffre " + (i + 1),
+        border: active ? "2px solid #1B4332" : "1.5px solid rgba(27,67,50,.2)",
+        bg: filled || active ? "#fff" : "#F2F2EF",
+        ring: active ? "0 0 0 4px rgba(27,67,50,.12)" : "none"
+      });
+    }
+    const left = N - s.code.length;
+    return {
+      tel: s.tel, yes: true, cells: cells, keys: keys, ok: left === 0, ko: left > 0,
+      koLabel: "Encore " + left + (left > 1 ? " chiffres" : " chiffre"),
+      secs: s.secs, waiting: s.secs > 0, canResend: s.secs === 0, resent: s.resent && s.secs > 0,
+      resend: () => this.setState({ secs: 30, resent: true, code: "" }),
+      onKey: (e) => {
+        if (/^\d$/.test(e.key)) set(s.code + e.key);
+        else if (e.key === "Backspace") set(s.code.slice(0, -1));
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

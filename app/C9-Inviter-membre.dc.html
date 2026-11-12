@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Famille · inviter</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;align-items:center;gap:12px;height:44px">
+      <a href="C2-Famille.dc.html" aria-label="Retour à la famille" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="font-size:22px;font-weight:700;letter-spacing:-.02em">Inviter un membre</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <label for="tel-membre" style="font-size:13px;font-weight:600;color:#5F5F5A">Son numéro de téléphone</label>
+      <div style="display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;border-radius:18px;border:1.5px solid #1B4332;background:#fff">
+        <div style="display:flex;align-items:center;gap:7px;font-size:17px;font-weight:700;flex:none">
+          <span aria-hidden="true" style="display:flex;width:20px;height:14px;border-radius:3px;overflow:hidden"><span style="flex:1;background:#00853F"></span><span style="flex:1;background:#FDEF42"></span><span style="flex:1;background:#E31B23"></span></span>
+          +221
+        </div>
+        <div aria-hidden="true" style="width:1px;height:26px;background:rgba(27,67,50,.18)"></div>
+        <input id="tel-membre" type="tel" inputmode="none" value="{{ telTxt }}" onChange="{{ onType }}" placeholder="77 000 00 00" style="flex-grow:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:22px;font-weight:700;letter-spacing:.01em;color:#1A1A1A;padding:0">
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div style="font-size:13px;font-weight:600;color:#5F5F5A">Son sous-plafond</div>
+        <div style="font-size:12.5px;color:#5F5F5A">sur ton plafond de 40&#8239;000</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+        <sc-for list="{{ caps }}" as="c" hint-placeholder-count="3">
+          <button type="button" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}" style="height:48px;border-radius:100px;background:{{ c.bg }};color:{{ c.fg }};font-size:14.5px;font-weight:{{ c.fw }}">{{ c.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 6px 10px 16px;border-radius:18px;background:#F2F2EF">
+      <div style="flex-grow:1;min-width:0">
+        <div style="font-size:15px;font-weight:600">Montrer la dette totale</div>
+        <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">Sinon, cette personne ne voit que sa part</div>
+      </div>
+      <button type="button" role="switch" aria-checked="{{ showAll }}" onClick="{{ toggleAll }}" aria-label="Montrer la dette totale du cahier" style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:50px;height:30px;border-radius:100px;background:{{ swBg }};display:flex;align-items:center;justify-content:{{ swPos }};padding:3px;box-sizing:border-box;transition:background .15s"><span style="width:24px;height:24px;border-radius:100px;background:#fff"></span></span></button>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style-active="background:#E0E0DA" style="grid-column:{{ k.col }};height:56px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <a href="C2-Famille.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path></svg>Envoyer l'invitation
+    </a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tel: "7620", cap: 5000, showAll: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const fmt = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const show = (d) => [d.slice(0, 2), d.slice(2, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(" ");
+    const set = (d) => this.setState({ tel: d.replace(/\D/g, "").slice(0, 9) });
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto", tap: () => set(s.tel + d) }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2", tap: () => set(s.tel + "0") });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto", tap: () => set(s.tel.slice(0, -1)) });
+    const caps = [5000, 10000, 15000].map((v) => {
+      const on = s.cap === v;
+      return { label: fmt(v), on: on, pick: () => this.setState({ cap: v }), bg: on ? "#1B4332" : "#F2F2EF", fg: on ? "#fff" : "#1A1A1A", fw: on ? 700 : 600 };
+    });
+    return {
+      keys: keys, telTxt: show(s.tel), onType: (e) => set(e.target.value), caps: caps,
+      showAll: s.showAll, toggleAll: () => this.setState({ showAll: !s.showAll }),
+      swBg: s.showAll ? "#2D6A4F" : "#C9C9C2", swPos: s.showAll ? "flex-end" : "flex-start"
+    };
+  }
+}
+</script>
+</body>
+</html>
