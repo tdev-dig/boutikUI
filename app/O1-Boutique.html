@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boutiquier · ma boutique — Boutik</title>
+<meta name="theme-color" content="#0F2A20">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+<header class="bk-top">
+  <a class="bk-pill" href="../index.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Tous les écrans</a>
+  <div class="bk-title"><span>Inscription — boutiquier puis client</span><strong>Boutiquier · ma boutique</strong></div>
+  <div class="bk-count">42 / 45</div>
+</header>
+<main class="bk-stage">
+  <div class="bk-fit" id="bk-fit"><div class="bk-screen" id="bk-screen"><div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: rgb(250, 250, 247); font-family: Inter, system-ui, sans-serif; color: rgb(26, 26, 26); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; padding: 40px 20px 28px; display: flex; flex-direction: column; justify-content: space-between;">
+
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; justify-content: center; align-items: center; height: 44px;">
+      <div style="padding: 7px 14px; border-radius: 100px; background: rgb(242, 242, 239); font-size: 13px; font-weight: 600; color: rgb(61, 61, 57);">Boutique · étape 1 sur 2</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.03em;">Ta boutique</div>
+      <div style="font-size: 15px; line-height: 1.45; color: rgb(61, 61, 57);">Ces infos apparaissent sur ton QR et chez tes clients.</div>
+    </div>
+
+    <button type="button" style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 20px; border: 1.5px dashed rgba(27, 67, 50, 0.4); text-align: left;">
+      <span style="width: 56px; height: 56px; border-radius: 18px; background: rgb(242, 242, 239); color: rgb(27, 67, 50); display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+        <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.7-2.5h6.6L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1ZM12 11v5M9.5 13.5h5"></path></svg>
+      </span>
+      <span style="flex-grow: 1; min-width: 0px;">
+        <span style="display: block; font-size: 15px; font-weight: 700;">Ajouter une photo de la boutique</span>
+        <span style="display: block; font-size: 12.5px; color: rgb(95, 95, 90); margin-top: 3px;">Facultatif, pour qu'on te reconnaisse</span>
+      </span>
+    </button>
+
+    <div style="display: flex; flex-direction: column; gap: 7px;">
+      <label for="b-nom" style="font-size: 13px; font-weight: 600; color: rgb(95, 95, 90);">Nom de la boutique</label>
+      <input id="b-nom" type="text" value="Boutique Ndiaye" style="height: 56px; box-sizing: border-box; padding: 0px 16px; border-radius: 16px; border: 1.5px solid rgb(27, 67, 50); background: rgb(255, 255, 255); font-style: inherit; font-variant: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 16px; font-weight: 600; color: rgb(26, 26, 26); outline: 0px;">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 7px;">
+      <label for="b-quartier" style="font-size: 13px; font-weight: 600; color: rgb(95, 95, 90);">Quartier</label>
+      <input id="b-quartier" type="text" value="Sacré-Cœur 3" style="height: 56px; box-sizing: border-box; padding: 0px 16px; border-radius: 16px; border: 1.5px solid rgba(27, 67, 50, 0.2); background: rgb(255, 255, 255); font-style: inherit; font-variant: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 16px; font-weight: 600; color: rgb(26, 26, 26); outline: 0px;">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 7px;">
+      <label for="b-tel" style="font-size: 13px; font-weight: 600; color: rgb(95, 95, 90);">Téléphone de la boutique</label>
+      <input id="b-tel" type="tel" value="+221 77 512 00 00" style="height: 56px; box-sizing: border-box; padding: 0px 16px; border-radius: 16px; border: 1.5px solid rgba(27, 67, 50, 0.2); background: rgb(255, 255, 255); font-style: inherit; font-variant: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 16px; font-weight: 600; color: rgb(26, 26, 26); outline: 0px;">
+      <div style="font-size: 12.5px; color: rgb(95, 95, 90);">Repris de ton numéro. Tu peux le changer.</div>
+    </div>
+  </div>
+
+  <a href="O2-NINEA.html" style="height: 56px; border-radius: 18px; background: rgb(27, 67, 50); color: rgb(255, 255, 255); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 700;">
+    Continuer<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  </a></div></div></div>
+</main>
+<nav class="bk-bottom" aria-label="Écrans">
+  <a class="bk-pill" rel="prev" href="A7-Biometrie.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
+  <a class="bk-pill bk-home" href="../index.html">Écrans</a>
+  <a class="bk-pill" rel="next" href="O2-NINEA.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+</nav>
+<script src="viewer.js"></script>
+</body>
+</html>

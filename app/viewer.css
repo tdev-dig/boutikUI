@@ -1,0 +1,41 @@
+/* Boutik UI — cadre de présentation des écrans exportés.
+   Tout est préfixé .bk- : aucune règle globale ne doit toucher le contenu des écrans. */
+:root{--bk-bg:#E8E7E1;--bk-ink:#1A1A1A;--bk-muted:#5F5F5A;--bk-green:#1B4332;--bk-deep:#0F2A20;--k:1}
+html{height:100%}
+body{margin:0;min-height:100%;background:var(--bk-bg);display:flex;flex-direction:column;align-items:center}
+
+/* Bases communes à tous les écrans (identiques au canvas) */
+.bk-screen a{color:inherit;text-decoration:none}
+.bk-screen a:hover{color:inherit}
+.bk-screen button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+.bk-screen svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* Le téléphone */
+.bk-stage{flex:none;display:flex;justify-content:center}
+.bk-fit{width:390px;height:844px;flex:none;overflow:hidden;background:#fff;border-radius:calc(40px * var(--k));box-shadow:0 30px 60px rgba(15,42,32,.22),0 0 0 1px rgba(15,42,32,.06)}
+.bk-screen{width:390px;height:844px;transform-origin:0 0}
+
+/* Barres de navigation entre écrans */
+.bk-top,.bk-bottom{font-family:Inter,system-ui,sans-serif;color:var(--bk-ink);-webkit-font-smoothing:antialiased;flex:none}
+.bk-top{width:100%;max-width:1100px;height:64px;box-sizing:border-box;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.bk-title{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.bk-title span{font-size:12px;line-height:1.2;color:var(--bk-muted)}
+.bk-title strong{font-size:15px;line-height:1.2;font-weight:700}
+.bk-count{min-width:150px;font-size:13px;font-weight:600;color:var(--bk-muted);font-variant-numeric:tabular-nums;display:flex;justify-content:flex-end}
+.bk-bottom{height:72px;display:flex;align-items:center;justify-content:center;gap:10px}
+.bk-pill{display:inline-flex;align-items:center;gap:8px;height:40px;box-sizing:border-box;padding:0 16px;border-radius:100px;background:#fff;color:var(--bk-green);font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 1px 2px rgba(15,42,32,.10);transition:background .15s,color .15s}
+.bk-pill:hover,.bk-pill:focus-visible{background:var(--bk-green);color:#fff}
+.bk-pill:focus-visible{outline:2px solid #F4A100;outline-offset:2px}
+.bk-pill svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.bk-home{display:none}
+
+/* Sur téléphone : l'écran occupe toute la largeur, comme dans l'app */
+@media (max-width:520px){
+  body{background:var(--bk-deep)}
+  .bk-top{display:none}
+  .bk-fit{border-radius:0;box-shadow:none}
+  .bk-bottom{width:100%;box-sizing:border-box;padding:0 12px;justify-content:space-between}
+  .bk-home{display:inline-flex}
+  .bk-pill{height:44px;background:rgba(255,255,255,.12);color:#fff;box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){.bk-pill{transition:none}}

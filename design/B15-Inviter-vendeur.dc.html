@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Inviter un vendeur</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:12px;height:44px">
+      <a href="B2-Vendeurs.dc.html" aria-label="Retour aux vendeurs" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="font-size:22px;font-weight:700;letter-spacing:-.02em">Inviter un vendeur</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <label for="tel-vendeur" style="font-size:13px;font-weight:600;color:#5F5F5A">Son numéro de téléphone</label>
+      <div style="display:flex;align-items:center;gap:12px;height:62px;padding:0 16px;border-radius:18px;border:1.5px solid #1B4332;background:#fff">
+        <div style="display:flex;align-items:center;gap:7px;font-size:17px;font-weight:700;flex:none">
+          <span aria-hidden="true" style="display:flex;width:20px;height:14px;border-radius:3px;overflow:hidden"><span style="flex:1;background:#00853F"></span><span style="flex:1;background:#FDEF42"></span><span style="flex:1;background:#E31B23"></span></span>
+          +221
+        </div>
+        <div aria-hidden="true" style="width:1px;height:26px;background:rgba(27,67,50,.18)"></div>
+        <input id="tel-vendeur" type="tel" inputmode="none" value="77 512 00 00" style="flex-grow:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:22px;font-weight:700;letter-spacing:.01em;color:#1A1A1A;padding:0">
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:18px;background:#F2F2EF">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="color:#1B4332"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.8-7 9.5-4.1-1.7-7-5.2-7-9.5V6l7-3ZM9 12l2.2 2.2L15.5 10"></path></svg>
+      <div style="font-size:13.5px;line-height:1.45;color:#3D3D39">Le vendeur verra les cahiers et pourra noter des bons pour tes clients. Il ne peut ni encaisser un remboursement, ni ouvrir un cahier.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
+        <button type="button" aria-label="{{ k.aria }}" style="grid-column:{{ k.col }};height:58px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <a href="B2-Vendeurs.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3.5-6.5L4 12Z"></path></svg>Envoyer l'invitation
+    </a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto" }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2" });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto" });
+    return { keys: keys };
+  }
+}
+</script>
+</body>
+</html>

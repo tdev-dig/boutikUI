@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Bon · noté</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#1B4332;font-family:Inter,system-ui,sans-serif;color:#fff;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:120px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:22px">
+    <div aria-hidden="true" style="width:88px;height:88px;border-radius:100px;background:#FAFAF7;color:#1B4332;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(255,255,255,.08)">
+      <svg width="44" height="44" viewBox="0 0 24 24" style="stroke-width:2.4"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Bon noté</div>
+      <div style="display:flex;align-items:flex-start;gap:8px">
+        <div style="font-size:56px;font-weight:700;letter-spacing:-.045em;line-height:1">2&#8239;500</div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.08em;color:#F4A100;padding-top:7px">FCFA</div>
+      </div>
+      <div style="font-size:15px;color:rgba(255,255,255,.82)">dans ton cahier chez Boutique Ndiaye</div>
+    </div>
+
+    <div style="width:100%;border-radius:20px;background:rgba(255,255,255,.08);padding:0 16px;box-sizing:border-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;height:50px;font-size:14.5px"><span style="color:rgba(255,255,255,.78)">Total dû maintenant</span><span style="font-weight:700">15&#8239;000 FCFA</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:50px;font-size:14.5px;border-top:1px solid rgba(255,255,255,.12)"><span style="color:rgba(255,255,255,.78)">Reste avant le plafond</span><span style="font-weight:700">5&#8239;000 FCFA</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;height:50px;font-size:14.5px;border-top:1px solid rgba(255,255,255,.12)"><span style="color:rgba(255,255,255,.78)">Échéance du cahier</span><span style="font-weight:700">30 novembre</span></div>
+    </div>
+
+    <div style="font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.82);text-align:center;max-width:300px">La boutique reçoit une simple notification. Elle n'a rien à valider.</div>
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <a href="F6-Le-bon.dc.html" style="flex:1;height:56px;border-radius:18px;border:1.5px solid rgba(255,255,255,.34);box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12V21l-3-1.8-3 1.8-3-1.8L6 21V3.5ZM9 8.5h6M9 12.5h6"></path></svg>Voir le bon
+    </a>
+    <a href="C1-Accueil.dc.html" style="flex:1;height:56px;border-radius:18px;background:#FAFAF7;color:#0F2A20;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">Terminé</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

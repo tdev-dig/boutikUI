@@ -1,1 +1,168 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=moodboard.html"><title>Boutik UI</title></head><body><a href="moodboard.html">Boutik UI — Moodboard</a></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boutik UI — les écrans de l'application</title>
+<meta name="description" content="Maquettes cliquables de Boutik, le cahier de bons des boutiques : 45 écrans, côté boutiquier et côté client.">
+<meta name="theme-color" content="#1B4332">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+:root{--green:#1B4332;--deep:#0F2A20;--gold:#F4A100;--cream:#FAFAF7;--surface:#F2F2EF;--ink:#1A1A1A;--muted:#5F5F5A;--line:rgba(27,67,50,.12)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.hero{background:var(--green);color:#fff;border-radius:0 0 32px 32px;padding:28px 0 36px}
+.brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;letter-spacing:-.02em}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--gold);color:var(--deep);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800}
+h1{margin:28px 0 0;font-size:clamp(30px,5vw,44px);line-height:1.08;letter-spacing:-.035em;font-weight:800;text-wrap:balance}
+.lead{margin:12px 0 0;max-width:62ch;color:rgba(255,255,255,.84)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:16px;border:1.5px solid rgba(255,255,255,.36);color:#fff;font-size:15px;font-weight:700;text-decoration:none;transition:background .15s}
+.btn:hover{background:rgba(255,255,255,.12)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--deep)}
+.btn.gold:hover{background:#FFB21F}
+.toc{display:flex;gap:8px;overflow-x:auto;padding:20px 0 6px;scrollbar-width:none}
+.toc::-webkit-scrollbar{display:none}
+.toc a{flex:none;display:inline-flex;align-items:center;height:44px;padding:0 16px;border-radius:100px;background:var(--surface);color:var(--green);font-size:13.5px;font-weight:600;text-decoration:none;white-space:nowrap}
+.toc a:hover{background:#E6E6E0}
+section{padding-top:32px;scroll-margin-top:8px}
+h2{margin:0;font-size:20px;line-height:1.25;letter-spacing:-.02em;font-weight:700}
+.count{margin-left:6px;font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap}
+.note{margin:8px 0 0;max-width:70ch;font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:22px 16px;margin-top:16px}
+.card{display:block;color:inherit;text-decoration:none;border-radius:18px}
+.card img{display:block;width:100%;height:auto;aspect-ratio:390/844;border-radius:18px;background:var(--surface);box-shadow:0 10px 24px rgba(15,42,32,.14),0 0 0 1px var(--line);transition:transform .18s,box-shadow .18s}
+.card:hover img{transform:translateY(-4px);box-shadow:0 18px 34px rgba(15,42,32,.22),0 0 0 1px var(--line)}
+.card span{display:block;margin-top:10px;font-size:13.5px;font-weight:600;line-height:1.3}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+footer{padding:44px 0 56px;font-size:13.5px;color:var(--muted)}
+footer a{color:var(--green);font-weight:600}
+@media (max-width:520px){
+  .grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-left:20px;margin:2px -20px 0;padding:14px 20px 18px;scrollbar-width:none}
+  .grid::-webkit-scrollbar{display:none}
+  .card{flex:none;width:150px;scroll-snap-align:start}
+  .btn{flex:1 1 100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card img,.btn{transition:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><span class="logo" aria-hidden="true">B</span>Boutik</div>
+    <h1>Les écrans de l'application</h1>
+    <p class="lead">45 écrans, côté boutiquier et côté client. Ouvrir un écran pour le parcourir : les boutons mènent d'un écran à l'autre, comme dans l'app.</p>
+    <div class="cta">
+      <a class="btn gold" href="app/Main.html">Parcours boutiquier</a>
+      <a class="btn" href="app/C1-Accueil.html">Parcours client</a>
+      <a class="btn" href="app/A1-Splash.html">Depuis l'ouverture</a>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <nav class="toc" aria-label="Groupes d'écrans">
+    <a href="#g1">Boutiquier — les 4 menus</a>
+    <a href="#g2">Boutiquier — gérer un cahier</a>
+    <a href="#g3">Boutiquier — activité, QR, vendeurs, formule</a>
+    <a href="#g4">Client — les 4 menus</a>
+    <a href="#g5">Noter un bon</a>
+    <a href="#g6">Client — cahier, remboursement, famille</a>
+    <a href="#g7">Connexion</a>
+    <a href="#g8">Inscription — boutiquier puis client</a>
+  </nav>
+  <section id="g1" aria-labelledby="h1">
+    <h2 id="h1">Boutiquier — les 4 menus <span class="count">4 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/Main.html"><img src="app/thumbs/Main.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Boutiquier · Accueil</span></a>
+      <a class="card" href="app/B2-Vendeurs.html"><img src="app/thumbs/B2-Vendeurs.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Boutiquier · Vendeurs</span></a>
+      <a class="card" href="app/B3-Cahiers.html"><img src="app/thumbs/B3-Cahiers.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Boutiquier · Cahiers (pile)</span></a>
+      <a class="card" href="app/B4-Profil.html"><img src="app/thumbs/B4-Profil.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Boutiquier · Profil</span></a>
+    </div>
+  </section>
+  <section id="g2" aria-labelledby="h2">
+    <h2 id="h2">Boutiquier — gérer un cahier <span class="count">7 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/B5-Fiche-cahier.html"><img src="app/thumbs/B5-Fiche-cahier.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Cahier · fiche (carte retournée)</span></a>
+      <a class="card" href="app/B6-Cahier-bloque.html"><img src="app/thumbs/B6-Cahier-bloque.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Cahier · bloqué</span></a>
+      <a class="card" href="app/B7-Plafond.html"><img src="app/thumbs/B7-Plafond.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Cahier · plafond</span></a>
+      <a class="card" href="app/B8-Echeance.html"><img src="app/thumbs/B8-Echeance.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Cahier · échéance</span></a>
+      <a class="card" href="app/B9-Encaisser.html"><img src="app/thumbs/B9-Encaisser.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Cahier · encaisser un remboursement</span></a>
+      <a class="card" href="app/B10-Tous-les-cahiers.html"><img src="app/thumbs/B10-Tous-les-cahiers.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Tous les cahiers</span></a>
+      <a class="card" href="app/B11-Demande-ouverture.html"><img src="app/thumbs/B11-Demande-ouverture.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Demande d&#x27;ouverture de cahier</span></a>
+    </div>
+  </section>
+  <section id="g3" aria-labelledby="h3">
+    <h2 id="h3">Boutiquier — activité, QR, vendeurs, formule <span class="count">6 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/B12-Notifications.html"><img src="app/thumbs/B12-Notifications.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Notifications</span></a>
+      <a class="card" href="app/B13-Bon-recu.html"><img src="app/thumbs/B13-Bon-recu.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon noté (bannière informative)</span></a>
+      <a class="card" href="app/B14-QR-boutique.html"><img src="app/thumbs/B14-QR-boutique.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>QR de la boutique</span></a>
+      <a class="card" href="app/B15-Inviter-vendeur.html"><img src="app/thumbs/B15-Inviter-vendeur.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Inviter un vendeur</span></a>
+      <a class="card" href="app/B16-Detail-vendeur.html"><img src="app/thumbs/B16-Detail-vendeur.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Détail vendeur</span></a>
+      <a class="card" href="app/B17-Formules.html"><img src="app/thumbs/B17-Formules.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Formules boutiquier</span></a>
+    </div>
+  </section>
+  <section id="g4" aria-labelledby="h4">
+    <h2 id="h4">Client — les 4 menus <span class="count">4 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/C1-Accueil.html"><img src="app/thumbs/C1-Accueil.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · Accueil</span></a>
+      <a class="card" href="app/C2-Famille.html"><img src="app/thumbs/C2-Famille.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · Famille</span></a>
+      <a class="card" href="app/C3-Cahiers.html"><img src="app/thumbs/C3-Cahiers.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · Cahiers (pile)</span></a>
+      <a class="card" href="app/C4-Profil.html"><img src="app/thumbs/C4-Profil.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · Profil</span></a>
+    </div>
+  </section>
+  <section id="g5" aria-labelledby="h5">
+    <h2 id="h5">Noter un bon <span class="count">7 écrans</span></h2>
+    <p class="note">Côté boutiquier ou vendeur, le flux est le même : il scanne le QR du client (dos de sa carte) au lieu du QR de la boutique, puis saisit le montant.</p>
+    <div class="grid">
+      <a class="card" href="app/F1-Camera.html"><img src="app/thumbs/F1-Camera.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · 1 Photo</span></a>
+      <a class="card" href="app/F2-Apercu.html"><img src="app/thumbs/F2-Apercu.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · aperçu</span></a>
+      <a class="card" href="app/F3-Scan.html"><img src="app/thumbs/F3-Scan.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · 2 Scan de la boutique</span></a>
+      <a class="card" href="app/F4-Montant.html"><img src="app/thumbs/F4-Montant.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · 3 Montant</span></a>
+      <a class="card" href="app/F5-Bon-note.html"><img src="app/thumbs/F5-Bon-note.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · noté</span></a>
+      <a class="card" href="app/F6-Le-bon.html"><img src="app/thumbs/F6-Le-bon.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · détail</span></a>
+      <a class="card" href="app/F7-Premier-bon.html"><img src="app/thumbs/F7-Premier-bon.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Bon · premier bon (ouverture demandée)</span></a>
+    </div>
+  </section>
+  <section id="g6" aria-labelledby="h6">
+    <h2 id="h6">Client — cahier, remboursement, famille <span class="count">6 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/C5-Cahier-bloque.html"><img src="app/thumbs/C5-Cahier-bloque.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · cahier bloqué</span></a>
+      <a class="card" href="app/C6-Rembourser.html"><img src="app/thumbs/C6-Rembourser.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · rembourser</span></a>
+      <a class="card" href="app/C7-Paiement-reussi.html"><img src="app/thumbs/C7-Paiement-reussi.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · remboursement réussi</span></a>
+      <a class="card" href="app/C8-Mon-QR.html"><img src="app/thumbs/C8-Mon-QR.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · mon QR (dos de la carte)</span></a>
+      <a class="card" href="app/C9-Inviter-membre.html"><img src="app/thumbs/C9-Inviter-membre.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Famille · inviter</span></a>
+      <a class="card" href="app/C10-Detail-membre.html"><img src="app/thumbs/C10-Detail-membre.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Famille · détail membre</span></a>
+    </div>
+  </section>
+  <section id="g7" aria-labelledby="h7">
+    <h2 id="h7">Connexion <span class="count">7 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/A1-Splash.html"><img src="app/thumbs/A1-Splash.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Splash</span></a>
+      <a class="card" href="app/A2-Role.html"><img src="app/thumbs/A2-Role.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Choix du rôle</span></a>
+      <a class="card" href="app/A3-Numero.html"><img src="app/thumbs/A3-Numero.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Numéro</span></a>
+      <a class="card" href="app/A4-OTP.html"><img src="app/thumbs/A4-OTP.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Code OTP</span></a>
+      <a class="card" href="app/A5-PIN.html"><img src="app/thumbs/A5-PIN.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Code secret</span></a>
+      <a class="card" href="app/A6-PIN-erreur.html"><img src="app/thumbs/A6-PIN-erreur.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Code secret · erreur</span></a>
+      <a class="card" href="app/A7-Biometrie.html"><img src="app/thumbs/A7-Biometrie.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Empreinte</span></a>
+    </div>
+  </section>
+  <section id="g8" aria-labelledby="h8">
+    <h2 id="h8">Inscription — boutiquier puis client <span class="count">4 écrans</span></h2>
+    <div class="grid">
+      <a class="card" href="app/O1-Boutique.html"><img src="app/thumbs/O1-Boutique.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Boutiquier · ma boutique</span></a>
+      <a class="card" href="app/O2-NINEA.html"><img src="app/thumbs/O2-NINEA.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Boutiquier · NINEA</span></a>
+      <a class="card" href="app/O3-Client.html"><img src="app/thumbs/O3-Client.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · mes informations</span></a>
+      <a class="card" href="app/O4-CNI.html"><img src="app/thumbs/O4-CNI.webp" width="390" height="844" loading="lazy" decoding="async" alt=""><span>Client · CNI</span></a>
+    </div>
+  </section>
+</main>
+<footer class="wrap">
+  Refonte de novembre 2026. Version précédente : <a href="moodboard.html">moodboard</a> · <a href="prototype.html">prototype initial</a>.
+</footer>
+</body>
+</html>
