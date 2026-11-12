@@ -33,14 +33,19 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   </div>
 
   <div style="display:flex;flex-direction:column;gap:6px">
-    <a href="O1-Boutique.dc.html" style="height:56px;border-radius:18px;background:#FAFAF7;color:#0F2A20;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">Activer l'empreinte</a>
-    <a href="O1-Boutique.dc.html" style="height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88)">Plus tard</a>
+    <a href="{{ next }}" style="height:56px;border-radius:18px;background:#FAFAF7;color:#0F2A20;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">Activer l'empreinte</a>
+    <a href="{{ next }}" style="height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88)">Plus tard</a>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  renderVals() {
+    // Rôle choisi au début (même onglet) ; sans lui, on ouvre l'inscription du boutiquier.
+    let role = "";
+    try { const o = window.name ? JSON.parse(window.name) : {}; role = (o && o.bkRole) || ""; } catch (err) {}
+    return { next: role === "client" ? "O3-Client.dc.html" : "O1-Boutique.dc.html" };
+  }
 }
 </script>
 </body>

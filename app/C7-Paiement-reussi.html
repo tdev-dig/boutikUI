@@ -13,42 +13,20 @@
 <body>
 <header class="bk-top">
   <a class="bk-pill" href="../index.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Tous les écrans</a>
-  <div class="bk-title"><span>Client — cahier, remboursement, famille</span><strong>Client · remboursement réussi</strong></div>
-  <div class="bk-count">31 / 45</div>
+  <div class="bk-title"><span id="bk-group">Client — cahier, remboursement, famille</span><strong id="bk-name">Client · remboursement réussi</strong></div>
+  <div class="bk-count" id="bk-count">31 / 45</div>
 </header>
 <main class="bk-stage">
-  <div class="bk-fit" id="bk-fit"><div class="bk-screen" id="bk-screen"><div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: rgb(27, 67, 50); font-family: Inter, system-ui, sans-serif; color: rgb(255, 255, 255); font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; padding: 120px 20px 28px; display: flex; flex-direction: column; justify-content: space-between;">
-
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 22px;">
-    <div aria-hidden="true" style="width: 88px; height: 88px; border-radius: 100px; background: rgb(250, 250, 247); color: rgb(27, 67, 50); display: flex; align-items: center; justify-content: center; box-shadow: rgba(255, 255, 255, 0.08) 0px 0px 0px 12px;">
-      <svg width="44" height="44" viewBox="0 0 24 24" style="stroke-width: 2.4;"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
-    </div>
-
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
-      <div style="font-size: 30px; font-weight: 700; letter-spacing: -0.03em;">Cahier soldé</div>
-      <div style="display: flex; align-items: flex-start; gap: 8px;">
-        <div style="font-size: 56px; font-weight: 700; letter-spacing: -0.045em; line-height: 1;">18 000</div>
-        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: rgb(244, 161, 0); padding-top: 7px;">FCFA</div>
-      </div>
-      <div style="font-size: 15px; color: rgba(255, 255, 255, 0.82);">payés à Alimentation Sow avec Wave</div>
-    </div>
-
-    <div style="width: 100%; border-radius: 20px; background: rgba(255, 255, 255, 0.08); padding: 0px 16px; box-sizing: border-box;">
-      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px; font-size: 14.5px;"><span style="color: rgba(255, 255, 255, 0.78);">Reste dû</span><span style="font-weight: 700;">0 FCFA</span></div>
-      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px; font-size: 14.5px; border-top: 1px solid rgba(255, 255, 255, 0.12);"><span style="color: rgba(255, 255, 255, 0.78);">Ce cahier</span><span style="font-weight: 700;">Clôturé tout seul</span></div>
-      <div style="display: flex; justify-content: space-between; align-items: center; height: 50px; font-size: 14.5px; border-top: 1px solid rgba(255, 255, 255, 0.12);"><span style="color: rgba(255, 255, 255, 0.78);">Payé le</span><span style="font-weight: 700;">12 nov. · 10:04</span></div>
-    </div>
-
-    <div style="font-size: 13.5px; line-height: 1.45; color: rgba(255, 255, 255, 0.82); text-align: center; max-width: 310px;">Pour reprendre des bons ici, demande l'ouverture d'un nouveau cahier à la boutique.</div>
+  <div class="bk-fit" id="bk-fit">
+    <iframe class="bk-screen" id="bk-screen" src="C7-Paiement-reussi.dc.html" title="Écran de l'application Boutik" width="390" height="844"></iframe>
   </div>
-
-  <a href="C1-Accueil.html" style="height: 56px; border-radius: 18px; background: rgb(250, 250, 247); color: rgb(15, 42, 32); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700;">Terminé</a></div></div></div>
 </main>
 <nav class="bk-bottom" aria-label="Écrans">
-  <a class="bk-pill" rel="prev" href="C6-Rembourser.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
+  <a class="bk-pill" id="bk-prev" rel="prev" href="C6-Rembourser.html"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Précédent</a>
   <a class="bk-pill bk-home" href="../index.html">Écrans</a>
-  <a class="bk-pill" rel="next" href="C8-Mon-QR.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
+  <a class="bk-pill" id="bk-next" rel="next" href="C8-Mon-QR.html">Suivant<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></a>
 </nav>
+<script src="screens.js"></script>
 <script src="viewer.js"></script>
 </body>
 </html>

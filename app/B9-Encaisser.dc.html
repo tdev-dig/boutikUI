@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cahier · encaisser un remboursement</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#0F2A20;font-family:Inter,system-ui,sans-serif;color:#fff;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;height:44px">
+      <a href="B3-Cahiers.dc.html" aria-label="Fermer" style="width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+      </a>
+      <div style="font-size:16px;font-weight:700">Encaisser</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:100px;background:rgba(255,255,255,.08)">
+      <div style="width:34px;height:34px;border-radius:100px;background:#FAFAF7;color:#1B4332;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700">AD</div>
+      <div style="font-size:13.5px;font-weight:600">Aïssatou Diop <span style="font-weight:400;color:rgba(255,255,255,.78)">· doit 12&#8239;500 FCFA</span></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px">
+      <div style="display:flex;align-items:flex-start;gap:8px">
+        <div style="font-size:64px;font-weight:700;letter-spacing:-.045em;line-height:1;color:{{ amtColor }}">{{ amtTxt }}</div>
+        <div style="font-size:13px;font-weight:700;letter-spacing:.08em;color:#F4A100;padding-top:8px">FCFA</div>
+      </div>
+      <div role="status" style="font-size:13.5px;color:{{ hintColor }}">{{ hint }}</div>
+    </div>
+
+    <div style="display:flex;gap:8px;padding-top:4px">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}" style="height:44px;padding:0 16px;border-radius:100px;background:{{ c.bg }};color:{{ c.fg }};font-size:13.5px;font-weight:{{ c.fw }}">{{ c.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;width:100%;padding:4px;box-sizing:border-box;border-radius:100px;background:rgba(255,255,255,.08)">
+      <sc-for list="{{ modes }}" as="m" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{ m.on }}" onClick="{{ m.pick }}" style="flex:{{ m.flex }};height:44px;border-radius:100px;background:{{ m.bg }};color:{{ m.fg }};font-size:13.5px;font-weight:{{ m.fw }}">{{ m.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="12">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style="height:58px;border-radius:18px;background:rgba(255,255,255,.07);font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center" style-active="background:rgba(255,255,255,.18)">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ ok }}" hint-placeholder-val="{{ true }}">
+      <a href="B3-Cahiers.dc.html" aria-label="{{ slideAria }}" draggable="false" onPointerDown="{{ slideDown }}" onPointerMove="{{ slideMove }}" onPointerUp="{{ slideUp }}" onPointerCancel="{{ slideCancel }}" onClick="{{ slideClick }}" onDragStart="{{ noDrag }}" style="position:relative;height:64px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88);touch-action:none;user-select:none;-webkit-user-select:none">
+        <span aria-hidden="true" style="position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:100px;background:#F4A100;color:#0F2A20;display:flex;align-items:center;justify-content:center;transform:translateX({{ sx }}px);transition:{{ thumbTr }}">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+        <span style="opacity:{{ labelOp }}">Glisser pour encaisser</span>
+      </a>
+    </sc-if>
+    <sc-if value="{{ ko }}" hint-placeholder-val="{{ false }}">
+      <div aria-disabled="true" style="height:64px;border-radius:100px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.6)">Saisis un montant pour encaisser</div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { amt: "5000", mode: "especes", capped: false, sx: 0, drag: false };
+  }
+  renderVals() {
+    const DUE = 12500, TRAVEL = 286, s = this.state;
+    const fmt = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const n = parseInt(s.amt || "0", 10);
+    const set = (raw) => {
+      const v = parseInt(raw || "0", 10);
+      if (v > DUE) return this.setState({ capped: true });
+      this.setState({ amt: v ? String(v) : "", capped: false });
+    };
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "000", "0"].map((d) => ({ label: d, aria: d, txt: true, del: false, tap: () => set(s.amt + d) }));
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, tap: () => set(s.amt.slice(0, -1)) });
+    const chip = (label, v) => {
+      const on = n === v;
+      return { label: label, on: on, pick: () => set(String(v)), bg: on ? "#FAFAF7" : "rgba(255,255,255,.08)", fg: on ? "#0F2A20" : "#fff", fw: on ? 700 : 600 };
+    };
+    const mode = (id, label, flex) => {
+      const on = s.mode === id;
+      return { label: label, on: on, flex: flex, pick: () => this.setState({ mode: id }), bg: on ? "#FAFAF7" : "transparent", fg: on ? "#0F2A20" : "rgba(255,255,255,.85)", fw: on ? 700 : 600 };
+    };
+    let hint = "Restera dû : " + fmt(DUE - n) + " FCFA";
+    if (s.capped) hint = "Pas plus que la dette : " + fmt(DUE) + " FCFA";
+    else if (!n) hint = "Saisis le montant reçu";
+    else if (n === DUE) hint = "Le cahier sera soldé";
+    return {
+      amtTxt: fmt(n), amtColor: n ? "#fff" : "rgba(255,255,255,.4)",
+      hint: hint, hintColor: s.capped ? "#FFB4B8" : "rgba(255,255,255,.78)",
+      chips: [chip("Tout · " + fmt(DUE), DUE), chip(fmt(5000), 5000), chip(fmt(10000), 10000)],
+      modes: [mode("especes", "Espèces", 1), mode("wave", "Wave", 1), mode("om", "Orange Money", 1.3)],
+      keys: keys, ok: n > 0, ko: !n,
+      slideAria: "Glisser pour encaisser " + fmt(n) + " FCFA",
+      sx: s.sx, thumbTr: s.drag ? "none" : "transform .25s ease", labelOp: Math.max(0, 1 - s.sx / 140),
+      noDrag: (e) => e.preventDefault(),
+      slideDown: (e) => {
+        this.sl = { x0: e.clientX, k: e.currentTarget.getBoundingClientRect().width / 350, moved: false };
+        this.slOk = undefined;
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+      },
+      slideMove: (e) => {
+        const d = this.sl;
+        if (!d) return;
+        const dx = (e.clientX - d.x0) / (d.k || 1);
+        if (Math.abs(dx) > 6) d.moved = true;
+        if (d.moved) this.setState({ sx: Math.max(0, Math.min(TRAVEL, dx)), drag: true });
+      },
+      slideUp: () => {
+        const d = this.sl;
+        this.sl = null;
+        if (!d) return;
+        this.slOk = !d.moved || this.state.sx >= TRAVEL * 0.85;
+        this.setState({ sx: d.moved && this.slOk ? TRAVEL : 0, drag: false });
+      },
+      slideCancel: () => { this.sl = null; this.slOk = undefined; this.setState({ sx: 0, drag: false }); },
+      slideClick: (e) => { if (this.slOk === false) e.preventDefault(); this.slOk = undefined; }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -84,7 +84,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
         </span>
         <span style="font-size:12.5px;font-weight:600">Mon QR</span>
       </a>
-      <button type="button" style="display:flex;flex-direction:column;align-items:center;gap:7px">
+      <button type="button" onClick="{{ call }}" style="display:flex;flex-direction:column;align-items:center;gap:7px">
         <span style="width:56px;height:56px;border-radius:100px;background:#F2F2EF;color:#1B4332;display:flex;align-items:center;justify-content:center">
           <svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"></path></svg>
         </span>
@@ -139,12 +139,19 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12V21l-3-1.8-3 1.8-3-1.8L6 21V3.5ZM12 8v6M9 11h6"></path></svg>
     </a>
   </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:absolute;left:20px;right:20px;bottom:100px;padding:13px 16px;border-radius:16px;background:#0F2A20;color:#fff;font-size:14px;font-weight:600;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(6,22,16,.35)">{{ toast }}</div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: "" }; }
+  say(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2600); }
+  componentWillUnmount() { clearTimeout(this.tt); }
   renderVals() {
     return {
+      toast: this.state.toast, call: () => this.say("Appel de Boutique Ndiaye…"),
       bons: [
         { date: "Aujourd'hui · 09:38", by: "Noté par toi", amount: "+2 500" },
         { date: "Mardi 10 nov. · 18:22", by: "Noté par le vendeur, sans data", amount: "+4 000" },

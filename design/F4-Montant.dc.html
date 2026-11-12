@@ -37,47 +37,109 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px">
       <div style="font-size:13.5px;color:rgba(255,255,255,.78)">Montant du bon</div>
       <div style="display:flex;align-items:flex-start;gap:8px">
-        <div style="font-size:64px;font-weight:700;letter-spacing:-.045em;line-height:1">2&#8239;500</div>
+        <div style="font-size:64px;font-weight:700;letter-spacing:-.045em;line-height:1;color:{{ amtColor }}">{{ amtTxt }}</div>
         <div style="font-size:13px;font-weight:700;letter-spacing:.08em;color:#F4A100;padding-top:8px">FCFA</div>
       </div>
-      <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;background:rgba(82,183,136,.18);color:#B7E4C7;font-size:13px;font-weight:600">
-        <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.2"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
-        Il restera 5&#8239;000 FCFA avant le plafond
+      <div role="status" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;background:{{ pillBg }};color:{{ pillFg }};font-size:13px;font-weight:600">
+        <sc-if value="{{ pillOk }}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.2"><path d="M5 12.5 9.5 17 19 7.5"></path></svg></sc-if>
+        <sc-if value="{{ pillWarn }}" hint-placeholder-val="{{ false }}"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.2"><path d="M12 4 2.8 19.5h18.4L12 4ZM12 10v4.5M12 17.2v.2"></path></svg></sc-if>
+        {{ pillTxt }}
       </div>
     </div>
 
     <div style="display:flex;gap:8px;padding-top:4px">
-      <button type="button" style="height:44px;padding:0 18px;border-radius:100px;background:rgba(255,255,255,.08);font-size:13.5px;font-weight:600">1&#8239;000</button>
-      <button type="button" aria-pressed="true" style="height:44px;padding:0 18px;border-radius:100px;background:#FAFAF7;color:#0F2A20;font-size:13.5px;font-weight:700">2&#8239;500</button>
-      <button type="button" style="height:44px;padding:0 18px;border-radius:100px;background:rgba(255,255,255,.08);font-size:13.5px;font-weight:600">5&#8239;000</button>
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{ c.on }}" onClick="{{ c.pick }}" style="height:44px;padding:0 18px;border-radius:100px;background:{{ c.bg }};color:{{ c.fg }};font-size:13.5px;font-weight:{{ c.fw }}">{{ c.label }}</button>
+      </sc-for>
     </div>
   </div>
 
   <div style="display:flex;flex-direction:column;gap:18px">
     <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
       <sc-for list="{{ keys }}" as="k" hint-placeholder-count="12">
-        <button type="button" aria-label="{{ k.aria }}" style="height:58px;border-radius:18px;background:rgba(255,255,255,.07);font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center">
+        <button type="button" aria-label="{{ k.aria }}" onClick="{{ k.tap }}" style="height:58px;border-radius:18px;background:rgba(255,255,255,.07);font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center" style-active="background:rgba(255,255,255,.18)">
           <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
           <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
         </button>
       </sc-for>
     </div>
 
-    <a href="F5-Bon-note.dc.html" aria-label="Glisser pour noter le bon de 2 500 FCFA" style="position:relative;height:64px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88)">
-      <span aria-hidden="true" style="position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:100px;background:#F4A100;color:#0F2A20;display:flex;align-items:center;justify-content:center">
-        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-      </span>
-      Glisser pour noter le bon
-    </a>
+    <sc-if value="{{ ok }}" hint-placeholder-val="{{ true }}">
+      <a href="F5-Bon-note.dc.html" aria-label="{{ slideAria }}" draggable="false" onPointerDown="{{ slideDown }}" onPointerMove="{{ slideMove }}" onPointerUp="{{ slideUp }}" onPointerCancel="{{ slideCancel }}" onClick="{{ slideClick }}" onDragStart="{{ noDrag }}" style="position:relative;height:64px;border-radius:100px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.88);touch-action:none;user-select:none;-webkit-user-select:none">
+        <span aria-hidden="true" style="position:absolute;left:6px;top:6px;width:52px;height:52px;border-radius:100px;background:#F4A100;color:#0F2A20;display:flex;align-items:center;justify-content:center;transform:translateX({{ sx }}px);transition:{{ thumbTr }}">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+        <span style="opacity:{{ labelOp }}">Glisser pour noter le bon</span>
+      </a>
+    </sc-if>
+    <sc-if value="{{ ko }}" hint-placeholder-val="{{ false }}">
+      <div aria-disabled="true" style="height:64px;border-radius:100px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.6)">{{ koLabel }}</div>
+    </sc-if>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { amt: "2500", capped: false, sx: 0, drag: false };
+  }
   renderVals() {
-    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "000", "0"].map((d) => ({ label: d, aria: d, txt: true, del: false }));
-    keys.push({ label: "", aria: "Effacer", txt: false, del: true });
-    return { keys: keys };
+    // Cahier chez Boutique Ndiaye : 12 500 dus, plafond 20 000. Bon minimum : 200 FCFA.
+    const ROOM = 7500, MIN = 200, TRAVEL = 286, s = this.state;
+    const fmt = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const n = parseInt(s.amt || "0", 10);
+    const set = (raw) => {
+      const v = parseInt(raw || "0", 10);
+      if (v > ROOM) return this.setState({ capped: true });
+      this.setState({ amt: v ? String(v) : "", capped: false });
+    };
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "000", "0"].map((d) => ({ label: d, aria: d, txt: true, del: false, tap: () => set(s.amt + d) }));
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, tap: () => set(s.amt.slice(0, -1)) });
+    const chip = (v) => {
+      const on = n === v;
+      return { label: fmt(v), on: on, pick: () => set(String(v)), bg: on ? "#FAFAF7" : "rgba(255,255,255,.08)", fg: on ? "#0F2A20" : "#fff", fw: on ? 700 : 600 };
+    };
+    const ok = n >= MIN;
+    let tone = "ok", pillTxt = "Il restera " + fmt(ROOM - n) + " FCFA avant le plafond";
+    if (s.capped) { tone = "bad"; pillTxt = "Pas plus de " + fmt(ROOM) + " FCFA avant le plafond"; }
+    else if (!n) { tone = "idle"; pillTxt = "Saisis le montant de tes achats"; }
+    else if (n < MIN) { tone = "bad"; pillTxt = "Un bon fait au moins " + fmt(MIN) + " FCFA"; }
+    else if (n === ROOM) { tone = "warn"; pillTxt = "Plafond atteint : le cahier se bloquera"; }
+    const tones = {
+      ok: ["rgba(82,183,136,.18)", "#B7E4C7"], warn: ["rgba(244,161,0,.2)", "#F4A100"],
+      bad: ["rgba(229,72,77,.22)", "#FFB4B8"], idle: ["rgba(255,255,255,.08)", "rgba(255,255,255,.78)"]
+    };
+    return {
+      amtTxt: fmt(n), amtColor: n ? "#fff" : "rgba(255,255,255,.4)",
+      pillTxt: pillTxt, pillBg: tones[tone][0], pillFg: tones[tone][1], pillOk: tone === "ok", pillWarn: tone === "warn" || tone === "bad",
+      chips: [chip(1000), chip(2500), chip(5000)],
+      keys: keys, ok: ok, ko: !ok, koLabel: n ? "Montant trop petit" : "Saisis un montant pour noter le bon",
+      slideAria: "Glisser pour noter le bon de " + fmt(n) + " FCFA",
+      sx: s.sx, thumbTr: s.drag ? "none" : "transform .25s ease", labelOp: Math.max(0, 1 - s.sx / 140),
+      noDrag: (e) => e.preventDefault(),
+      slideDown: (e) => {
+        this.sl = { x0: e.clientX, k: e.currentTarget.getBoundingClientRect().width / 350, moved: false };
+        this.slOk = undefined;
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+      },
+      slideMove: (e) => {
+        const d = this.sl;
+        if (!d) return;
+        const dx = (e.clientX - d.x0) / (d.k || 1);
+        if (Math.abs(dx) > 6) d.moved = true;
+        if (d.moved) this.setState({ sx: Math.max(0, Math.min(TRAVEL, dx)), drag: true });
+      },
+      slideUp: () => {
+        const d = this.sl;
+        this.sl = null;
+        if (!d) return;
+        this.slOk = !d.moved || this.state.sx >= TRAVEL * 0.85;
+        this.setState({ sx: d.moved && this.slOk ? TRAVEL : 0, drag: false });
+      },
+      slideCancel: () => { this.sl = null; this.slOk = undefined; this.setState({ sx: 0, drag: false }); },
+      slideClick: (e) => { if (this.slOk === false) e.preventDefault(); this.slOk = undefined; }
+    };
   }
 }
 </script>

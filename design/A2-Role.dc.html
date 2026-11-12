@@ -26,40 +26,60 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
     </div>
 
     <div style="display:flex;flex-direction:column;gap:12px">
-      <button type="button" aria-pressed="true" style="display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:22px;background:#fff;border:2px solid #1B4332;text-align:left;box-shadow:0 12px 26px rgba(27,67,50,.14)">
-        <span style="width:56px;height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;flex:none">
+      <button type="button" aria-pressed="{{ isShop }}" onClick="{{ pickShop }}" style="display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:22px;background:#fff;border:2px solid {{ shop.bd }};text-align:left;box-shadow:{{ shop.sh }}">
+        <span style="width:56px;height:56px;border-radius:18px;background:{{ shop.tile }};color:{{ shop.ico }};display:flex;align-items:center;justify-content:center;flex:none">
           <svg width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v10h16V10M3 9.5 4.8 4h14.4L21 9.5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0ZM9.5 20v-5h5v5"></path></svg>
         </span>
         <span style="flex-grow:1;min-width:0">
           <span style="display:block;font-size:19px;font-weight:700;letter-spacing:-.015em">Boutiquier</span>
           <span style="display:block;font-size:13.5px;color:#5F5F5A;margin-top:3px">Je tiens les cahiers clients</span>
         </span>
-        <span aria-hidden="true" style="width:26px;height:26px;border-radius:100px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;flex:none">
+        <span aria-hidden="true" style="width:26px;height:26px;border-radius:100px;box-sizing:border-box;background:{{ shop.dot }};border:2px solid {{ shop.dotBd }};color:#fff;display:flex;align-items:center;justify-content:center;flex:none">
           <svg width="15" height="15" viewBox="0 0 24 24" style="stroke-width:2.8"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
         </span>
       </button>
 
-      <button type="button" aria-pressed="false" style="display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:22px;background:#fff;border:1.5px solid rgba(27,67,50,.16);text-align:left">
-        <span style="width:56px;height:56px;border-radius:18px;background:#F2F2EF;color:#1B4332;display:flex;align-items:center;justify-content:center;flex:none">
-          <svg width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c.8-3.9 3.6-6 7.5-6s6.7 2.1 7.5 6"></path></svg>
+      <button type="button" aria-pressed="{{ isClient }}" onClick="{{ pickClient }}" style="display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:22px;background:#fff;border:2px solid {{ client.bd }};text-align:left;box-shadow:{{ client.sh }}">
+        <span style="width:56px;height:56px;border-radius:18px;background:{{ client.tile }};color:{{ client.ico }};display:flex;align-items:center;justify-content:center;flex:none">
+          <svg width="27" height="27" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c.8-3.9 3.6-6 7.5-6s6.700 2.100 7.500 6"></path></svg>
         </span>
         <span style="flex-grow:1;min-width:0">
           <span style="display:block;font-size:19px;font-weight:700;letter-spacing:-.015em">Client</span>
           <span style="display:block;font-size:13.5px;color:#5F5F5A;margin-top:3px">Je note mes bons en boutique</span>
         </span>
-        <span aria-hidden="true" style="width:26px;height:26px;border-radius:100px;border:2px solid #C9C9C2;box-sizing:border-box;flex:none"></span>
+        <span aria-hidden="true" style="width:26px;height:26px;border-radius:100px;box-sizing:border-box;background:{{ client.dot }};border:2px solid {{ client.dotBd }};color:#fff;display:flex;align-items:center;justify-content:center;flex:none">
+          <svg width="15" height="15" viewBox="0 0 24 24" style="stroke-width:2.8"><path d="M5 12.5 9.5 17 19 7.5"></path></svg>
+        </span>
       </button>
     </div>
   </div>
 
-  <a href="A3-Numero.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
-    Continuer comme boutiquier<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  <a href="A3-Numero.dc.html" onClick="{{ remember }}" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+    {{ cta }}<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
   </a>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(props) { super(props); this.state = { role: "boutiquier" }; }
+  renderVals() {
+    const r = this.state.role;
+    const look = (on) => on
+      ? { bd: "#1B4332", sh: "0 12px 26px rgba(27,67,50,.14)", tile: "#1B4332", ico: "#fff", dot: "#1B4332", dotBd: "#1B4332" }
+      : { bd: "rgba(27,67,50,.16)", sh: "none", tile: "#F2F2EF", ico: "#1B4332", dot: "transparent", dotBd: "#C9C9C2" };
+    return {
+      isShop: r === "boutiquier", isClient: r === "client", shop: look(r === "boutiquier"), client: look(r === "client"),
+      pickShop: () => this.setState({ role: "boutiquier" }), pickClient: () => this.setState({ role: "client" }),
+      cta: r === "client" ? "Continuer comme client" : "Continuer comme boutiquier",
+      // Le rôle suit jusqu'à la fin de la connexion (même onglet) pour ouvrir la bonne inscription.
+      remember: () => {
+        try {
+          const o = window.name ? JSON.parse(window.name) : {};
+          if (o && typeof o === "object") { o.bkRole = r; window.name = JSON.stringify(o); }
+        } catch (err) {}
+      }
+    };
+  }
 }
 </script>
 </body>

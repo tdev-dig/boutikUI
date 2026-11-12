@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Client · mon QR</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FFFFFF;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;height:44px">
+      <a href="C1-Accueil.dc.html" aria-label="Fermer" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+      </a>
+      <div style="font-size:16px;font-weight:700">Mon QR</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="width:100%;box-sizing:border-box;padding:6px 20px 24px;border-radius:26px;background:#0F2A20;color:#fff;display:flex;flex-direction:column;align-items:center;margin-top:6px;box-shadow:0 16px 32px rgba(15,42,32,.22)">
+      <div style="width:100%;height:46px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72)">Carte client</div>
+        <div style="padding:4px 10px;border-radius:100px;background:rgba(244,161,0,.2);color:#F4A100;font-size:11px;font-weight:800;letter-spacing:.06em">PREMIUM</div>
+      </div>
+      <div style="padding:16px;border-radius:20px;background:#fff">
+        <div role="img" aria-label="QR code personnel de Aïssatou Diop" style="display:grid;grid-template-columns:repeat(21, minmax(0, 1fr));width:231px;height:231px">
+          <sc-for list="{{ cells }}" as="c" hint-placeholder-count="21">
+            <div style="background:{{ c.bg }}"></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+      <div style="font-size:24px;font-weight:700;letter-spacing:-.025em">Aïssatou Diop</div>
+      <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;background:rgba(45,106,79,.14);color:#1F5A40;font-size:12.5px;font-weight:700">
+        <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.8-7 9.5-4.1-1.7-7-5.2-7-9.5V6l7-3ZM9 12l2.2 2.2L15.5 10"></path></svg>
+        Cliente vérifiée
+      </div>
+    </div>
+
+    <div style="font-size:14px;line-height:1.45;color:#3D3D39;text-align:center;max-width:300px">Pas de data ? Montre ce QR au vendeur : il note le bon à ta place.</div>
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <a href="C1-Accueil.dc.html" style="flex:1.2;height:56px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;color:#1B4332;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"></path></svg>Retourner la carte
+    </a>
+    <button type="button" onClick="{{ share }}" style="flex:1;height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5l4-4 4 4M5 13v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"></path></svg>Partager
+    </button>
+  </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:absolute;left:20px;right:20px;top:92px;padding:13px 16px;border-radius:16px;background:#1B4332;color:#fff;font-size:14px;font-weight:600;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(6,22,16,.35)">{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: "" }; }
+  say(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2600); }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  renderVals() {
+    const N = 21, seed = 3;
+    const finders = [[0, 0], [0, N - 7], [N - 7, 0]];
+    function on(r, c) {
+      for (let i = 0; i < finders.length; i++) {
+        const y = r - finders[i][0], x = c - finders[i][1];
+        if (y >= -1 && y <= 7 && x >= -1 && x <= 7) {
+          if (y < 0 || y > 6 || x < 0 || x > 6) return false;
+          return y === 0 || y === 6 || x === 0 || x === 6 || (y >= 2 && y <= 4 && x >= 2 && x <= 4);
+        }
+      }
+      if (r === 6 || c === 6) return (r + c) % 2 === 0;
+      const h = Math.sin(r * 12.9898 + c * 78.233 + seed) * 43758.5453;
+      return h - Math.floor(h) > 0.5;
+    }
+    const cells = [];
+    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) cells.push({ bg: on(r, c) ? "#0F2A20" : "transparent" });
+    return { cells: cells, toast: this.state.toast, share: () => this.say("Image de ton QR prête à envoyer") };
+  }
+}
+</script>
+</body>
+</html>

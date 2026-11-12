@@ -25,7 +25,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
         <div style="font-size:17px;font-weight:700;letter-spacing:-.01em">Bonjour Aïssatou</div>
         <div style="font-size:12.5px;color:rgba(255,255,255,.78);margin-top:2px">Cliente vérifiée</div>
       </div>
-      <button type="button" aria-label="Notifications" style="position:relative;width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex:none">
+      <button type="button" aria-label="Notifications" onClick="{{ notif }}" style="position:relative;width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex:none">
         <svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 2h-15l1.5-2ZM10 21h4"></path></svg>
         <span aria-hidden="true" style="position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:100px;background:#F4A100;border:2px solid #1B4332"></span>
       </button>
@@ -41,8 +41,8 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
           </a>
         </div>
       </div>
-      <button type="button" aria-label="Masquer le montant, 33 500 FCFA" style="margin-top:2px;align-self:flex-start;display:flex;align-items:flex-start;gap:7px;text-align:left">
-        <span style="font-size:48px;font-weight:800;letter-spacing:-.04em;line-height:1">33&#8239;500</span>
+      <button type="button" aria-label="{{ amtAria }}" aria-pressed="{{ hidden }}" onClick="{{ toggleAmt }}" style="margin-top:2px;align-self:flex-start;display:flex;align-items:flex-start;gap:7px;text-align:left">
+        <span style="font-size:48px;font-weight:800;letter-spacing:-.04em;line-height:1">{{ amt }}</span>
         <span style="font-size:12px;font-weight:700;letter-spacing:.1em;color:#F4A100;padding-top:6px">FCFA</span>
       </button>
       <div style="margin-top:7px;font-size:12.5px;line-height:1.2;color:rgba(255,255,255,.72)">Prochaine échéance le 30 novembre</div>
@@ -107,12 +107,22 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12V21l-3-1.8-3 1.8-3-1.8L6 21V3.5ZM12 8v6M9 11h6"></path></svg>
     </a>
   </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:absolute;left:20px;right:20px;bottom:100px;padding:13px 16px;border-radius:16px;background:#0F2A20;color:#fff;font-size:14px;font-weight:600;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(6,22,16,.35)">{{ toast }}</div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: "", hidden: false }; }
+  say(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2600); }
+  componentWillUnmount() { clearTimeout(this.tt); }
   renderVals() {
+    const s = this.state;
     return {
+      toast: s.toast, notif: () => this.say("Dernière alerte : ton cahier chez Alimentation Sow est bloqué"),
+      hidden: s.hidden, toggleAmt: () => this.setState({ hidden: !s.hidden }),
+      amt: s.hidden ? "•• •••" : "33 500", amtAria: s.hidden ? "Afficher le montant" : "Masquer le montant, 33 500 FCFA",
       cahiers: [
         { name: "Boutique Ndiaye", sub: "Échéance le 30 nov.", amount: "12 500", status: "Actif", bg: "rgba(45,106,79,.14)", fg: "#1F5A40", href: "C3-Cahiers.dc.html" },
         { name: "Alimentation Sow", sub: "Échu le 10 nov. · à rembourser", amount: "18 000", status: "Bloqué", bg: "#C1121F", fg: "#FFFFFF", href: "C5-Cahier-bloque.dc.html" },

@@ -31,7 +31,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="display:flex;align-items:center;gap:10px">
           <div style="font-size:20px;font-weight:700;letter-spacing:-.02em">Basic</div>
-          <div style="padding:3px 10px;border-radius:100px;background:rgba(45,106,79,.14);color:#1F5A40;font-size:12px;font-weight:700">Ta formule</div>
+          <sc-if value="{{ basic }}" hint-placeholder-val="{{ true }}"><div style="padding:3px 10px;border-radius:100px;background:rgba(45,106,79,.14);color:#1F5A40;font-size:12px;font-weight:700">Ta formule</div></sc-if>
         </div>
         <div style="font-size:15px;font-weight:700">2&#8239;000 FCFA <span style="font-weight:500;color:#5F5F5A">/ mois</span></div>
       </div>
@@ -44,7 +44,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 
     <div style="padding:16px 18px;border-radius:22px;background:#1B4332;color:#fff;display:flex;flex-direction:column;gap:12px;box-shadow:0 14px 28px rgba(27,67,50,.24)">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-size:20px;font-weight:700;letter-spacing:-.02em">Premium</div>
+        <div style="display:flex;align-items:center;gap:10px"><div style="font-size:20px;font-weight:700;letter-spacing:-.02em">Premium</div><sc-if value="{{ premium }}" hint-placeholder-val="{{ false }}"><div style="padding:3px 10px;border-radius:100px;background:rgba(244,161,0,.2);color:#F4A100;font-size:12px;font-weight:700">Ta formule</div></sc-if></div>
         <div style="font-size:15px;font-weight:700">5&#8239;000 FCFA <span style="font-weight:500;color:rgba(255,255,255,.78)">/ mois</span></div>
       </div>
       <div style="font-size:14px;color:rgba(255,255,255,.82)">Tout Basic, plus les statistiques avancées :</div>
@@ -58,14 +58,23 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   </div>
 
   <div style="display:flex;flex-direction:column;gap:10px">
-    <button type="button" style="height:58px;border-radius:18px;background:#F4A100;color:#0F2A20;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px rgba(244,161,0,.3)">Passer à Premium</button>
+    <sc-if value="{{ basic }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ up }}" style="height:58px;border-radius:18px;background:#F4A100;color:#0F2A20;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px rgba(244,161,0,.3)">Passer à Premium</button>
+    </sc-if>
+    <sc-if value="{{ premium }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ down }}" style="height:58px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;color:#1B4332;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center">Revenir à Basic</button>
+    </sc-if>
     <div style="font-size:12.5px;color:#5F5F5A;text-align:center">5&#8239;000 FCFA par mois pour Boutique Ndiaye</div>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(props) { super(props); this.state = { plan: "basic" }; }
+  renderVals() {
+    const p = this.state.plan === "premium";
+    return { premium: p, basic: !p, up: () => this.setState({ plan: "premium" }), down: () => this.setState({ plan: "basic" }) };
+  }
 }
 </script>
 </body>

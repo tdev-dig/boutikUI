@@ -32,7 +32,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <a href="B5-Fiche-cahier.dc.html" aria-label="Retourner la carte de Aïssatou Diop" style="position:absolute;top:22px;left:0;right:0;height:204px;box-sizing:border-box;border-radius:22px;background:#0F2A20;border:1px solid rgba(255,255,255,.12);color:#fff;padding:16px 20px 15px;display:flex;flex-direction:column;box-shadow:0 14px 28px rgba(6,22,16,.34)">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;height:22px">
           <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72)">Cahier n° 014</div>
-          <div style="padding:3px 10px;border-radius:100px;background:rgba(82,183,136,.22);color:#B7E4C7;font-size:12px;font-weight:700">Actif</div>
+          <div style="padding:3px 10px;border-radius:100px;background:{{ pillBg }};color:{{ pillFg }};font-size:12px;font-weight:700">{{ pillTxt }}</div>
         </div>
         <div style="margin-top:10px;font-size:18px;font-weight:700;letter-spacing:-.01em;line-height:1.15">Aïssatou Diop</div>
         <div style="margin-top:4px;font-size:12.5px;line-height:1.2;color:rgba(255,255,255,.72)">Cliente depuis mars 2026 · vérifiée</div>
@@ -87,11 +87,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
         </span>
         <span style="font-size:12.5px;font-weight:600">Échéance</span>
       </a>
-      <button type="button" style="display:flex;flex-direction:column;align-items:center;gap:7px">
-        <span style="width:56px;height:56px;border-radius:100px;background:#F2F2EF;color:#1B4332;display:flex;align-items:center;justify-content:center">
+      <button type="button" aria-pressed="{{ susp }}" onClick="{{ toggleSusp }}" style="display:flex;flex-direction:column;align-items:center;gap:7px">
+        <span style="width:56px;height:56px;border-radius:100px;background:{{ suspBg }};color:{{ suspFg }};display:flex;align-items:center;justify-content:center">
           <svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM10 9v6M14 9v6"></path></svg>
         </span>
-        <span style="font-size:12.5px;font-weight:600">Suspendre</span>
+        <span style="font-size:12.5px;font-weight:600">{{ suspLabel }}</span>
       </button>
     </div>
 
@@ -145,12 +145,23 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
       <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.500h12V21l-3-1.800-3 1.800-3-1.800L6 21V3.500ZM12 8v6M9 11h6"></path></svg>
     </a>
   </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position:absolute;left:20px;right:20px;bottom:100px;padding:13px 16px;border-radius:16px;background:#0F2A20;color:#fff;font-size:14px;font-weight:600;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(6,22,16,.35)">{{ toast }}</div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: "", susp: false }; }
+  say(msg) { clearTimeout(this.tt); this.setState({ toast: msg }); this.tt = setTimeout(() => this.setState({ toast: "" }), 2600); }
+  componentWillUnmount() { clearTimeout(this.tt); }
   renderVals() {
+    const s = this.state;
     return {
+      toast: s.toast, susp: s.susp,
+      toggleSusp: () => { this.setState({ susp: !s.susp }); this.say(s.susp ? "Cahier repris : Aïssatou peut de nouveau noter des bons" : "Cahier suspendu : plus de bon jusqu'à ce que tu le reprennes"); },
+      suspLabel: s.susp ? "Reprendre" : "Suspendre", suspBg: s.susp ? "#1B4332" : "#F2F2EF", suspFg: s.susp ? "#fff" : "#1B4332",
+      pillTxt: s.susp ? "Suspendu" : "Actif", pillBg: s.susp ? "rgba(244,161,0,.2)" : "rgba(82,183,136,.22)", pillFg: s.susp ? "#F4A100" : "#B7E4C7",
       bons: [
         { date: "Aujourd'hui · 09:38", by: "Noté par la cliente", amount: "+2 500" },
         { date: "Mardi 10 nov. · 18:22", by: "Noté par Ibrahima, vendeur", amount: "+4 000" },

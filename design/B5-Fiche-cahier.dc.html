@@ -64,29 +64,25 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   <div style="padding:12px 20px 0;display:flex;flex-direction:column">
     <div style="font-size:16px;font-weight:700;letter-spacing:-.01em;height:36px;display:flex;align-items:center">Réglages du cahier</div>
 
-    <div style="display:flex;align-items:center;gap:12px;height:66px;border-top:1px solid rgba(27,67,50,.09)">
-      <div style="flex-grow:1;min-width:0">
-        <div style="font-size:15px;font-weight:600">Remboursement partiel</div>
-        <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">Elle peut payer en plusieurs fois</div>
+    <sc-for list="{{ opts }}" as="o" hint-placeholder-count="3">
+      <div style="display:flex;align-items:center;gap:12px;height:66px;border-top:1px solid rgba(27,67,50,.09)">
+        <div style="flex-grow:1;min-width:0">
+          <div style="font-size:15px;font-weight:600">{{ o.label }}</div>
+          <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">{{ o.sub }}</div>
+        </div>
+        <button type="button" role="switch" aria-checked="{{ o.on }}" aria-label="{{ o.label }}" onClick="{{ o.toggle }}" style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:50px;height:30px;border-radius:100px;background:{{ o.bg }};display:flex;align-items:center;justify-content:{{ o.pos }};padding:3px;box-sizing:border-box;transition:background .15s"><span style="width:24px;height:24px;border-radius:100px;background:#fff"></span></span></button>
       </div>
-      <button type="button" role="switch" aria-checked="true" aria-label="Remboursement partiel" style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:50px;height:30px;border-radius:100px;background:#2D6A4F;display:flex;align-items:center;justify-content:flex-end;padding:3px;box-sizing:border-box"><span style="width:24px;height:24px;border-radius:100px;background:#fff"></span></span></button>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;height:66px;border-top:1px solid rgba(27,67,50,.09)">
-      <div style="flex-grow:1;min-width:0">
-        <div style="font-size:15px;font-weight:600">Bons de la famille</div>
-        <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">Moussa et Khady peuvent noter des bons</div>
-      </div>
-      <button type="button" role="switch" aria-checked="true" aria-label="Bons de la famille" style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:50px;height:30px;border-radius:100px;background:#2D6A4F;display:flex;align-items:center;justify-content:flex-end;padding:3px;box-sizing:border-box"><span style="width:24px;height:24px;border-radius:100px;background:#fff"></span></span></button>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;height:66px;border-top:1px solid rgba(27,67,50,.09)">
-      <div style="flex-grow:1;min-width:0">
-        <div style="font-size:15px;font-weight:600">M'avertir à chaque bon</div>
-        <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">Notification simple, rien à valider</div>
-      </div>
-      <button type="button" role="switch" aria-checked="false" aria-label="M'avertir à chaque bon" style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:50px;height:30px;border-radius:100px;background:#C9C9C2;display:flex;align-items:center;justify-content:flex-start;padding:3px;box-sizing:border-box"><span style="width:24px;height:24px;border-radius:100px;background:#fff"></span></span></button>
-    </div>
+    </sc-for>
 
-    <button type="button" style="margin-top:10px;height:52px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);color:#C1121F;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px">Clôturer le cahier</button>
+    <sc-if value="{{ calm }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ arm }}" style="margin-top:10px;height:52px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);color:#C1121F;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px">Clôturer le cahier</button>
+    </sc-if>
+    <sc-if value="{{ armed }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button type="button" onClick="{{ disarm }}" style="flex:1;height:52px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;color:#1B4332;font-size:15px;font-weight:700">Annuler</button>
+        <a href="B10-Tous-les-cahiers.dc.html" style="flex:1.4;height:52px;border-radius:18px;background:#C1121F;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center">Oui, clôturer</a>
+      </div>
+    </sc-if>
     <div style="font-size:12.5px;line-height:1.4;color:#5F5F5A;text-align:center;margin-top:8px">Le cahier sort de la pile. Ses bons restent dans l'historique.</div>
   </div>
 
@@ -113,7 +109,19 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  constructor(props) { super(props); this.state = { partiel: true, famille: true, avertir: false, armed: false }; }
+  renderVals() {
+    const s = this.state;
+    const opt = (id, label, onTxt, offTxt) => ({ label: label, sub: s[id] ? onTxt : offTxt, on: s[id], toggle: () => this.setState({ [id]: !s[id] }), bg: s[id] ? "#2D6A4F" : "#C9C9C2", pos: s[id] ? "flex-end" : "flex-start" });
+    return {
+      opts: [
+        opt("partiel", "Remboursement partiel", "Elle peut payer en plusieurs fois", "Elle doit tout payer en une fois"),
+        opt("famille", "Bons de la famille", "Moussa et Khady peuvent noter des bons", "Seule Aïssatou peut noter des bons"),
+        opt("avertir", "M'avertir à chaque bon", "Notification simple, rien à valider", "Aucune notification pour ce cahier")
+      ],
+      armed: s.armed, calm: !s.armed, arm: () => this.setState({ armed: true }), disarm: () => this.setState({ armed: false })
+    };
+  }
 }
 </script>
 </body>

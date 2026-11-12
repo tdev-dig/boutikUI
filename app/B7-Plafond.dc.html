@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cahier · plafond</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased">
+
+  <div aria-hidden="true" style="position:absolute;inset:0">
+    <div style="background:#1B4332;height:398px;border-radius:0 0 32px 32px;padding:40px 20px 0;box-sizing:border-box;color:#fff">
+      <div style="font-size:26px;font-weight:700;letter-spacing:-.025em;height:44px;display:flex;align-items:center">Cahiers</div>
+      <div style="margin-top:36px;height:204px;box-sizing:border-box;border-radius:22px;background:#0F2A20;border:1px solid rgba(255,255,255,.12);padding:48px 20px 0">
+        <div style="font-size:18px;font-weight:700;letter-spacing:-.01em;line-height:1.15">Aïssatou Diop</div>
+        <div style="margin-top:28px;font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1">12&#8239;500</div>
+      </div>
+    </div>
+  </div>
+  <div aria-hidden="true" style="position:absolute;inset:0;background:rgba(8,24,18,.62)"></div>
+
+  <section aria-label="Plafond du cahier" style="position:absolute;left:0;right:0;bottom:0;background:#FAFAF7;border-radius:30px 30px 0 0;padding:10px 20px 28px;display:flex;flex-direction:column;gap:16px;box-shadow:0 -10px 30px rgba(8,24,18,.25)">
+    <div aria-hidden="true" style="width:40px;height:4px;border-radius:100px;background:#D8D8D2;align-self:center"></div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div>
+        <div style="font-size:20px;font-weight:700;letter-spacing:-.02em">Plafond du cahier</div>
+        <div style="font-size:13px;color:#5F5F5A;margin-top:3px">Aïssatou Diop · 12&#8239;500 FCFA déjà dus</div>
+      </div>
+      <a href="B3-Cahiers.dc.html" aria-label="Fermer" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;flex:none;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+      </a>
+    </div>
+
+    <div style="display:flex;justify-content:center;align-items:flex-start;gap:8px;padding-top:4px">
+      <div style="font-size:52px;font-weight:700;letter-spacing:-.04em;line-height:1;color:{{ capColor }}">{{ capTxt }}</div>
+      <div style="font-size:12px;font-weight:700;letter-spacing:.08em;color:#8A5A00;padding-top:6px">FCFA</div>
+    </div>
+
+    <div>
+      <div style="position:relative;height:44px;display:flex;align-items:center">
+        <div aria-hidden="true" style="position:absolute;left:0;right:0;height:6px;border-radius:100px;background:#E3E3DD"></div>
+        <div aria-hidden="true" style="position:absolute;left:0;width:{{ pct }}%;height:6px;border-radius:100px;background:#1B4332"></div>
+        <div aria-hidden="true" style="position:absolute;left:{{ pct }}%;margin-left:{{ thumbShift }}px;width:30px;height:30px;border-radius:100px;background:#fff;border:2px solid #1B4332;box-sizing:border-box;box-shadow:0 4px 10px rgba(27,67,50,.22)"></div>
+        <input type="range" min="12500" max="50000" step="500" value="{{ cap }}" onInput="{{ slide }}" onChange="{{ slide }}" aria-label="Plafond en FCFA" style="position:absolute;inset:0;width:100%;height:44px;margin:0;opacity:0;cursor:pointer">
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#5F5F5A">
+        <span>12&#8239;500 · déjà dus</span><span>50&#8239;000</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ presets }}" as="p" hint-placeholder-count="4">
+        <button type="button" aria-pressed="{{ p.on }}" onClick="{{ p.pick }}" style="height:44px;border-radius:100px;background:{{ p.bg }};color:{{ p.fg }};font-size:14px;font-weight:{{ p.fw }}">{{ p.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 6px 10px 16px;border-radius:18px;background:#F2F2EF">
+      <div style="flex-grow:1;min-width:0">
+        <div style="font-size:15px;font-weight:600">Sans plafond</div>
+        <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">Le cahier ne se bloque jamais sur le montant</div>
+      </div>
+      <button type="button" role="switch" aria-checked="{{ none }}" aria-label="Sans plafond" onClick="{{ toggleNone }}" style="width:52px;height:44px;display:flex;align-items:center;justify-content:center;flex:none"><span style="width:50px;height:30px;border-radius:100px;background:{{ swBg }};display:flex;align-items:center;justify-content:{{ swPos }};padding:3px;box-sizing:border-box;transition:background .15s"><span style="width:24px;height:24px;border-radius:100px;background:#fff"></span></span></button>
+    </div>
+
+    <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.4;color:#3D3D39">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="color:#1B4332;margin-top:1px"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 11v5.5M12 7.5v.2"></path></svg>
+      <div>Dès que le plafond est atteint, le cahier se bloque : plus aucun bon jusqu'à ton déblocage.</div>
+    </div>
+
+    <a href="B3-Cahiers.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700">Enregistrer le plafond</a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { cap: 20000, none: false }; }
+  renderVals() {
+    const MIN = 12500, MAX = 50000, s = this.state;
+    const fmt = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const set = (v) => this.setState({ cap: Math.max(MIN, Math.min(MAX, Math.round(v / 500) * 500)), none: false });
+    const pct = Math.round(((s.cap - MIN) / (MAX - MIN)) * 100);
+    const preset = (v) => {
+      const on = !s.none && s.cap === v;
+      return { label: fmt(v), on: on, pick: () => set(v), bg: on ? "#1B4332" : "#F2F2EF", fg: on ? "#fff" : "#1A1A1A", fw: on ? 700 : 600 };
+    };
+    return {
+      cap: s.cap, capTxt: s.none ? "Aucun" : fmt(s.cap), capColor: s.none ? "#5F5F5A" : "#1A1A1A",
+      pct: pct, thumbShift: -Math.round(pct * 0.3),
+      slide: (e) => set(Number(e.target.value)),
+      presets: [preset(15000), preset(20000), preset(30000), preset(50000)],
+      none: s.none, toggleNone: () => this.setState({ none: !s.none }),
+      swBg: s.none ? "#2D6A4F" : "#C9C9C2", swPos: s.none ? "flex-end" : "flex-start"
+    };
+  }
+}
+</script>
+</body>
+</html>

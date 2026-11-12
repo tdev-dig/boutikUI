@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Détail vendeur</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased">
+
+  <div style="background:#1B4332;border-radius:0 0 32px 32px;padding:40px 20px 24px;color:#fff;display:flex;flex-direction:column;gap:10px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <a href="B2-Vendeurs.dc.html" aria-label="Retour aux vendeurs" style="width:44px;height:44px;border-radius:100px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;background:rgba(255,255,255,.12);font-size:12.5px;font-weight:700">
+        <span aria-hidden="true" style="width:8px;height:8px;border-radius:100px;background:#52B788"></span>Actif
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:68px;height:68px;border-radius:100px;background:#FAFAF7;color:#1B4332;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex:none">IS</div>
+      <div>
+        <div style="font-size:24px;font-weight:700;letter-spacing:-.025em">Ibrahima Sarr</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);margin-top:3px">Vendeur depuis mai 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:18px 20px 0;display:flex;flex-direction:column;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+      <div style="padding:14px 16px;border-radius:20px;background:#fff;box-shadow:0 1px 0 rgba(27,67,50,.08)">
+        <div style="font-size:12.5px;color:#5F5F5A">Bons notés ce mois</div>
+        <div style="font-size:26px;font-weight:700;letter-spacing:-.03em;margin-top:6px">34</div>
+      </div>
+      <div style="padding:14px 16px;border-radius:20px;background:#fff;box-shadow:0 1px 0 rgba(27,67,50,.08)">
+        <div style="font-size:12.5px;color:#5F5F5A">Montant noté</div>
+        <div style="display:flex;align-items:flex-start;gap:5px;margin-top:6px">
+          <div style="font-size:26px;font-weight:700;letter-spacing:-.03em">128&#8239;500</div>
+          <div style="font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#8A5A00;padding-top:5px">FCFA</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:16px;font-weight:700;letter-spacing:-.01em;height:34px;display:flex;align-items:center">Ses derniers bons</div>
+      <sc-for list="{{ bons }}" as="b" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:12px;height:64px;border-top:1px solid rgba(27,67,50,.09)">
+          <div style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;color:#1B4332;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;flex:none">{{ b.ini }}</div>
+          <div style="flex-grow:1;min-width:0">
+            <div style="font-size:15px;font-weight:600">{{ b.client }}</div>
+            <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">{{ b.date }}</div>
+          </div>
+          <div style="font-size:15px;font-weight:700">{{ b.amount }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:20px;right:20px;bottom:24px;display:flex;flex-direction:column;gap:8px">
+    <sc-if value="{{ calm }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ arm }}" style="height:52px;border-radius:18px;border:1.5px solid rgba(193,18,31,.35);color:#C1121F;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;background:#FAFAF7">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM3 20c.6-3.6 3.2-5.5 7-5.5 1.2 0 2.3.2 3.2.6M15 17h6"></path></svg>Retirer ce vendeur
+      </button>
+    </sc-if>
+    <sc-if value="{{ armed }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:8px">
+        <button type="button" onClick="{{ disarm }}" style="flex:1;height:52px;border-radius:18px;border:1.5px solid rgba(27,67,50,.22);box-sizing:border-box;background:#FAFAF7;color:#1B4332;font-size:15px;font-weight:700">Annuler</button>
+        <a href="B2-Vendeurs.dc.html" style="flex:1.4;height:52px;border-radius:18px;background:#C1121F;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center">Oui, le retirer</a>
+      </div>
+    </sc-if>
+    <div style="font-size:12.5px;line-height:1.4;color:#5F5F5A;text-align:center">Il perd l'accès aux cahiers tout de suite. Ses bons restent dans l'historique.</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { armed: false }; }
+  renderVals() {
+    return {
+      armed: this.state.armed, calm: !this.state.armed, arm: () => this.setState({ armed: true }), disarm: () => this.setState({ armed: false }),
+      bons: [
+        { ini: "MK", client: "Malick Kane", date: "Aujourd'hui · 08:47", amount: "+5 000" },
+        { ini: "AD", client: "Aïssatou Diop", date: "Mardi 10 nov. · 18:22", amount: "+4 000" },
+        { ini: "RN", client: "Rokhaya Ndour", date: "Lundi 9 nov. · 19:04", amount: "+1 800" },
+        { ini: "FS", client: "Fatou Sow", date: "Samedi 7 nov. · 12:15", amount: "+7 000" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
