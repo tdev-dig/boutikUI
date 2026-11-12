@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Code OTP</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <a href="A3-Numero.dc.html" aria-label="Retour" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Étape 2 sur 4</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Code de vérification</div>
+      <div style="font-size:15px;line-height:1.45;color:#3D3D39">Envoyé par SMS au <span style="font-weight:700;color:#1A1A1A">+221 77 512 00 00</span></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(6, minmax(0, 1fr));gap:8px">
+      <input inputmode="none" maxlength="1" value="4" aria-label="Chiffre 1" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0">
+      <input inputmode="none" maxlength="1" value="2" aria-label="Chiffre 2" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0">
+      <input inputmode="none" maxlength="1" value="9" aria-label="Chiffre 3" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0">
+      <input inputmode="none" maxlength="1" value="1" aria-label="Chiffre 4" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0">
+      <input inputmode="none" maxlength="1" value="" aria-label="Chiffre 5" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:2px solid #1B4332;background:#fff;font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0;box-shadow:0 0 0 4px rgba(27,67,50,.12)">
+      <input inputmode="none" maxlength="1" value="" aria-label="Chiffre 6" style="height:64px;min-width:0;box-sizing:border-box;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#F2F2EF;font:inherit;font-size:26px;font-weight:700;text-align:center;color:#1A1A1A;padding:0;outline:0">
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#3D3D39">
+      <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" style="color:#1B4332"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7.5V12l3 2"></path></svg>
+      Renvoyer le code dans <span style="font-weight:700;color:#1A1A1A">24 s</span>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+      <sc-for list="{{ keys }}" as="k" hint-placeholder-count="11">
+        <button type="button" aria-label="{{ k.aria }}" style="grid-column:{{ k.col }};height:58px;border-radius:18px;background:#F2F2EF;font-size:24px;font-weight:600;display:flex;align-items:center;justify-content:center">
+          <sc-if value="{{ k.txt }}" hint-placeholder-val="{{ true }}">{{ k.label }}</sc-if>
+          <sc-if value="{{ k.del }}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5h10a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9L3 12l6-6.5ZM12 9.5l5 5M17 9.5l-5 5"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <a href="A5-PIN.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+      Vérifier<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].map((d) => ({ label: d, aria: d, txt: true, del: false, col: "auto" }));
+    keys.push({ label: "0", aria: "0", txt: true, del: false, col: "span 2" });
+    keys.push({ label: "", aria: "Effacer", txt: false, del: true, col: "auto" });
+    return { keys: keys };
+  }
+}
+</script>
+</body>
+</html>

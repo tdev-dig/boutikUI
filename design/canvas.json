@@ -1,0 +1,83 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-11-12T05:12:00Z" },
+  "title": "Boutik — Refonte UI/UX",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 390, "h": 844, "title": "Boutiquier · Accueil", "radius": 40, "is_interactive": true },
+    "B2-Vendeurs.dc.html": { "x": 470, "y": 0, "w": 390, "h": 844, "title": "Boutiquier · Vendeurs", "radius": 40, "is_interactive": true },
+    "B3-Cahiers.dc.html": { "x": 940, "y": 0, "w": 390, "h": 844, "title": "Boutiquier · Cahiers (pile)", "radius": 40, "is_interactive": true },
+    "B4-Profil.dc.html": { "x": 1410, "y": 0, "w": 390, "h": 844, "title": "Boutiquier · Profil", "radius": 40, "is_interactive": true },
+
+    "B5-Fiche-cahier.dc.html": { "x": 0, "y": 1204, "w": 390, "h": 844, "title": "Cahier · fiche (carte retournée)", "radius": 40, "is_interactive": true },
+    "B6-Cahier-bloque.dc.html": { "x": 470, "y": 1204, "w": 390, "h": 844, "title": "Cahier · bloqué", "radius": 40, "is_interactive": true },
+    "B7-Plafond.dc.html": { "x": 940, "y": 1204, "w": 390, "h": 844, "title": "Cahier · plafond", "radius": 40, "is_interactive": true },
+    "B8-Echeance.dc.html": { "x": 1410, "y": 1204, "w": 390, "h": 844, "title": "Cahier · échéance", "radius": 40, "is_interactive": true },
+    "B9-Encaisser.dc.html": { "x": 1880, "y": 1204, "w": 390, "h": 844, "title": "Cahier · encaisser un remboursement", "radius": 40, "is_interactive": true },
+    "B10-Tous-les-cahiers.dc.html": { "x": 2350, "y": 1204, "w": 390, "h": 844, "title": "Tous les cahiers", "radius": 40, "is_interactive": true },
+    "B11-Demande-ouverture.dc.html": { "x": 2820, "y": 1204, "w": 390, "h": 844, "title": "Demande d'ouverture de cahier", "radius": 40, "is_interactive": true },
+
+    "B12-Notifications.dc.html": { "x": 0, "y": 2408, "w": 390, "h": 844, "title": "Notifications", "radius": 40, "is_interactive": true },
+    "B13-Bon-recu.dc.html": { "x": 470, "y": 2408, "w": 390, "h": 844, "title": "Bon noté (bannière informative)", "radius": 40, "is_interactive": true },
+    "B14-QR-boutique.dc.html": { "x": 940, "y": 2408, "w": 390, "h": 844, "title": "QR de la boutique", "radius": 40, "is_interactive": true },
+    "B15-Inviter-vendeur.dc.html": { "x": 1410, "y": 2408, "w": 390, "h": 844, "title": "Inviter un vendeur", "radius": 40, "is_interactive": true },
+    "B16-Detail-vendeur.dc.html": { "x": 1880, "y": 2408, "w": 390, "h": 844, "title": "Détail vendeur", "radius": 40, "is_interactive": true },
+    "B17-Formules.dc.html": { "x": 2350, "y": 2408, "w": 390, "h": 844, "title": "Formules boutiquier", "radius": 40, "is_interactive": true },
+
+    "C1-Accueil.dc.html": { "x": 0, "y": 3612, "w": 390, "h": 844, "title": "Client · Accueil", "radius": 40, "is_interactive": true },
+    "C2-Famille.dc.html": { "x": 470, "y": 3612, "w": 390, "h": 844, "title": "Client · Famille", "radius": 40, "is_interactive": true },
+    "C3-Cahiers.dc.html": { "x": 940, "y": 3612, "w": 390, "h": 844, "title": "Client · Cahiers (pile)", "radius": 40, "is_interactive": true },
+    "C4-Profil.dc.html": { "x": 1410, "y": 3612, "w": 390, "h": 844, "title": "Client · Profil", "radius": 40, "is_interactive": true },
+
+    "F1-Camera.dc.html": { "x": 0, "y": 4816, "w": 390, "h": 844, "title": "Bon · 1 Photo", "radius": 40, "is_interactive": true },
+    "F2-Apercu.dc.html": { "x": 470, "y": 4816, "w": 390, "h": 844, "title": "Bon · aperçu", "radius": 40, "is_interactive": true },
+    "F3-Scan.dc.html": { "x": 940, "y": 4816, "w": 390, "h": 844, "title": "Bon · 2 Scan de la boutique", "radius": 40, "is_interactive": true },
+    "F4-Montant.dc.html": { "x": 1410, "y": 4816, "w": 390, "h": 844, "title": "Bon · 3 Montant", "radius": 40, "is_interactive": true },
+    "F5-Bon-note.dc.html": { "x": 1880, "y": 4816, "w": 390, "h": 844, "title": "Bon · noté", "radius": 40, "is_interactive": true },
+    "F6-Le-bon.dc.html": { "x": 2350, "y": 4816, "w": 390, "h": 844, "title": "Bon · détail", "radius": 40, "is_interactive": true },
+    "F7-Premier-bon.dc.html": { "x": 2820, "y": 4816, "w": 390, "h": 844, "title": "Bon · premier bon (ouverture demandée)", "radius": 40, "is_interactive": true },
+
+    "C5-Cahier-bloque.dc.html": { "x": 0, "y": 6020, "w": 390, "h": 844, "title": "Client · cahier bloqué", "radius": 40, "is_interactive": true },
+    "C6-Rembourser.dc.html": { "x": 470, "y": 6020, "w": 390, "h": 844, "title": "Client · rembourser", "radius": 40, "is_interactive": true },
+    "C7-Paiement-reussi.dc.html": { "x": 940, "y": 6020, "w": 390, "h": 844, "title": "Client · remboursement réussi", "radius": 40, "is_interactive": true },
+    "C8-Mon-QR.dc.html": { "x": 1410, "y": 6020, "w": 390, "h": 844, "title": "Client · mon QR (dos de la carte)", "radius": 40, "is_interactive": true },
+    "C9-Inviter-membre.dc.html": { "x": 1880, "y": 6020, "w": 390, "h": 844, "title": "Famille · inviter", "radius": 40, "is_interactive": true },
+    "C10-Detail-membre.dc.html": { "x": 2350, "y": 6020, "w": 390, "h": 844, "title": "Famille · détail membre", "radius": 40, "is_interactive": true },
+
+    "A1-Splash.dc.html": { "x": 0, "y": 7224, "w": 390, "h": 844, "title": "Splash", "radius": 40, "is_interactive": true },
+    "A2-Role.dc.html": { "x": 470, "y": 7224, "w": 390, "h": 844, "title": "Choix du rôle", "radius": 40, "is_interactive": true },
+    "A3-Numero.dc.html": { "x": 940, "y": 7224, "w": 390, "h": 844, "title": "Numéro", "radius": 40, "is_interactive": true },
+    "A4-OTP.dc.html": { "x": 1410, "y": 7224, "w": 390, "h": 844, "title": "Code OTP", "radius": 40, "is_interactive": true },
+    "A5-PIN.dc.html": { "x": 1880, "y": 7224, "w": 390, "h": 844, "title": "Code secret", "radius": 40, "is_interactive": true },
+    "A6-PIN-erreur.dc.html": { "x": 2350, "y": 7224, "w": 390, "h": 844, "title": "Code secret · erreur", "radius": 40, "is_interactive": true },
+    "A7-Biometrie.dc.html": { "x": 2820, "y": 7224, "w": 390, "h": 844, "title": "Empreinte", "radius": 40, "is_interactive": true },
+
+    "O1-Boutique.dc.html": { "x": 0, "y": 8428, "w": 390, "h": 844, "title": "Boutiquier · ma boutique", "radius": 40, "is_interactive": true },
+    "O2-NINEA.dc.html": { "x": 470, "y": 8428, "w": 390, "h": 844, "title": "Boutiquier · NINEA", "radius": 40, "is_interactive": true },
+    "O3-Client.dc.html": { "x": 940, "y": 8428, "w": 390, "h": 844, "title": "Client · mes informations", "radius": 40, "is_interactive": true },
+    "O4-CNI.dc.html": { "x": 1410, "y": 8428, "w": 390, "h": 844, "title": "Client · CNI", "radius": 40, "is_interactive": true }
+  },
+  "order": [
+    "Main.dc.html", "B2-Vendeurs.dc.html", "B3-Cahiers.dc.html", "B4-Profil.dc.html",
+    "B5-Fiche-cahier.dc.html", "B6-Cahier-bloque.dc.html", "B7-Plafond.dc.html", "B8-Echeance.dc.html", "B9-Encaisser.dc.html", "B10-Tous-les-cahiers.dc.html", "B11-Demande-ouverture.dc.html",
+    "B12-Notifications.dc.html", "B13-Bon-recu.dc.html", "B14-QR-boutique.dc.html", "B15-Inviter-vendeur.dc.html", "B16-Detail-vendeur.dc.html", "B17-Formules.dc.html",
+    "C1-Accueil.dc.html", "C2-Famille.dc.html", "C3-Cahiers.dc.html", "C4-Profil.dc.html",
+    "F1-Camera.dc.html", "F2-Apercu.dc.html", "F3-Scan.dc.html", "F4-Montant.dc.html", "F5-Bon-note.dc.html", "F6-Le-bon.dc.html", "F7-Premier-bon.dc.html",
+    "C5-Cahier-bloque.dc.html", "C6-Rembourser.dc.html", "C7-Paiement-reussi.dc.html", "C8-Mon-QR.dc.html", "C9-Inviter-membre.dc.html", "C10-Detail-membre.dc.html",
+    "A1-Splash.dc.html", "A2-Role.dc.html", "A3-Numero.dc.html", "A4-OTP.dc.html", "A5-PIN.dc.html", "A6-PIN-erreur.dc.html", "A7-Biometrie.dc.html",
+    "O1-Boutique.dc.html", "O2-NINEA.dc.html", "O3-Client.dc.html", "O4-CNI.dc.html"
+  ],
+  "notes": {
+    "t-b-onglets": { "x": 0, "y": -250, "text": "Boutiquier — les 4 menus", "kind": "title1", "maxW": 1800 },
+    "t-b-cahier": { "x": 0, "y": 954, "text": "Boutiquier — gérer un cahier", "kind": "title1", "maxW": 3210 },
+    "t-b-activite": { "x": 0, "y": 2158, "text": "Boutiquier — activité, QR, vendeurs, formule", "kind": "title1", "maxW": 2740 },
+    "t-c-onglets": { "x": 0, "y": 3362, "text": "Client — les 4 menus", "kind": "title1", "maxW": 1800 },
+    "t-c-bon": { "x": 0, "y": 4566, "text": "Noter un bon", "kind": "title1", "maxW": 3210 },
+    "t-c-cahier": { "x": 0, "y": 5770, "text": "Client — cahier, remboursement, famille", "kind": "title1", "maxW": 2740 },
+    "t-auth": { "x": 0, "y": 6974, "text": "Connexion", "kind": "title1", "maxW": 3210 },
+    "t-inscription": { "x": 0, "y": 8178, "text": "Inscription — boutiquier puis client", "kind": "title1", "maxW": 1800 },
+    "n-bon-boutiquier": { "x": 3290, "y": 4816, "w": 300, "text": "Côté boutiquier ou vendeur, le flux est le même : il scanne le QR du client (dos de sa carte) au lieu du QR de la boutique, puis saisit le montant." }
+  },
+  "designSystems": []
+}

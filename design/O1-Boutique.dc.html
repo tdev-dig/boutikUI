@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Boutiquier · ma boutique</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 28px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;justify-content:center;align-items:center;height:44px">
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Boutique · étape 1 sur 2</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Ta boutique</div>
+      <div style="font-size:15px;line-height:1.45;color:#3D3D39">Ces infos apparaissent sur ton QR et chez tes clients.</div>
+    </div>
+
+    <button type="button" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;border:1.5px dashed rgba(27,67,50,.4);text-align:left">
+      <span style="width:56px;height:56px;border-radius:18px;background:#F2F2EF;color:#1B4332;display:flex;align-items:center;justify-content:center;flex:none">
+        <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.7-2.5h6.6L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1ZM12 11v5M9.5 13.5h5"></path></svg>
+      </span>
+      <span style="flex-grow:1;min-width:0">
+        <span style="display:block;font-size:15px;font-weight:700">Ajouter une photo de la boutique</span>
+        <span style="display:block;font-size:12.5px;color:#5F5F5A;margin-top:3px">Facultatif, pour qu'on te reconnaisse</span>
+      </span>
+    </button>
+
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <label for="b-nom" style="font-size:13px;font-weight:600;color:#5F5F5A">Nom de la boutique</label>
+      <input id="b-nom" type="text" value="Boutique Ndiaye" style="height:56px;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid #1B4332;background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <label for="b-quartier" style="font-size:13px;font-weight:600;color:#5F5F5A">Quartier</label>
+      <input id="b-quartier" type="text" value="Sacré-Cœur 3" style="height:56px;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <label for="b-tel" style="font-size:13px;font-weight:600;color:#5F5F5A">Téléphone de la boutique</label>
+      <input id="b-tel" type="tel" value="+221 77 512 00 00" style="height:56px;box-sizing:border-box;padding:0 16px;border-radius:16px;border:1.5px solid rgba(27,67,50,.2);background:#fff;font:inherit;font-size:16px;font-weight:600;color:#1A1A1A;outline:0">
+      <div style="font-size:12.5px;color:#5F5F5A">Repris de ton numéro. Tu peux le changer.</div>
+    </div>
+  </div>
+
+  <a href="O2-NINEA.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+    Continuer<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  </a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

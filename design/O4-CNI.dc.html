@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Client · CNI</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:inherit;text-decoration:none}a:hover{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;position:relative;overflow:hidden;background:#FAFAF7;font-family:Inter,system-ui,sans-serif;color:#1A1A1A;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;padding:40px 20px 20px;display:flex;flex-direction:column;justify-content:space-between">
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
+      <a href="O3-Client.dc.html" aria-label="Retour" style="width:44px;height:44px;border-radius:100px;background:#F2F2EF;display:flex;align-items:center;justify-content:center;color:#1B4332">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="padding:7px 14px;border-radius:100px;background:#F2F2EF;font-size:13px;font-weight:600;color:#3D3D39">Client · étape 2 sur 2</div>
+      <div aria-hidden="true" style="width:44px"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:30px;font-weight:700;letter-spacing:-.03em">Vérifie ton identité</div>
+      <div style="font-size:15px;line-height:1.45;color:#3D3D39">Facultatif. Les boutiquiers font plus confiance aux clients vérifiés.</div>
+    </div>
+
+    <button type="button" aria-label="Scanner ma carte d'identité" style="height:212px;border-radius:24px;border:1.5px dashed rgba(27,67,50,.4);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative">
+      <span aria-hidden="true" style="position:absolute;left:16px;top:16px;width:26px;height:26px;border-left:3px solid #1B4332;border-top:3px solid #1B4332;border-radius:10px 0 0 0"></span>
+      <span aria-hidden="true" style="position:absolute;right:16px;top:16px;width:26px;height:26px;border-right:3px solid #1B4332;border-top:3px solid #1B4332;border-radius:0 10px 0 0"></span>
+      <span aria-hidden="true" style="position:absolute;left:16px;bottom:16px;width:26px;height:26px;border-left:3px solid #1B4332;border-bottom:3px solid #1B4332;border-radius:0 0 0 10px"></span>
+      <span aria-hidden="true" style="position:absolute;right:16px;bottom:16px;width:26px;height:26px;border-right:3px solid #1B4332;border-bottom:3px solid #1B4332;border-radius:0 0 10px 0"></span>
+      <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true" style="color:#1B4332;stroke-width:1.4"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1ZM8.5 12.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6ZM5.8 15.5c.4-1.2 1.4-1.8 2.7-1.8s2.3.6 2.7 1.8M14 10h4M14 13.5h3"></path></svg>
+      <span style="font-size:16px;font-weight:700">Ta carte d'identité</span>
+      <span style="font-size:13px;color:#5F5F5A">Lecture automatique, rien à saisir à la main</span>
+    </button>
+
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:#F2F2EF">
+      <div style="width:44px;height:44px;border-radius:100px;background:#fff;color:#1B4332;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none">AD</div>
+      <div style="flex-grow:1;min-width:0">
+        <div style="font-size:15px;font-weight:700">Aïssatou Diop</div>
+        <div style="font-size:12.5px;color:#5F5F5A;margin-top:2px">Badge sur ton cahier</div>
+      </div>
+      <div style="padding:5px 10px;border-radius:100px;background:rgba(244,161,0,.2);color:#7A4F00;font-size:12px;font-weight:700;flex:none">Non vérifiée</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <a href="C1-Accueil.dc.html" style="height:56px;border-radius:18px;background:#1B4332;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:700">
+      <svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.7-2.5h6.6L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1ZM12 17.2a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8Z"></path></svg>Scanner ma CNI
+    </a>
+    <a href="C1-Accueil.dc.html" style="height:48px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:#1B4332">Passer cette étape</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
