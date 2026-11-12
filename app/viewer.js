@@ -26,7 +26,7 @@
   function sync() {
     var name;
     try {
-      name = decodeURIComponent(frame.contentWindow.location.pathname.split('/').pop()).replace(/\.dc\.html$/, '');
+      name = decodeURIComponent(frame.contentWindow.location.pathname.split('/').pop()).replace(/\.dc(\.html)?$/, ''); // Vercel sert Main.dc.html sous /app/Main.dc
     } catch (err) { return; }
     var i = -1;
     for (var j = 0; j < list.length; j++) if (list[j].name === name) { i = j; break; }
